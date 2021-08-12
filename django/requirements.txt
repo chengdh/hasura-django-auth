@@ -9,4 +9,4 @@ psycopg2<3
 gunicorn<21
 django-cors-headers<4
 requests<3
-uuid<2'
+uuid<2

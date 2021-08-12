@@ -23,15 +23,15 @@ services:
       # Any $ in your secret key needs another $ for interpolation. > ex. `...4v$0n^c...` becomes `...4v$$0n^c...` (read readme.md)
       DJANGO_SECRET: 'T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs'
     ports:
-      - "127.0.0.1:8000:8000"
+      - "18000:8000"
 
   hasura:
     # Uncomment and comment image below to disable migrations
     # image: hasura/graphql-engine:latest
     image: hasura/graphql-engine:latest.cli-migrations-v2
-    volumes:
-      - ./hasura/migrations:/hasura-migrations
-      - ./hasura/metadata:/hasura-metadata
+    # volumes:
+      # - ./hasura/migrations:/hasura-migrations
+      # - ./hasura/metadata:/hasura-metadata
     container_name: hda-hasura
     restart: always
     depends_on:
@@ -46,5 +46,5 @@ services:
       # Any $ in your secret key needs another $ for interpolation. > ex. `...4v$0n^c...` becomes `...4v$$0n^c...` (read readme.md)
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs" }'
     ports:
-      - "127.0.0.1:8080:8080"
+      - "18080:8080"
 

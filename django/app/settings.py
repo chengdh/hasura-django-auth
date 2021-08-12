@@ -33,13 +33,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'rest_framework',
-    'rest_framework_simplejwt',
-    'django_rest_passwordreset',
-    'corsheaders',
-    'import_export',
+    'allauth',
+    'allauth.account',
+    'rest_auth',
+    'rest_auth.registration',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
+    # 'django_rest_passwordreset',
+    # 'corsheaders',
+    # 'import_export',
     # 'api.apps.APIConfig',
 ]
+
+SITE_ID = 1
+REST_USE_JWT = True
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -86,7 +96,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': 'hds-postgres',
+        'HOST': 'hda-postgres',
         'PORT': '5432',
     }
 }
@@ -129,14 +139,14 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     )
 }
-SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(weeks=1)
-}
+# SIMPLE_JWT = {
+#     'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+#     'REFRESH_TOKEN_LIFETIME': timedelta(weeks=1)
+# }
 
 CSRF_COOKIE_SECURE = False
 CSRF_TRUSTED_ORIGINS = ['localhost']
