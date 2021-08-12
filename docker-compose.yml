@@ -1,0 +1,50 @@
+version: '2.4'
+
+services:
+  postgres:
+    image: postgres:12
+    container_name: hda-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'postgres'
+      POSTGRES_PASSWORD: 'password'
+      
+  django:
+    build: ./django
+    container_name: hda-django
+    restart: always
+    depends_on:
+      - 'postgres'
+    volumes:
+      - ./django:/code
+    environment:
+      PYTHONUNBUFFERED: 1
+      # Any $ in your secret key needs another $ for interpolation. > ex. `...4v$0n^c...` becomes `...4v$$0n^c...` (read readme.md)
+      DJANGO_SECRET: 'T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs'
+    ports:
+      - "127.0.0.1:8000:8000"
+
+  hasura:
+    # Uncomment and comment image below to disable migrations
+    # image: hasura/graphql-engine:latest
+    image: hasura/graphql-engine:latest.cli-migrations-v2
+    volumes:
+      - ./hasura/migrations:/hasura-migrations
+      - ./hasura/metadata:/hasura-metadata
+    container_name: hda-hasura
+    restart: always
+    depends_on:
+      - 'postgres'
+      - 'django'
+    environment:
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'public'
+      HASURA_GRAPHQL_DATABASE_URL: 'postgres://postgres:password@postgres:5432/postgres'
+      HASURA_GRAPHQL_ADMIN_SECRET: 'password'
+      # Any $ in your secret key needs another $ for interpolation. > ex. `...4v$0n^c...` becomes `...4v$$0n^c...` (read readme.md)
+      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs" }'
+    ports:
+      - "127.0.0.1:8080:8080"
+
