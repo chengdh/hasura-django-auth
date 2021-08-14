@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    # 'django_extensions',
     'rest_framework',
     'allauth',
     'allauth.account',
@@ -151,3 +152,6 @@ REST_FRAMEWORK = {
 CSRF_COOKIE_SECURE = False
 CSRF_TRUSTED_ORIGINS = ['localhost']
 CORS_ORIGIN_WHITELIST = ['http://localhost:8080', 'http://localhost:3000']
+
+#disable email confirmation
+ACCOUNT_EMAIL_VERIFICATION = "none"

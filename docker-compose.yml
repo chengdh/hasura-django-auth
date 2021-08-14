@@ -1,4 +1,4 @@
-version: '2.4'
+version: '3'
 
 services:
   postgres:
@@ -9,7 +9,9 @@ services:
       POSTGRES_USER: 'postgres'
       POSTGRES_DB: 'postgres'
       POSTGRES_PASSWORD: 'password'
-      
+    ports:
+      - "15432:5432"
+
   django:
     build: ./django
     container_name: hda-django
@@ -47,4 +49,3 @@ services:
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs" }'
     ports:
       - "18080:8080"
-
