@@ -10,6 +10,9 @@ services:
       POSTGRES_PASSWORD: 'password'
     ports:
       - "15432:5432"
+    volumes:
+      - hda-data:/var/lib/postgresql/data
+
 
   django:
     build: ./django
@@ -25,6 +28,8 @@ services:
       DJANGO_SECRET: 'T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs'
     ports:
       - "18000:8000"
+
+    command: python manage.py runserver 0.0.0.0:8000
 
   hasura:
     # Uncomment and comment image below to disable migrations
@@ -48,3 +53,6 @@ services:
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs" }'
     ports:
       - "18080:8080"
+
+volumes:
+  hda-data:

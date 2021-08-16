@@ -34,23 +34,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    # 'django_extensions',
+    'django_extensions',
     'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+
     'allauth',
     'allauth.account',
-    'rest_auth',
-    'rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
     # 'django_rest_passwordreset',
     # 'corsheaders',
     # 'import_export',
-    # 'api.apps.APIConfig',
+    'api.apps.APIConfig',
 ]
 
 SITE_ID = 1
-REST_USE_JWT = True
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -140,7 +141,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     )
 }
 # SIMPLE_JWT = {
@@ -148,6 +149,13 @@ REST_FRAMEWORK = {
 #     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
 #     'REFRESH_TOKEN_LIFETIME': timedelta(weeks=1)
 # }
+REST_AUTH_SERIALIZERS = {
+    'JWT_TOKEN_CLAIMS_SERIALIZER': 'api.auth.HasuraTokenObtainPairSerializer'
+}
+REST_USE_JWT = True
+
+JWT_AUTH_COOKIE = 'my-app-auth'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
 CSRF_COOKIE_SECURE = False
 CSRF_TRUSTED_ORIGINS = ['localhost']

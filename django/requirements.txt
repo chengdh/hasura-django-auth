@@ -1,10 +1,9 @@
 django<4
 djangorestframework<4
-django-rest-auth
+django-extensions
+dj-rest-auth
 django-allauth
-djangorestframework-jwt<5
-django-import-export<3
-django-rest-passwordreset<2
+djangorestframework-simplejwt
 psycopg2<3
 gunicorn<21
 django-cors-headers<4
