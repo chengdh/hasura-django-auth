@@ -7,10 +7,9 @@ class HasuraTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['user_name'] = user.username
         token['user_email'] = user.email
         token['https://hasura.io/jwt/claims'] = {}
-        # token['https://hasura.io/jwt/claims']['x-hasura-allowed-roles'] = [g.name for g in user.groups]
-        token['https://hasura.io/jwt/claims']['x-hasura-allowed-roles'] = ["admin"]
-        # token['https://hasura.io/jwt/claims']['x-hasura-default-role'] = user.profile.role
-        token['https://hasura.io/jwt/claims']['x-hasura-default-role'] = "admin" 
+        token['https://hasura.io/jwt/claims']['x-hasura-allowed-roles'] = [g.name for g in user.groups.all()]
+        # token['https://hasura.io/jwt/claims']['x-hasura-default-role'] =  user.groups.first().name 
+        token['https://hasura.io/jwt/claims']['x-hasura-default-role'] = "admin"
         token['https://hasura.io/jwt/claims']['x-hasura-user-id'] = str(user.id)
         return token
 

@@ -43,8 +43,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.weixin',
+    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
     # 'django_rest_passwordreset',
     # 'corsheaders',
     # 'import_export',
@@ -163,3 +164,23 @@ CORS_ORIGIN_WHITELIST = ['http://localhost:8080', 'http://localhost:3000']
 
 #disable email confirmation
 ACCOUNT_EMAIL_VERIFICATION = "none"
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '4e74a06399449f7ffe42',
+            'secret': 'acc3971484c244d5305a7ba91a6428b516ebbe68',
+            'key': ''
+        }
+    }
+}
+
+#disable social account email verification
+#ref https://github.com/Tivix/django-rest-auth/issues/23
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
+SOCIALACCOUNT_EMAIL_REQUIRED = False
+SOCIALACCOUNT_QUERY_EMAIL = True
