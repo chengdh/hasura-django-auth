@@ -1,3 +1,5 @@
 {
-"python.autoComplete.extraPaths": ["./django"]
+	"python.autoComplete.extraPaths": [
+		"./django"
+	]
 }
