@@ -11,20 +11,18 @@ class HasuraTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['https://hasura.io/jwt/claims'] = {}
         token['https://hasura.io/jwt/claims']['x-hasura-allowed-roles'] = [g.name for g in user.groups.all()]
 
-        def get_default_group(user):
-            ret_group = None
-            if hasattr(user, "profile"):
-                ret_group = user.profile.default_group
-            elif user.groups:
-                ret_group = user.groups.first()
+        default_group = user.get_default_group
 
-            return ret_group
+        if default_group:
+            token['https://hasura.io/jwt/claims']['x-hasura-default-role'] = default_group.name
+            token['https://hasura.io/jwt/claims']['x-hasura-default-role-id'] = default_group.id
 
-        default_group = get_default_group(user)
+        token['https://hasura.io/jwt/claims']['x-hasura-allowed-org-ids'] = [org.id for org in user.organizations.all()]
 
-        token['https://hasura.io/jwt/claims']['x-hasura-default-role'] = default_group.name
-        token['https://hasura.io/jwt/claims']['x-hasura-default-role-id'] = default_group.id
-
+        default_org = user.get_default_organization
+        if default_org:
+            token['https://hasura.io/jwt/claims']['x-hasura-default-org'] = default_org.name
+            token['https://hasura.io/jwt/claims']['x-hasura-default-rog-id'] = default_org.id
 
         token['https://hasura.io/jwt/claims']['x-hasura-user-id'] = str(user.id)
 
