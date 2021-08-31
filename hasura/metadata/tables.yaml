@@ -1,0 +1,63 @@
+- table:
+    schema: public
+    name: account_emailaddress
+- table:
+    schema: public
+    name: account_emailconfirmation
+- table:
+    schema: public
+    name: api_hasurauser
+- table:
+    schema: public
+    name: api_hasurauser_groups
+- table:
+    schema: public
+    name: api_hasurauser_user_permissions
+- table:
+    schema: public
+    name: api_organization
+- table:
+    schema: public
+    name: api_organization_users
+- table:
+    schema: public
+    name: auth_group
+- table:
+    schema: public
+    name: auth_group_permissions
+- table:
+    schema: public
+    name: auth_permission
+- table:
+    schema: public
+    name: authtoken_token
+- table:
+    schema: public
+    name: django_admin_log
+- table:
+    schema: public
+    name: django_content_type
+- table:
+    schema: public
+    name: django_migrations
+- table:
+    schema: public
+    name: django_session
+- table:
+    schema: public
+    name: django_site
+- table:
+    schema: public
+    name: public_posts
+- table:
+    schema: public
+    name: socialaccount_socialaccount
+- table:
+    schema: public
+    name: socialaccount_socialapp
+- table:
+    schema: public
+    name: socialaccount_socialapp_sites
+- table:
+    schema: public
+    name: socialaccount_socialtoken

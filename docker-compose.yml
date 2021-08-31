@@ -36,7 +36,7 @@ services:
     # image: hasura/graphql-engine:latest
     image: hasura/graphql-engine:latest.cli-migrations-v2
     volumes:
-      - ./hasura/migrations:/hasura-migrations
+      # - ./hasura/migrations:/hasura-migrations
       #- ./hasura/metadata:/hasura-metadata
       - ./hasura:/hasura_project
     container_name: hda-hasura

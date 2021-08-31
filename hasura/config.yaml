@@ -1,7 +1,7 @@
 version: 2
 endpoint: http://localhost:8080
-metadata_directory: '/hasura-metadata'
-migrations_directory: '/hasura-migrations'
+metadata_directory: 'metadata'
+migrations_directory: 'migrations'
 admin_secret: password
 actions:
   kind: synchronous
