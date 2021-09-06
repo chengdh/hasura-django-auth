@@ -145,11 +145,13 @@ REST_FRAMEWORK = {
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     )
 }
-# SIMPLE_JWT = {
+SIMPLE_JWT = {
 #     'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
 #     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
 #     'REFRESH_TOKEN_LIFETIME': timedelta(weeks=1)
-# }
+    #禁用blacklist_app
+    'BLACKLIST_AFTER_ROTATION' :False
+}
 REST_AUTH_SERIALIZERS = {
     'JWT_TOKEN_CLAIMS_SERIALIZER': 'api.auth.HasuraTokenObtainPairSerializer'
 }
@@ -187,3 +189,4 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 
 #自定义用户验证模型
 AUTH_USER_MODEL = "api.HasuraUser"
+
