@@ -47,14 +47,13 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
     # 'django_rest_passwordreset',
-    # 'corsheaders',
+    'corsheaders',
     # 'import_export',
     'api.apps.APIConfig',
 ]
 
 SITE_ID = 1
 
-CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -160,9 +159,15 @@ REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
-CSRF_COOKIE_SECURE = False
-CSRF_TRUSTED_ORIGINS = ['localhost']
-CORS_ORIGIN_WHITELIST = ['http://localhost:8080', 'http://localhost:3000']
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
 
 #disable email confirmation
 ACCOUNT_EMAIL_VERIFICATION = "none"

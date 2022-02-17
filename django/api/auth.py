@@ -22,7 +22,7 @@ class HasuraTokenObtainPairSerializer(TokenObtainPairSerializer):
         default_org = user.get_default_organization
         if default_org:
             token['https://hasura.io/jwt/claims']['x-hasura-default-org'] = default_org.name
-            token['https://hasura.io/jwt/claims']['x-hasura-default-rog-id'] = default_org.id
+            token['https://hasura.io/jwt/claims']['x-hasura-default-org-id'] = default_org.id
 
         token['https://hasura.io/jwt/claims']['x-hasura-user-id'] = str(user.id)
 
