@@ -19,7 +19,7 @@ services:
     container_name: hda-django
     # restart: always
     depends_on:
-      - 'postgres'
+      - postgres
     volumes:
       - ./django:/code
     environment:
@@ -55,6 +55,15 @@ services:
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs" }'
     ports:
       - "18080:8080"
+  pgweb:
+    container_name: pgweb
+    image: sosedoff/pgweb
+    ports: 
+      - "8091:8081" 
+    environment:
+      - DATABASE_URL=postgres://postgres:password@postgres:5432/postgres?sslmode=disable
+    depends_on:
+      - postgres
 
 volumes:
   hda-data:
