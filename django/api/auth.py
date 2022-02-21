@@ -3,19 +3,24 @@ from django.contrib.auth.models import User
 
 # Hasura > JWT Specifics
 class HasuraTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """jwtoken序列化器
+    """
     @classmethod
     def get_token(cls, user):
+        """
+        生成hasura jwtoken
+        """
         token = super().get_token(user)
         token['user_name'] = user.username
         token['user_email'] = user.email
         token['https://hasura.io/jwt/claims'] = {}
-        token['https://hasura.io/jwt/claims']['x-hasura-allowed-roles'] = [g.name for g in user.groups.all()]
+        token['https://hasura.io/jwt/claims']['x-hasura-allowed-roles'] = [g.name for g in user.roles.all()]
 
-        default_group = user.get_default_group
+        default_role = user.get_default_role
 
-        if default_group:
-            token['https://hasura.io/jwt/claims']['x-hasura-default-role'] = default_group.name
-            token['https://hasura.io/jwt/claims']['x-hasura-default-role-id'] = default_group.id
+        if default_role:
+            token['https://hasura.io/jwt/claims']['x-hasura-default-role'] = default_role.name
+            token['https://hasura.io/jwt/claims']['x-hasura-default-role-id'] = default_role.id
 
         token['https://hasura.io/jwt/claims']['x-hasura-allowed-org-ids'] = [org.id for org in user.organizations.all()]
 
@@ -30,8 +35,10 @@ class HasuraTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class ValidateTokenRefreshSerializer(TokenRefreshSerializer):
-    # Validate user account is active, and the user role matches the issued JWT
-    # Based on: https://github.com/SimpleJWT/django-rest-framework-simplejwt/issues/193
+    """"""
+     Validate user account is active, and the user role matches the issued JWT
+     Based on: https://github.com/SimpleJWT/django-rest-framework-simplejwt/issues/193
+    """"""
     error_msg = 'No active account found with the given credentials'
 
     def validate(self, attrs):

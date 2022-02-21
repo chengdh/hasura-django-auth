@@ -1,0 +1,53 @@
+- model: api.Role
+  pk: 1
+  fields:
+    name: 管理员
+
+- model: api.Role
+  pk: 2
+  fields:
+    name: 普通用户 
+
+
+- model: api.Organization
+  pk: 1
+  fields:
+    name: 国家电投河南电力有限公司
+    address: test_address 
+
+- model: api.Organization
+  pk: 2
+  fields:
+    name: 开封热电
+    address: 开封杜良
+    parent_org: 1
+
+- model: api.Organization
+  pk: 3
+  fields:
+    name: 周口热电
+    address: 周口市 
+    parent_org: 1
+
+- model: api.HasuraUser
+  pk: 2
+  fields:
+    username: rabbitchengh 
+    email: email2@123.com
+    password: yesno242612
+    roles: [1,2]
+    organizations: [1,2,3] 
+
+- model: api.HasuraUser
+  pk: 3
+  fields:
+    username: admin3
+    email: email@123.com
+    password: yesno242612
+
+  pk: 4
+  fields:
+    username: 普通用户 
+    email: email4@123.com
+    password: yesno242612
+
