@@ -35,13 +35,25 @@ class HasuraTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class ValidateTokenRefreshSerializer(TokenRefreshSerializer):
-    """"""
-     Validate user account is active, and the user role matches the issued JWT
-     Based on: https://github.com/SimpleJWT/django-rest-framework-simplejwt/issues/193
-    """"""
+    """
+    validate token
+    """
     error_msg = 'No active account found with the given credentials'
 
     def validate(self, attrs):
+        """_summary_
+
+        Args:
+            attrs (_type_): _description_
+
+        Raises:
+            exceptions.AuthenticationFailed: _description_
+            exceptions.AuthenticationFailed: _description_
+            exceptions.AuthenticationFailed: _description_
+
+        Returns:
+            _type_: _description_
+        """
         token_payload = token_backend.decode(attrs['refresh'])
         try:
             user = User.objects.get(pk=token_payload['user_id'])

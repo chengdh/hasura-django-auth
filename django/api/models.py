@@ -4,7 +4,7 @@ from django.contrib.auth.models import  AbstractUser
 
 class HasuraUser(AbstractUser):
     '''
-    user代理类，用于扩展user的部分功能和属性
+    user代理类,用于扩展user的部分功能和属性
     '''
 
     default_role= models.ForeignKey("Role",related_name='+',verbose_name="默认用户组",null=True, on_delete=models.SET_NULL)
@@ -61,15 +61,20 @@ class FunctionCategory(models.Model):
     frontend_router_redirect = models.CharField("重定向path",  max_length=200,null =True,blank=True)
     frontend_router_meta_title = models.CharField("类别",  max_length=200)
     frontend_router_meta_icon= models.CharField("显示图标",  max_length=200,null =True,blank=True)
+    parent_function_category = models.ForeignKey("self", verbose_name="上级功能",null=True,blank=True, on_delete=models.CASCADE)
     rank = models.IntegerField("排序",default=1)
     is_active = models.BooleanField("是否有效", default=True)
     note = models.TextField("备注",null=True,blank=True)
+    class Meta:
+        ordering=["rank"]
+
+
 
 class SystemFunction(models.Model):
     """
     系统功能
     """
-    function_category = models.ForeignKey("FunctionCategory",verbose_name="所属类别",on_delete=models.CASCADE)
+    function_category = models.ForeignKey("FunctionCategory",verbose_name="所属类别",on_delete=models.CASCADE,related_name="children")
     frontend_router_path = models.CharField("路径",  max_length=200)
     frontend_router_name = models.CharField("类别",help_text="对应前端router名称",  max_length=200)
     frontend_router_redirect = models.CharField("重定向path",  max_length=200,null =True,blank=True)
@@ -79,16 +84,25 @@ class SystemFunction(models.Model):
     rank = models.IntegerField("排序",default=1)
     note = models.TextField("备注",null=True,blank=True)
 
+    class Meta:
+        ordering=["rank"]
+
 
 class SystemFunctionOperate(models.Model):
     """
     功能操作
     """ 
-    system_function = models.ForeignKey("SystemFunction",verbose_name="所属功能",on_delete=models.CASCADE)
+    system_function = models.ForeignKey("SystemFunction",verbose_name="所属功能",on_delete=models.CASCADE,related_name="operates")
     name = models.CharField("显示名称",  max_length=200)
+    code = models.CharField("操作代码",  max_length=200)
     is_active = models.BooleanField("是否有效", default=True)
     rank = models.IntegerField("排序",default=1)
     note = models.TextField("备注",null=True,blank=True)
+
+    class Meta:
+        ordering=["rank"]
+
+
 
 class Role(models.Model):
     """
@@ -98,6 +112,8 @@ class Role(models.Model):
     is_active = models.BooleanField("是否有效", default=True)
     rank = models.IntegerField("排序",default=1)
     note = models.TextField("备注",null=True,blank=True)
-
     #角色具有的权限
     system_function_operates= models.ManyToManyField(SystemFunctionOperate,verbose_name="角色具有的权限")
+    class Meta:
+        ordering=["rank"]
+
