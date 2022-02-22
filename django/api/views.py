@@ -8,11 +8,11 @@ class RoutersView(RetrieveAPIView):
     """
     获取当前用户前端权限
     """
-    serializer_class = RoleSerializer 
+    serializer_class = RoleSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_object(self):
-        return self.request.user.default_role
+        return self.request.user.get_default_role
 
     def get_queryset(self):
         """

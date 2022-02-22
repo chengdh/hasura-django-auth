@@ -47,24 +47,27 @@ class RoleSerializer(serializers.ModelSerializer):
             route = {
                 "path" : fc.frontend_router_path,
                 "name" : fc.frontend_router_name,
-                # "redirect" : fc.frontend_router_redirect,
                 "meta": {
                     "title": fc.frontend_router_meta_title,
                     "icon": fc.frontend_router_meta_icon,
                 }
             }
+            if fc.frontend_router_redirect:
+                route['redirect'] = fc.frontend_router_redirect
 
             sf_children = []
             for sf in fc.children.filter(pk__in = system_function_ids):
                 child_route = {
                     "path" : sf.frontend_router_path,
                     "name" : sf.frontend_router_name,
-                    # "redirect" : sf.frontend_router_redirect,
                     "meta": {
                         "title": sf.frontend_router_meta_title,
                         "icon": sf.frontend_router_meta_icon,
                     }
                 }
+                if sf.frontend_router_redirect:
+                    child_route['redirect'] = sf.frontend_router_redirect
+
 
                 sfo_children = []
                 for sfo in sf.operates.filter(pk__in = system_function_operate_ids):

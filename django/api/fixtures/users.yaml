@@ -2,7 +2,7 @@
   pk: 1
   fields:
     name: 管理员
-    system_function_operates: [1,2,3,4]
+    system_function_operates: [1,2,3,4,5,6,7]
 
 - model: api.Role
   pk: 2

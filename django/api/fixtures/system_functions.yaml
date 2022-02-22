@@ -1,18 +1,19 @@
 - model: api.FunctionCategory
   pk: 1
   fields:
-    frontend_router_path: /system_admin 
-    frontend_router_name: system_admin
+    frontend_router_path: /permission
+    frontend_router_name: permission 
+    frontend_router_redirect: /permission/page/index
     frontend_router_meta_title: 系统管理
-    frontend_router_meta_icon: ""
+    frontend_router_meta_icon: lollipop 
     rank: 1
 
 - model: api.SystemFunction
   pk: 1
   fields:
     function_category: 1
-    frontend_router_path: /system_admin/user_admin 
-    frontend_router_name: system_admin_user_admin
+    frontend_router_path: /permission/page/index
+    frontend_router_name: permissionPage 
     frontend_router_meta_title: 用户管理
     frontend_router_meta_icon: ""
     rank: 1
@@ -59,6 +60,24 @@
     frontend_router_meta_icon: ""
     rank: 2
 
+- model: api.SystemFunctionOperate
+  pk: 5
+  fields:
+    system_function: 2
+    name: 查看角色 
+    code: read_role
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 6
+  fields:
+    system_function: 2
+    name: 修改角色 
+    code: update_role
+    rank: 1
+
+
+
 - model: api.SystemFunction
   pk: 3
   fields:
@@ -68,3 +87,11 @@
     frontend_router_meta_title: 操作日志 
     frontend_router_meta_icon: ""
     rank: 3
+
+- model: api.SystemFunctionOperate
+  pk: 7
+  fields:
+    system_function: 3
+    name: 查看日志
+    code: read_log
+    rank: 1
