@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'corsheaders',
     # 'import_export',
     'api.apps.APIConfig',
+    'electric_power_sale.apps.ElectricPowerSaleConfig',
 ]
 
 SITE_ID = 1
@@ -194,4 +195,3 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 
 #自定义用户验证模型
 AUTH_USER_MODEL = "api.HasuraUser"
-
