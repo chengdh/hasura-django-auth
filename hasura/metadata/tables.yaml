@@ -6,10 +6,19 @@
     name: account_emailconfirmation
 - table:
     schema: public
+    name: api_functioncategory
+- table:
+    schema: public
     name: api_hasurauser
 - table:
     schema: public
     name: api_hasurauser_groups
+- table:
+    schema: public
+    name: api_hasurauser_organizations
+- table:
+    schema: public
+    name: api_hasurauser_roles
 - table:
     schema: public
     name: api_hasurauser_user_permissions
@@ -18,7 +27,38 @@
     name: api_organization
 - table:
     schema: public
-    name: api_organization_users
+    name: api_role
+  array_relationships:
+  - name: api_hasurauser_roles
+    using:
+      foreign_key_constraint_on:
+        column: role_id
+        table:
+          schema: public
+          name: api_hasurauser_roles
+  - name: api_hasurausers
+    using:
+      foreign_key_constraint_on:
+        column: default_role_id
+        table:
+          schema: public
+          name: api_hasurauser
+  - name: api_role_system_function_operates
+    using:
+      foreign_key_constraint_on:
+        column: role_id
+        table:
+          schema: public
+          name: api_role_system_function_operates
+- table:
+    schema: public
+    name: api_role_system_function_operates
+- table:
+    schema: public
+    name: api_systemfunction
+- table:
+    schema: public
+    name: api_systemfunctionoperate
 - table:
     schema: public
     name: auth_group
@@ -48,7 +88,29 @@
     name: django_site
 - table:
     schema: public
-    name: public_posts
+    name: electric_power_sale_agent
+  object_relationships:
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: organization_id
+  array_relationships:
+  - name: electric_power_sale_customers
+    using:
+      foreign_key_constraint_on:
+        column: agent_id
+        table:
+          schema: public
+          name: electric_power_sale_customer
+- table:
+    schema: public
+    name: electric_power_sale_customer
+  object_relationships:
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: organization_id
+  - name: electric_power_sale_agent
+    using:
+      foreign_key_constraint_on: agent_id
 - table:
     schema: public
     name: socialaccount_socialaccount

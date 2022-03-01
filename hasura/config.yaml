@@ -1,5 +1,5 @@
 version: 2
-endpoint: http://localhost:18080
+endpoint: http://localhost:8080
 metadata_directory: 'metadata'
 migrations_directory: 'migrations'
 admin_secret: password
