@@ -14,20 +14,22 @@ class HasuraTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['user_name'] = user.username
         token['user_email'] = user.email
         token['https://hasura.io/jwt/claims'] = {}
-        token['https://hasura.io/jwt/claims']['x-hasura-allowed-roles'] = [g.name for g in user.roles.all()]
+        # token['https://hasura.io/jwt/claims']['x-hasura-allowed-roles'] = [g.name for g in user.roles.all()]
+        token['https://hasura.io/jwt/claims']['x-hasura-allowed-roles'] = ["admin","public"]
 
         default_role = user.get_default_role
 
         if default_role:
-            token['https://hasura.io/jwt/claims']['x-hasura-default-role'] = default_role.name
-            token['https://hasura.io/jwt/claims']['x-hasura-default-role-id'] = default_role.id
+            # token['https://hasura.io/jwt/claims']['x-hasura-default-role'] = default_role.name
+            token['https://hasura.io/jwt/claims']['x-hasura-default-role'] = "admin" 
+            token['https://hasura.io/jwt/claims']['x-hasura-default-role-id'] = str(default_role.id)
 
-        token['https://hasura.io/jwt/claims']['x-hasura-allowed-org-ids'] = [org.id for org in user.organizations.all()]
+        # token['https://hasura.io/jwt/claims']['x-hasura-allowed-org-ids'] = [str(org.id) for org in user.organizations.all()]
 
         default_org = user.get_default_organization
         if default_org:
             token['https://hasura.io/jwt/claims']['x-hasura-default-org'] = default_org.name
-            token['https://hasura.io/jwt/claims']['x-hasura-default-org-id'] = default_org.id
+            token['https://hasura.io/jwt/claims']['x-hasura-default-org-id'] = str(default_org.id)
 
         token['https://hasura.io/jwt/claims']['x-hasura-user-id'] = str(user.id)
 

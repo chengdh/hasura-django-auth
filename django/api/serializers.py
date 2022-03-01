@@ -1,5 +1,13 @@
-from .models import FunctionCategory,SystemFunction,SystemFunctionOperate,Role
+from .models import HasuraUser,FunctionCategory, Organization,SystemFunction,SystemFunctionOperate,Role,Organization 
 from rest_framework import serializers
+
+class OrganizationSerializer(serializers.ModelSerializer):
+    """系统功能
+    """
+    class Meta:
+        model = Organization 
+        fields = ["id","name","address","parent_org","is_active" ]
+
 
 class FunctionCategorySerializer(serializers.ModelSerializer):
     """功能类别
@@ -26,7 +34,7 @@ class SystemFunctionOperateSerializer(serializers.ModelSerializer):
     system_function = SystemFunctionSerializer()
     class Meta:
         model = SystemFunctionOperate
-        fields = ["id","name","is_active","rank","note","system_function" ]
+        fields = ["id","code","name","is_active","rank","note","system_function" ]
 
 
 class RoleSerializer(serializers.ModelSerializer):
@@ -91,3 +99,16 @@ class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role 
         fields = ["id","name","is_active","rank","note","system_function_operates","routers" ]
+
+class HasuraUserSerializer(serializers.ModelSerializer):
+    """用户信息序列化器
+
+    Args:
+        serializers (_type_): _description_
+    """
+
+    roles = RoleSerializer(many = True)
+    organizations = OrganizationSerializer(many = True)
+    class Meta:
+        model = HasuraUser
+        fields = ["pk","username","email","roles","organizations"]
