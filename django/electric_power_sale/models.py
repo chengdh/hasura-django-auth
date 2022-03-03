@@ -14,6 +14,9 @@ class Agent(models.Model):
     toucher_mobile_1 = models.CharField("联系电话1",null=True,blank=True,max_length=60)
     toucher_mobile_2 = models.CharField("联系电话2",null=True,blank=True,max_length=60)
     default_agent_rate = models.DecimalField("默认居间分成比例",max_digits=20,decimal_places=4,default=0)
+    note = models.TextField("备注1",null=True,blank=True)
+    is_active = models.BooleanField("是否有效", default=True)
+
 
  
 # Create your models here.
@@ -45,8 +48,8 @@ class Customer(models.Model):
     grid_account = models.CharField("电网账号",null=True,blank=True,max_length=60)
     grid_password = models.CharField("电网密码",null=True,blank=True,max_length=60)
 
-    elect_level = models.IntegerField("电压等级",null=True,blank=True)
-    transformer_volume = models.IntegerField("变压器容量",null=True,blank=True)
+    elect_level = models.CharField("电压等级",null=True,blank=True,max_length=60)
+    transformer_volume = models.CharField("变压器容量",null=True,blank=True,max_length=60)
 
     #收入结算方式
     #服务费率
@@ -57,17 +60,36 @@ class Customer(models.Model):
     INCOME_TYPE_DIVIDE_RATE="income_type_divide_rate"
 
     INCOME_TYPE_CHOICES = [(INCOME_TYPE_RATE,"按服务费率"),(INCOME_TYPE_FIXED,"按固定金额"),(INCOME_TYPE_DIVIDE_RATE,"按分成比例")]
+
     income_type = models.CharField("收入结算方式",max_length=40,
         choices=INCOME_TYPE_CHOICES ,
         default=INCOME_TYPE_RATE)
+
+    #客户用电性质
+    #常规
+    USE_TYPE_COMMON="use_type_common"
+    #分时段
+    USE_TYPE_SEPRATE_TIME="use_type_seprate_time"
+    #常规-高耗能
+    USE_TYPE_COMMON_HIGH_POWER="use_type_common_high_power"
+    #高耗能-分时段
+    USE_TYPE_HIGH_POWER_SEPRATE_TIME="use_type_high_power_seprate_time"
+
+    USE_TYPE_CHOICES = [(USE_TYPE_COMMON,"常规"),(USE_TYPE_SEPRATE_TIME,"常规-分时段"),(USE_TYPE_COMMON_HIGH_POWER,"常规-高耗能"),(USE_TYPE_HIGH_POWER_SEPRATE_TIME,"高耗能-分时段")]
+
+
+    use_type = models.CharField("客户用电性质",max_length=80,
+        choices=USE_TYPE_CHOICES ,
+        default=USE_TYPE_COMMON)
+ 
     
-    rate = models.DecimalField("服务费率",max_digits=10,decimal_places=4,default=0)
-    fix_fee = models.DecimalField("固定服务费",max_digits=20,decimal_places=4,default=0)
-    divide_rate = models.DecimalField("分成比例",max_digits=20,decimal_places=4,default=0)
+    rate = models.DecimalField("服务费率",max_digits=10,decimal_places=4,null=True,default=0)
+    fix_fee = models.DecimalField("固定服务费",null=True,max_digits=20,decimal_places=4,default=0)
+    divide_rate = models.DecimalField("分成比例",null=True,max_digits=20,decimal_places=4,default=0)
 
     agent = models.ForeignKey(Agent, verbose_name="所属居间",null=True, on_delete=models.SET_NULL)
-    agent_rate = models.DecimalField("与居间分成比例",max_digits=20,decimal_places=4,default=0)
-    tax_diff = models.DecimalField("税差",max_digits=20,decimal_places=4,default=0)
+    agent_rate = models.DecimalField("与居间分成比例",null=True,max_digits=20,decimal_places=4,default=0)
+    tax_diff = models.DecimalField("税差",max_digits=20,null=True,decimal_places=4,default=0)
  
     note_1 = models.TextField("备注1",null=True,blank=True)
     note_2 = models.TextField("备注2",null=True,blank=True)

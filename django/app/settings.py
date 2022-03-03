@@ -146,11 +146,8 @@ REST_FRAMEWORK = {
     )
 }
 SIMPLE_JWT = {
-#     'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
-#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-#     'REFRESH_TOKEN_LIFETIME': timedelta(weeks=1)
-    #禁用blacklist_app
-    'BLACKLIST_AFTER_ROTATION' :False
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
 }
 REST_AUTH_SERIALIZERS = {
     'JWT_TOKEN_CLAIMS_SERIALIZER': 'api.auth.HasuraTokenObtainPairSerializer'
