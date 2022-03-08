@@ -2,8 +2,13 @@ from rest_framework.generics import GenericAPIView,ListAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.viewsets import ReadOnlyModelViewSet
+from django_filters import rest_framework as filters
+from drf_excel.mixins import XLSXFileMixin
+from drf_excel.renderers import XLSXRenderer
 from .serializers import RoleSerializer,SystemFunctionOperateSerializer,OrganizationSerializer,HasuraUserSerializer 
 from .models import Role,HasuraUser
+from .filters import RoleFilter
 
 
 class RoutersView(RetrieveAPIView):
@@ -52,3 +57,67 @@ class AllPermissionsView(RetrieveAPIView):
         django-rest-swagger
         """
         return HasuraUser.objects.none()
+
+class RolesExportViewSet(XLSXFileMixin, ListAPIView):
+    permission_classes = (AllowAny,)
+    xlsx_use_labels = True
+    xlsx_boolean_labels = {True: "是", False: "否"}
+    queryset = Role.objects.all()
+    serializer_class = RoleSerializer
+    renderer_classes = (XLSXRenderer,)
+    filename = '角色信息.xlsx' 
+    xlsx_ignore_headers = ["id","system_function_operates","routers"]
+    filterset_fields = {"name": ["exact","iexact","contains","icontains"],"is_active": ["exact","in"]} 
+    # filterset_class = RoleFilter
+
+    column_header = {
+        'height': 25,
+        'style': {
+            'fill': {
+                'fill_type': 'solid',
+                'start_color': 'FFCCFFCC',
+            },
+            'alignment': {
+                'horizontal': 'center',
+                'vertical': 'center',
+                'wrapText': True,
+                'shrink_to_fit': True,
+            },
+            'border_side': {
+                'border_style': 'thin',
+                'color': 'FF000000',
+            },
+            'font': {
+                'name': 'Arial',
+                'size': 14,
+                'bold': True,
+                'color': 'FF000000',
+            },
+        },
+    }
+
+    body = {
+        'style': {
+            'fill': {
+                'fill_type': 'solid',
+                'start_color': 'FFCCFFCC',
+            },
+            'alignment': {
+                'horizontal': 'center',
+                'vertical': 'center',
+                'wrapText': True,
+                'shrink_to_fit': True,
+            },
+            'border_side': {
+                'border_style': 'thin',
+                'color': 'FF000000',
+            },
+            'font': {
+                'name': 'Arial',
+                'size': 14,
+                'bold': False,
+                'color': 'FF000000',
+            }
+        },
+        'height': 40,
+    }

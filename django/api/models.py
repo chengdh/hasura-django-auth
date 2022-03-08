@@ -108,12 +108,11 @@ class Role(models.Model):
     """
     角色
     """ 
-    name = models.CharField("显示名称",  max_length=200)
-    is_active = models.BooleanField("是否有效", default=True)
+    name = models.CharField("名称",  max_length=200)
+    is_active = models.BooleanField("有效", default=True)
     rank = models.IntegerField("排序",default=1)
     note = models.TextField("备注",null=True,blank=True)
     #角色具有的权限
     system_function_operates= models.ManyToManyField(SystemFunctionOperate,verbose_name="角色具有的权限")
-    class Meta:
-        ordering=["rank"]
-
+    # class Meta:
+        # ordering=["rank"]
