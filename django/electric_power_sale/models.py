@@ -1,6 +1,31 @@
 from django.db import models
-from api.models import Organization
-from datetime import date
+from api.models import HasuraUser, Organization
+from datetime import date,datetime
+
+def default_cur_date():
+    return date.today()
+
+def default_cur_mth():
+    return int(date.today().strftime("%Y%m"))
+
+
+def default_cur_datetime():
+    return datetime.now()
+
+def default_year_start_date():
+    epoch_year = date.today().year
+    year_start = date(epoch_year, 1, 1)
+    return year_start
+
+def default_year_end_date():
+    epoch_year = date.today().year
+    year_end = date(epoch_year, 12, 31)
+    return year_end
+
+
+def default_cur_year():
+    return date.today().year
+
 
 class Agent(models.Model):
     """居间资料
@@ -16,6 +41,8 @@ class Agent(models.Model):
     default_agent_rate = models.DecimalField("默认居间分成比例",max_digits=20,decimal_places=4,default=0)
     note = models.TextField("备注1",null=True,blank=True)
     is_active = models.BooleanField("是否有效", default=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
 
 
  
@@ -37,7 +64,7 @@ class Customer(models.Model):
         return "{:%Y%M%d}-{:06d}".format(date.today(),count)
 
     name = models.CharField("客户名称",max_length=200)
-    organization = models.ForeignKey(Organization, verbose_name="上级机构",null=True,on_delete=models.SET_NULL)
+    organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
     address = models.CharField("地址",null=True,blank=True,max_length=200)
     custom_no = models.CharField("客户编号",null=True,blank=True,max_length=60,default=get_customer_no)
     toucher_1 = models.CharField("联系人1",null=True,blank=True,max_length=60)
@@ -50,6 +77,17 @@ class Customer(models.Model):
 
     elect_level = models.CharField("电压等级",null=True,blank=True,max_length=60)
     transformer_volume = models.CharField("变压器容量",null=True,blank=True,max_length=60)
+
+    #服务费率
+    TRANSFORMER_TYPE_LT_35="transformer_type_lt_35"
+    TRANSFORMER_TYPE_GT_35="transformer_type_gt_35"
+
+    TRANSFORMER_TYPE_CHOICES = [(TRANSFORMER_TYPE_LT_35,"35KVA以下"),(TRANSFORMER_TYPE_LT_35,"35KVA以上")]
+ 
+    transformer_type = models.CharField("变压器容量类型",
+        choices=TRANSFORMER_TYPE_CHOICES ,
+        default=TRANSFORMER_TYPE_LT_35,
+        null=True,blank=True,max_length=60)
 
     #收入结算方式
     #服务费率
@@ -95,3 +133,297 @@ class Customer(models.Model):
     note_2 = models.TextField("备注2",null=True,blank=True)
     note_3 = models.TextField("备注3",null=True,blank=True)
     is_active = models.BooleanField("是否有效", default=True)
+
+class Contract(models.Model):
+    """销售合同
+    """
+    name = models.CharField("合同名称",max_length=200)
+    organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
+    customer = models.ForeignKey(Customer, verbose_name="关联客户",null=True,on_delete=models.SET_NULL)
+    contract_no = models.CharField("合同编号",max_length=40,blank=True,null=True)
+    contract_year = models.IntegerField("所属年度",default=default_cur_year)
+    contract_start_date = models.DateField("合同生效日期",default=default_year_start_date)
+    contract_end_date = models.DateField("合同结束日期",default=default_year_end_date)
+
+    #电量计费方式
+    #常规
+    PRICE_TYPE_COMMON="price_type_common"
+    #分时段
+    PRICE_TYPE_SEPRATE_TIME="price_type_seprate_time"
+
+    PRICE_TYPE_CHOICES = [(PRICE_TYPE_COMMON,"常规"),(PRICE_TYPE_SEPRATE_TIME,"分时段")]
+
+
+    contract_price_type = models.CharField("电价价方式",max_length=40,
+        choices=PRICE_TYPE_CHOICES,
+        default=PRICE_TYPE_COMMON)
+
+
+    price_common = models.DecimalField("常规时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_peak = models.DecimalField("峰时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_flat= models.DecimalField("平时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_valley = models.DecimalField("谷时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+
+    state = models.CharField("状态",max_length=40,default="draft")
+    note = models.TextField("备注1",null=True,blank=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+class ContractLine(models.Model):
+    """合同明细(电量计划表)
+    """
+    contract = models.ForeignKey(Contract, verbose_name="合同",on_delete=models.CASCADE)
+    mth = models.IntegerField("月份", default=default_cur_mth)
+    plan_common= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    #一下字段从不同业务表中同步
+    adjust_plan_common= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    price_common = models.DecimalField("常规时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_peak = models.DecimalField("峰时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_flat= models.DecimalField("平时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_valley = models.DecimalField("谷时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+
+    state = models.CharField("状态",max_length=40,default="draft")
+
+    note = models.TextField("备注1",null=True,blank=True)
+
+class MthAdjust(models.Model):
+    """月度电量调整表
+
+    Args:
+        models (_type_): _description_
+    """
+    organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
+    mth = models.IntegerField("月份", default=default_cur_mth)
+
+    state = models.CharField("状态",max_length=40,default="draft")
+
+    note = models.TextField("备注",null=True,blank=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+
+class MthAdjustLine(models.Model):
+    """月度电量调整子表
+
+    Args:
+        models (_type_): _description_
+    """
+    mth_adjust= models.ForeignKey(MthAdjust, verbose_name="月度电量调整主表",on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, verbose_name="关联客户",null=True,on_delete=models.SET_NULL)
+    state = models.CharField("状态",max_length=40,default="draft")
+    note = models.TextField("备注",null=True,blank=True)
+
+class MthAdjustLineDetail(models.Model):
+    """月度电量调整明细
+
+    Args:
+        models (_type_): _description_
+    """
+    mth_adjust_line= models.ForeignKey(MthAdjustLine, verbose_name="月度电量调整子表",on_delete=models.CASCADE)
+    mth = models.IntegerField("月份", default=default_cur_mth)
+
+    #调整前
+    previous_plan_common= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    #调整后
+    adjust_plan_common= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    state = models.CharField("状态",max_length=40,default="draft")
+    note = models.TextField("备注",null=True,blank=True)
+
+class MthCustomerBill(models.Model):
+    """月度电量结算单主表 
+
+    Args:
+        models (_type_): _description_
+    """
+    organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
+    mth = models.IntegerField("月份", default=default_cur_mth)
+
+    state = models.CharField("状态",max_length=40,default="draft")
+
+    note = models.TextField("备注",null=True,blank=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+class MthCustomerBillLine(models.Model):
+    """月度电量结算单明细
+
+    Args:
+        models (_type_): _description_
+    """
+    mth_customer_bill= models.ForeignKey(MthCustomerBill, verbose_name="月度电量结算单主表",on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, verbose_name="关联客户",null=True,on_delete=models.SET_NULL)
+
+    contract_name = models.CharField("合同名称",max_length=40)
+    #结算电量
+    act_common= models.DecimalField("月结算电量-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat= models.DecimalField("月结算电量-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley= models.DecimalField("月结算电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak= models.DecimalField("月结算电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    #结算价格
+    price_common = models.DecimalField("常规时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_peak = models.DecimalField("峰时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_flat= models.DecimalField("平时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_valley = models.DecimalField("谷时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+
+    service_rate = models.DecimalField("代理服务费比例",max_digits=20,decimal_places=4,default=0)
+    service_fee = models.DecimalField("代理服务费",max_digits=20,decimal_places=4,default=0)
+
+    state = models.CharField("状态",max_length=40,default="draft")
+    note = models.TextField("备注",null=True,blank=True)
+
+class MthAgentBill(models.Model):
+    """月度电量居间结算单主表 
+
+    Args:
+        models (_type_): _description_
+    """
+    organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
+    mth = models.IntegerField("月份", default=default_cur_mth)
+
+    state = models.CharField("状态",max_length=40,default="draft")
+
+    note = models.TextField("备注",null=True,blank=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+class MthAgentBillLine(models.Model):
+    """月度电量结算单明细
+
+    Args:
+        models (_type_): _description_
+    """
+    mth_agent_bill= models.ForeignKey(MthAgentBill, verbose_name="月度电量结算单主表",on_delete=models.CASCADE)
+    agent = models.ForeignKey(Agent, verbose_name="居间",null=True,on_delete=models.SET_NULL)
+
+    #计划电量
+    plan_common= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    #结算电量
+    act_common= models.DecimalField("月结算电量-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat= models.DecimalField("月结算电量-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley= models.DecimalField("月结算电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak= models.DecimalField("月结算电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    #结算价格
+    price_common = models.DecimalField("常规时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_peak = models.DecimalField("峰时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_flat= models.DecimalField("平时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    price_valley = models.DecimalField("谷时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+
+    service_rate = models.DecimalField("代理服务费比例",max_digits=20,decimal_places=4,default=0)
+    service_fee = models.DecimalField("代理服务费",max_digits=20,decimal_places=4,default=0)
+
+    agent_rate = models.DecimalField("居间分成比例",max_digits=20,decimal_places=4,default=0)
+    agent_fee = models.DecimalField("居间分成金额",max_digits=20,decimal_places=4,default=0)
+    tax_diff = models.DecimalField("增值税差额",max_digits=20,decimal_places=4,default=0)
+    act_agent_fee= models.DecimalField("实际结算居间分成费",max_digits=20,decimal_places=4,default=0)
+
+
+    agent_confirm_date= models.DateField("居间确认时间", default=default_cur_date)
+
+    state = models.CharField("状态",max_length=40,default="draft")
+    note = models.TextField("备注",null=True,blank=True)
+
+class MthDraftCustomerBill(models.Model):
+    """月度电量确认单主表 
+
+    Args:
+        models (_type_): _description_
+    """
+    organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
+    mth = models.IntegerField("月份", default=default_cur_mth)
+
+    state = models.CharField("状态",max_length=40,default="draft")
+
+    note = models.TextField("备注",null=True,blank=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+class MthDraftCustomerBillLine(models.Model):
+    """月度电量确认单明细
+
+    Args:
+        models (_type_): _description_
+    """
+    mth_draft_customer_bill= models.ForeignKey(MthDraftCustomerBill, verbose_name="月度电量确认单主表",on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, verbose_name="关联客户",null=True,on_delete=models.SET_NULL)
+    customer_device_no = models.CharField("户号",max_length=40)
+
+   
+    #结算电量
+    act_common= models.DecimalField("月结算电量-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat= models.DecimalField("月结算电量-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley= models.DecimalField("月结算电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak= models.DecimalField("月结算电量-峰时段",max_digits=20,decimal_places=4,default=0)
+    state = models.CharField("状态",max_length=40,default="draft")
+    note = models.TextField("备注",null=True,blank=True)
+
+class MthDiffCustomerBill(models.Model):
+    """月度电量偏差控制主表 
+
+    Args:
+        models (_type_): _description_
+    """
+    organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
+    mth = models.IntegerField("月份", default=default_cur_mth)
+
+    state = models.CharField("状态",max_length=40,default="draft")
+
+    note = models.TextField("备注",null=True,blank=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+    
+class MthDiffCustomerBillLine(models.Model):
+    """月度电量偏差控制表明细
+
+    Args:
+        models (_type_): _description_
+    """
+    mth_diff_customer_bill= models.ForeignKey(MthDiffCustomerBill, verbose_name="月度电量偏差控制主表",on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, verbose_name="关联客户",null=True,on_delete=models.SET_NULL)
+    customer_device_no = models.CharField("户号",max_length=40)
+
+    #计划电量
+    plan_common= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    #结算电量
+    act_common= models.DecimalField("月结算电量-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat= models.DecimalField("月结算电量-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley= models.DecimalField("月结算电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak= models.DecimalField("月结算电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    state = models.CharField("状态",max_length=40,default="draft")
+    note = models.TextField("备注",null=True,blank=True)
