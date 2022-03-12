@@ -1,8 +1,8 @@
 version: 2
-endpoint: http://localhost:8080
+endpoint: http://hasura:8080
 metadata_directory: 'metadata'
 migrations_directory: 'migrations'
 admin_secret: password
 actions:
   kind: synchronous
-  handler_webhook_baseurl: http://localhost:18000
+  handler_webhook_baseurl: http://hasura:8080

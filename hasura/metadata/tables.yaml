@@ -1,30 +1,298 @@
 - table:
     schema: public
     name: account_emailaddress
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: user_id
+  array_relationships:
+  - name: account_emailconfirmations
+    using:
+      foreign_key_constraint_on:
+        column: email_address_id
+        table:
+          schema: public
+          name: account_emailconfirmation
 - table:
     schema: public
     name: account_emailconfirmation
+  object_relationships:
+  - name: account_emailaddress
+    using:
+      foreign_key_constraint_on: email_address_id
 - table:
     schema: public
     name: api_functioncategory
+  object_relationships:
+  - name: api_functioncategory
+    using:
+      foreign_key_constraint_on: parent_function_category_id
+  array_relationships:
+  - name: api_functioncategories
+    using:
+      foreign_key_constraint_on:
+        column: parent_function_category_id
+        table:
+          schema: public
+          name: api_functioncategory
+  - name: api_systemfunctions
+    using:
+      foreign_key_constraint_on:
+        column: function_category_id
+        table:
+          schema: public
+          name: api_systemfunction
 - table:
     schema: public
     name: api_hasurauser
+  object_relationships:
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: default_org_id
+  - name: api_role
+    using:
+      foreign_key_constraint_on: default_role_id
+  - name: authtoken_token
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: authtoken_token
+  array_relationships:
+  - name: account_emailaddresses
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: account_emailaddress
+  - name: api_hasurauser_groups
+    using:
+      foreign_key_constraint_on:
+        column: hasurauser_id
+        table:
+          schema: public
+          name: api_hasurauser_groups
+  - name: api_hasurauser_organizations
+    using:
+      foreign_key_constraint_on:
+        column: hasurauser_id
+        table:
+          schema: public
+          name: api_hasurauser_organizations
+  - name: api_hasurauser_roles
+    using:
+      foreign_key_constraint_on:
+        column: hasurauser_id
+        table:
+          schema: public
+          name: api_hasurauser_roles
+  - name: api_hasurauser_user_permissions
+    using:
+      foreign_key_constraint_on:
+        column: hasurauser_id
+        table:
+          schema: public
+          name: api_hasurauser_user_permissions
+  - name: api_organizations
+    using:
+      foreign_key_constraint_on:
+        column: header_id
+        table:
+          schema: public
+          name: api_organization
+  - name: django_admin_logs
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: django_admin_log
+  - name: electric_power_sale_agents
+    using:
+      foreign_key_constraint_on:
+        column: created_by_id
+        table:
+          schema: public
+          name: electric_power_sale_agent
+  - name: electric_power_sale_contracts
+    using:
+      foreign_key_constraint_on:
+        column: created_by_id
+        table:
+          schema: public
+          name: electric_power_sale_contract
+  - name: electric_power_sale_mthadjusts
+    using:
+      foreign_key_constraint_on:
+        column: created_by_id
+        table:
+          schema: public
+          name: electric_power_sale_mthadjust
+  - name: electric_power_sale_mthagentbills
+    using:
+      foreign_key_constraint_on:
+        column: created_by_id
+        table:
+          schema: public
+          name: electric_power_sale_mthagentbill
+  - name: electric_power_sale_mthcustomerbills
+    using:
+      foreign_key_constraint_on:
+        column: created_by_id
+        table:
+          schema: public
+          name: electric_power_sale_mthcustomerbill
+  - name: electric_power_sale_mthdiffcustomerbills
+    using:
+      foreign_key_constraint_on:
+        column: created_by_id
+        table:
+          schema: public
+          name: electric_power_sale_mthdiffcustomerbill
+  - name: electric_power_sale_mthdraftcustomerbills
+    using:
+      foreign_key_constraint_on:
+        column: created_by_id
+        table:
+          schema: public
+          name: electric_power_sale_mthdraftcustomerbill
+  - name: socialaccount_socialaccounts
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: socialaccount_socialaccount
 - table:
     schema: public
     name: api_hasurauser_groups
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: hasurauser_id
+  - name: auth_group
+    using:
+      foreign_key_constraint_on: group_id
 - table:
     schema: public
     name: api_hasurauser_organizations
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: hasurauser_id
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: organization_id
 - table:
     schema: public
     name: api_hasurauser_roles
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: hasurauser_id
+  - name: api_role
+    using:
+      foreign_key_constraint_on: role_id
 - table:
     schema: public
     name: api_hasurauser_user_permissions
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: hasurauser_id
+  - name: auth_permission
+    using:
+      foreign_key_constraint_on: permission_id
 - table:
     schema: public
     name: api_organization
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: header_id
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: parent_org_id
+  array_relationships:
+  - name: api_hasurauser_organizations
+    using:
+      foreign_key_constraint_on:
+        column: organization_id
+        table:
+          schema: public
+          name: api_hasurauser_organizations
+  - name: api_hasurausers
+    using:
+      foreign_key_constraint_on:
+        column: default_org_id
+        table:
+          schema: public
+          name: api_hasurauser
+  - name: api_organizations
+    using:
+      foreign_key_constraint_on:
+        column: parent_org_id
+        table:
+          schema: public
+          name: api_organization
+  - name: electric_power_sale_agents
+    using:
+      foreign_key_constraint_on:
+        column: organization_id
+        table:
+          schema: public
+          name: electric_power_sale_agent
+  - name: electric_power_sale_contracts
+    using:
+      foreign_key_constraint_on:
+        column: organization_id
+        table:
+          schema: public
+          name: electric_power_sale_contract
+  - name: electric_power_sale_customers
+    using:
+      foreign_key_constraint_on:
+        column: organization_id
+        table:
+          schema: public
+          name: electric_power_sale_customer
+  - name: electric_power_sale_mthadjusts
+    using:
+      foreign_key_constraint_on:
+        column: organization_id
+        table:
+          schema: public
+          name: electric_power_sale_mthadjust
+  - name: electric_power_sale_mthagentbills
+    using:
+      foreign_key_constraint_on:
+        column: organization_id
+        table:
+          schema: public
+          name: electric_power_sale_mthagentbill
+  - name: electric_power_sale_mthcustomerbills
+    using:
+      foreign_key_constraint_on:
+        column: organization_id
+        table:
+          schema: public
+          name: electric_power_sale_mthcustomerbill
+  - name: electric_power_sale_mthdiffcustomerbills
+    using:
+      foreign_key_constraint_on:
+        column: organization_id
+        table:
+          schema: public
+          name: electric_power_sale_mthdiffcustomerbill
+  - name: electric_power_sale_mthdraftcustomerbills
+    using:
+      foreign_key_constraint_on:
+        column: organization_id
+        table:
+          schema: public
+          name: electric_power_sale_mthdraftcustomerbill
 - table:
     schema: public
     name: api_role
@@ -53,30 +321,128 @@
 - table:
     schema: public
     name: api_role_system_function_operates
+  object_relationships:
+  - name: api_role
+    using:
+      foreign_key_constraint_on: role_id
+  - name: api_systemfunctionoperate
+    using:
+      foreign_key_constraint_on: systemfunctionoperate_id
 - table:
     schema: public
     name: api_systemfunction
+  object_relationships:
+  - name: api_functioncategory
+    using:
+      foreign_key_constraint_on: function_category_id
+  array_relationships:
+  - name: api_systemfunctionoperates
+    using:
+      foreign_key_constraint_on:
+        column: system_function_id
+        table:
+          schema: public
+          name: api_systemfunctionoperate
 - table:
     schema: public
     name: api_systemfunctionoperate
+  object_relationships:
+  - name: api_systemfunction
+    using:
+      foreign_key_constraint_on: system_function_id
+  array_relationships:
+  - name: api_role_system_function_operates
+    using:
+      foreign_key_constraint_on:
+        column: systemfunctionoperate_id
+        table:
+          schema: public
+          name: api_role_system_function_operates
 - table:
     schema: public
     name: auth_group
+  array_relationships:
+  - name: api_hasurauser_groups
+    using:
+      foreign_key_constraint_on:
+        column: group_id
+        table:
+          schema: public
+          name: api_hasurauser_groups
+  - name: auth_group_permissions
+    using:
+      foreign_key_constraint_on:
+        column: group_id
+        table:
+          schema: public
+          name: auth_group_permissions
 - table:
     schema: public
     name: auth_group_permissions
+  object_relationships:
+  - name: auth_group
+    using:
+      foreign_key_constraint_on: group_id
+  - name: auth_permission
+    using:
+      foreign_key_constraint_on: permission_id
 - table:
     schema: public
     name: auth_permission
+  object_relationships:
+  - name: django_content_type
+    using:
+      foreign_key_constraint_on: content_type_id
+  array_relationships:
+  - name: api_hasurauser_user_permissions
+    using:
+      foreign_key_constraint_on:
+        column: permission_id
+        table:
+          schema: public
+          name: api_hasurauser_user_permissions
+  - name: auth_group_permissions
+    using:
+      foreign_key_constraint_on:
+        column: permission_id
+        table:
+          schema: public
+          name: auth_group_permissions
 - table:
     schema: public
     name: authtoken_token
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: user_id
 - table:
     schema: public
     name: django_admin_log
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: user_id
+  - name: django_content_type
+    using:
+      foreign_key_constraint_on: content_type_id
 - table:
     schema: public
     name: django_content_type
+  array_relationships:
+  - name: auth_permissions
+    using:
+      foreign_key_constraint_on:
+        column: content_type_id
+        table:
+          schema: public
+          name: auth_permission
+  - name: django_admin_logs
+    using:
+      foreign_key_constraint_on:
+        column: content_type_id
+        table:
+          schema: public
+          name: django_admin_log
 - table:
     schema: public
     name: django_migrations
@@ -86,10 +452,21 @@
 - table:
     schema: public
     name: django_site
+  array_relationships:
+  - name: socialaccount_socialapp_sites
+    using:
+      foreign_key_constraint_on:
+        column: site_id
+        table:
+          schema: public
+          name: socialaccount_socialapp_sites
 - table:
     schema: public
     name: electric_power_sale_agent
   object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: created_by_id
   - name: api_organization
     using:
       foreign_key_constraint_on: organization_id
@@ -101,6 +478,41 @@
         table:
           schema: public
           name: electric_power_sale_customer
+  - name: electric_power_sale_mthagentbilllines
+    using:
+      foreign_key_constraint_on:
+        column: agent_id
+        table:
+          schema: public
+          name: electric_power_sale_mthagentbillline
+- table:
+    schema: public
+    name: electric_power_sale_contract
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: created_by_id
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: organization_id
+  - name: electric_power_sale_customer
+    using:
+      foreign_key_constraint_on: customer_id
+  array_relationships:
+  - name: electric_power_sale_contractlines
+    using:
+      foreign_key_constraint_on:
+        column: contract_id
+        table:
+          schema: public
+          name: electric_power_sale_contractline
+- table:
+    schema: public
+    name: electric_power_sale_contractline
+  object_relationships:
+  - name: electric_power_sale_contract
+    using:
+      foreign_key_constraint_on: contract_id
 - table:
     schema: public
     name: electric_power_sale_customer
@@ -111,15 +523,247 @@
   - name: electric_power_sale_agent
     using:
       foreign_key_constraint_on: agent_id
+  array_relationships:
+  - name: electric_power_sale_contracts
+    using:
+      foreign_key_constraint_on:
+        column: customer_id
+        table:
+          schema: public
+          name: electric_power_sale_contract
+  - name: electric_power_sale_mthadjustlines
+    using:
+      foreign_key_constraint_on:
+        column: customer_id
+        table:
+          schema: public
+          name: electric_power_sale_mthadjustline
+  - name: electric_power_sale_mthcustomerbilllines
+    using:
+      foreign_key_constraint_on:
+        column: customer_id
+        table:
+          schema: public
+          name: electric_power_sale_mthcustomerbillline
+  - name: electric_power_sale_mthdiffcustomerbilllines
+    using:
+      foreign_key_constraint_on:
+        column: customer_id
+        table:
+          schema: public
+          name: electric_power_sale_mthdiffcustomerbillline
+  - name: electric_power_sale_mthdraftcustomerbilllines
+    using:
+      foreign_key_constraint_on:
+        column: customer_id
+        table:
+          schema: public
+          name: electric_power_sale_mthdraftcustomerbillline
+- table:
+    schema: public
+    name: electric_power_sale_mthadjust
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: created_by_id
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: organization_id
+  array_relationships:
+  - name: electric_power_sale_mthadjustlines
+    using:
+      foreign_key_constraint_on:
+        column: mth_adjust_id
+        table:
+          schema: public
+          name: electric_power_sale_mthadjustline
+- table:
+    schema: public
+    name: electric_power_sale_mthadjustline
+  object_relationships:
+  - name: electric_power_sale_customer
+    using:
+      foreign_key_constraint_on: customer_id
+  - name: electric_power_sale_mthadjust
+    using:
+      foreign_key_constraint_on: mth_adjust_id
+  array_relationships:
+  - name: electric_power_sale_mthadjustlinedetails
+    using:
+      foreign_key_constraint_on:
+        column: mth_adjust_line_id
+        table:
+          schema: public
+          name: electric_power_sale_mthadjustlinedetail
+- table:
+    schema: public
+    name: electric_power_sale_mthadjustlinedetail
+  object_relationships:
+  - name: electric_power_sale_mthadjustline
+    using:
+      foreign_key_constraint_on: mth_adjust_line_id
+- table:
+    schema: public
+    name: electric_power_sale_mthagentbill
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: created_by_id
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: organization_id
+  array_relationships:
+  - name: electric_power_sale_mthagentbilllines
+    using:
+      foreign_key_constraint_on:
+        column: mth_agent_bill_id
+        table:
+          schema: public
+          name: electric_power_sale_mthagentbillline
+- table:
+    schema: public
+    name: electric_power_sale_mthagentbillline
+  object_relationships:
+  - name: electric_power_sale_agent
+    using:
+      foreign_key_constraint_on: agent_id
+  - name: electric_power_sale_mthagentbill
+    using:
+      foreign_key_constraint_on: mth_agent_bill_id
+- table:
+    schema: public
+    name: electric_power_sale_mthcustomerbill
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: created_by_id
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: organization_id
+  array_relationships:
+  - name: electric_power_sale_mthcustomerbilllines
+    using:
+      foreign_key_constraint_on:
+        column: mth_customer_bill_id
+        table:
+          schema: public
+          name: electric_power_sale_mthcustomerbillline
+- table:
+    schema: public
+    name: electric_power_sale_mthcustomerbillline
+  object_relationships:
+  - name: electric_power_sale_customer
+    using:
+      foreign_key_constraint_on: customer_id
+  - name: electric_power_sale_mthcustomerbill
+    using:
+      foreign_key_constraint_on: mth_customer_bill_id
+- table:
+    schema: public
+    name: electric_power_sale_mthdiffcustomerbill
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: created_by_id
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: organization_id
+  array_relationships:
+  - name: electric_power_sale_mthdiffcustomerbilllines
+    using:
+      foreign_key_constraint_on:
+        column: mth_diff_customer_bill_id
+        table:
+          schema: public
+          name: electric_power_sale_mthdiffcustomerbillline
+- table:
+    schema: public
+    name: electric_power_sale_mthdiffcustomerbillline
+  object_relationships:
+  - name: electric_power_sale_customer
+    using:
+      foreign_key_constraint_on: customer_id
+  - name: electric_power_sale_mthdiffcustomerbill
+    using:
+      foreign_key_constraint_on: mth_diff_customer_bill_id
+- table:
+    schema: public
+    name: electric_power_sale_mthdraftcustomerbill
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: created_by_id
+  - name: api_organization
+    using:
+      foreign_key_constraint_on: organization_id
+  array_relationships:
+  - name: electric_power_sale_mthdraftcustomerbilllines
+    using:
+      foreign_key_constraint_on:
+        column: mth_draft_customer_bill_id
+        table:
+          schema: public
+          name: electric_power_sale_mthdraftcustomerbillline
+- table:
+    schema: public
+    name: electric_power_sale_mthdraftcustomerbillline
+  object_relationships:
+  - name: electric_power_sale_customer
+    using:
+      foreign_key_constraint_on: customer_id
+  - name: electric_power_sale_mthdraftcustomerbill
+    using:
+      foreign_key_constraint_on: mth_draft_customer_bill_id
 - table:
     schema: public
     name: socialaccount_socialaccount
+  object_relationships:
+  - name: api_hasurauser
+    using:
+      foreign_key_constraint_on: user_id
+  array_relationships:
+  - name: socialaccount_socialtokens
+    using:
+      foreign_key_constraint_on:
+        column: account_id
+        table:
+          schema: public
+          name: socialaccount_socialtoken
 - table:
     schema: public
     name: socialaccount_socialapp
+  array_relationships:
+  - name: socialaccount_socialapp_sites
+    using:
+      foreign_key_constraint_on:
+        column: socialapp_id
+        table:
+          schema: public
+          name: socialaccount_socialapp_sites
+  - name: socialaccount_socialtokens
+    using:
+      foreign_key_constraint_on:
+        column: app_id
+        table:
+          schema: public
+          name: socialaccount_socialtoken
 - table:
     schema: public
     name: socialaccount_socialapp_sites
+  object_relationships:
+  - name: django_site
+    using:
+      foreign_key_constraint_on: site_id
+  - name: socialaccount_socialapp
+    using:
+      foreign_key_constraint_on: socialapp_id
 - table:
     schema: public
     name: socialaccount_socialtoken
+  object_relationships:
+  - name: socialaccount_socialaccount
+    using:
+      foreign_key_constraint_on: account_id
+  - name: socialaccount_socialapp
+    using:
+      foreign_key_constraint_on: app_id

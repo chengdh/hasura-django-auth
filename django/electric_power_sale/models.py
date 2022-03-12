@@ -168,6 +168,7 @@ class Contract(models.Model):
     note = models.TextField("备注1",null=True,blank=True)
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+    is_active = models.BooleanField("是否有效", default=True)
 
 class ContractLine(models.Model):
     """合同明细(电量计划表)
