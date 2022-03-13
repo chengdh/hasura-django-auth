@@ -43,9 +43,9 @@ class Agent(models.Model):
     is_active = models.BooleanField("是否有效", default=True)
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
 
-
- 
 # Create your models here.
 class Customer(models.Model):
     """客户资料
@@ -133,6 +133,10 @@ class Customer(models.Model):
     note_2 = models.TextField("备注2",null=True,blank=True)
     note_3 = models.TextField("备注3",null=True,blank=True)
     is_active = models.BooleanField("是否有效", default=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
 
 class Contract(models.Model):
     """销售合同
@@ -168,6 +172,9 @@ class Contract(models.Model):
     note = models.TextField("备注1",null=True,blank=True)
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+
     is_active = models.BooleanField("是否有效", default=True)
 
 class ContractLine(models.Model):
@@ -181,7 +188,7 @@ class ContractLine(models.Model):
     plan_peak= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
 
 
-    #一下字段从不同业务表中同步
+    #以下字段从不同业务表中同步
     adjust_plan_common= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
     adjust_plan_flat= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
     adjust_plan_valley= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
@@ -200,6 +207,12 @@ class ContractLine(models.Model):
     state = models.CharField("状态",max_length=40,default="draft")
 
     note = models.TextField("备注1",null=True,blank=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+
+
 
 class MthAdjust(models.Model):
     """月度电量调整表
@@ -215,6 +228,10 @@ class MthAdjust(models.Model):
     note = models.TextField("备注",null=True,blank=True)
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+
+
 
 
 class MthAdjustLine(models.Model):
@@ -269,6 +286,11 @@ class MthCustomerBill(models.Model):
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
 
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+
+
+
 class MthCustomerBillLine(models.Model):
     """月度电量结算单明细
 
@@ -296,6 +318,13 @@ class MthCustomerBillLine(models.Model):
 
     state = models.CharField("状态",max_length=40,default="draft")
     note = models.TextField("备注",null=True,blank=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+
+
 
 class MthAgentBill(models.Model):
     """月度电量居间结算单主表 
@@ -311,6 +340,11 @@ class MthAgentBill(models.Model):
     note = models.TextField("备注",null=True,blank=True)
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+
+
 
 class MthAgentBillLine(models.Model):
     """月度电量结算单明细
@@ -353,6 +387,14 @@ class MthAgentBillLine(models.Model):
     state = models.CharField("状态",max_length=40,default="draft")
     note = models.TextField("备注",null=True,blank=True)
 
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+
+
+
 class MthDraftCustomerBill(models.Model):
     """月度电量确认单主表 
 
@@ -367,6 +409,11 @@ class MthDraftCustomerBill(models.Model):
     note = models.TextField("备注",null=True,blank=True)
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+
+
 
 class MthDraftCustomerBillLine(models.Model):
     """月度电量确认单明细
@@ -387,6 +434,13 @@ class MthDraftCustomerBillLine(models.Model):
     state = models.CharField("状态",max_length=40,default="draft")
     note = models.TextField("备注",null=True,blank=True)
 
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+
+
 class MthDiffCustomerBill(models.Model):
     """月度电量偏差控制主表 
 
@@ -401,6 +455,11 @@ class MthDiffCustomerBill(models.Model):
     note = models.TextField("备注",null=True,blank=True)
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+
+
 
     
 class MthDiffCustomerBillLine(models.Model):
@@ -428,3 +487,10 @@ class MthDiffCustomerBillLine(models.Model):
 
     state = models.CharField("状态",max_length=40,default="draft")
     note = models.TextField("备注",null=True,blank=True)
+    created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
+    created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
+
+    updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
+    updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
+
+
