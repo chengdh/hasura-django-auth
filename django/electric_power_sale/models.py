@@ -181,28 +181,192 @@ class ContractLine(models.Model):
     """合同明细(电量计划表)
     """
     contract = models.ForeignKey(Contract, verbose_name="合同",on_delete=models.CASCADE)
-    mth = models.IntegerField("月份", default=default_cur_mth)
-    plan_common= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
-    plan_flat= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
-    plan_valley= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
-    plan_peak= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_1= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_1= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_1= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_1= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_2= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_2= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_2= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_2= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_3= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_3= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_3= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_3= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_4= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_4= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_4= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_4= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_5= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_5= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_5= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_5= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_6= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_6= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_6= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_6= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_7= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_7= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_7= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_7= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_8= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_8= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_8= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_8= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_9= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_9= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_9= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_9= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_10= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_10= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_10= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_10= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_11= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_11= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_11= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_11= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    plan_common_mth_12= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    plan_flat_mth_12= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    plan_valley_mth_12= models.DecimalField("计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    plan_peak_mth_12= models.DecimalField("计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
 
 
     #以下字段从不同业务表中同步
-    adjust_plan_common= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
-    adjust_plan_flat= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
-    adjust_plan_valley= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
-    adjust_plan_peak= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_common_mth_1= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_1= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_1= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_1= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
 
-    act_common= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
-    act_flat= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
-    act_valley= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
-    act_peak= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_common_mth_2= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_2= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_2= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_2= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
 
-    price_common = models.DecimalField("常规时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
-    price_peak = models.DecimalField("峰时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
-    price_flat= models.DecimalField("平时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
-    price_valley = models.DecimalField("谷时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_common_mth_3= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_3= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_3= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_3= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_4= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_4= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_4= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_4= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_5= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_5= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_5= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_5= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_6= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_6= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_6= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_6= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_7= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_7= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_7= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_7= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_8= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_8= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_8= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_8= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_9= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_9= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_9= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_9= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_10= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_10= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_10= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_10= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_11= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_11= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_11= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_11= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_12= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_12= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_12= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_12= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    act_common_mth_1= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_1= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_1= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_1= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common_mth_2= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_2= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_2= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_2= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common_mth_3= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_3= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_3= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_3= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common_mth_4= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_4= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_4= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_4= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common_mth_5= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_5= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_5= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_5= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common_mth_6= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_6= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_6= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_6= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common_mth_7= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_7= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_7= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_7= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    act_common_mth_8= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_8= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_8= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_8= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common_mth_9= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_9= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_9= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_9= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common_mth_10= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_10= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_10= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_10= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common_mth_11= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_11= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_11= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_11= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    act_common_mth_12= models.DecimalField("电量结算-常规",max_digits=20,decimal_places=4,default=0)
+    act_flat_mth_12= models.DecimalField("电量结算-平时段",max_digits=20,decimal_places=4,default=0)
+    act_valley_mth_12= models.DecimalField("电量结算-谷时段",max_digits=20,decimal_places=4,default=0)
+    act_peak_mth_12= models.DecimalField("电量结算-峰时段",max_digits=20,decimal_places=4,default=0)
+
 
     state = models.CharField("状态",max_length=40,default="draft")
 
@@ -242,34 +406,141 @@ class MthAdjustLine(models.Model):
     """
     mth_adjust= models.ForeignKey(MthAdjust, verbose_name="月度电量调整主表",on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, verbose_name="关联客户",null=True,on_delete=models.SET_NULL)
-    state = models.CharField("状态",max_length=40,default="draft")
-    note = models.TextField("备注",null=True,blank=True)
-
-class MthAdjustLineDetail(models.Model):
-    """月度电量调整明细
-
-    Args:
-        models (_type_): _description_
-    """
-    mth_adjust_line= models.ForeignKey(MthAdjustLine, verbose_name="月度电量调整子表",on_delete=models.CASCADE)
-    mth = models.IntegerField("月份", default=default_cur_mth)
 
     #调整前
-    previous_plan_common= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
-    previous_plan_flat= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
-    previous_plan_valley= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
-    previous_plan_peak= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_common_mth_1= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_1= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_1= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_1= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
 
+    previous_plan_common_mth_2= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_2= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_2= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_2= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    previous_plan_common_mth_3= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_3= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_3= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_3= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    previous_plan_common_mth_4= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_4= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_4= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_4= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    previous_plan_common_mth_5= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_5= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_5= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_5= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    previous_plan_common_mth_6= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_6= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_6= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_6= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    previous_plan_common_mth_7= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_7= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_7= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_7= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    previous_plan_common_mth_8= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_8= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_8= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_8= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    previous_plan_common_mth_9= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_9= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_9= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_9= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    previous_plan_common_mth_10= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_10= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_10= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_10= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    previous_plan_common_mth_11= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_11= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_11= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_11= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    previous_plan_common_mth_12= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
+    previous_plan_flat_mth_12= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_valley_mth_12= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
+    previous_plan_peak_mth_12= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
 
     #调整后
-    adjust_plan_common= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
-    adjust_plan_flat= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
-    adjust_plan_valley= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
-    adjust_plan_peak= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_common_mth_1= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_1= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_1= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_1= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
 
+    adjust_plan_common_mth_2= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_2= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_2= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_2= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    adjust_plan_common_mth_3= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_3= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_3= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_3= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    adjust_plan_common_mth_4= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_4= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_4= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_4= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    adjust_plan_common_mth_5= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_5= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_5= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_5= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    adjust_plan_common_mth_6= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_6= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_6= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_6= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_7= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_7= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_7= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_7= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    adjust_plan_common_mth_8= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_8= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_8= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_8= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    adjust_plan_common_mth_9= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_9= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_9= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_9= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    adjust_plan_common_mth_10= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_10= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_10= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_10= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+    adjust_plan_common_mth_11= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_11= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_11= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_11= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
+
+
+    adjust_plan_common_mth_12= models.DecimalField("计划电量调整-常规",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_flat_mth_12= models.DecimalField("计划电量调整-平时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_valley_mth_12= models.DecimalField("计划电量调整-谷时段",max_digits=20,decimal_places=4,default=0)
+    adjust_plan_peak_mth_12= models.DecimalField("计划电量调整-峰时段",max_digits=20,decimal_places=4,default=0)
 
     state = models.CharField("状态",max_length=40,default="draft")
     note = models.TextField("备注",null=True,blank=True)
+
 
 class MthCustomerBill(models.Model):
     """月度电量结算单主表 
