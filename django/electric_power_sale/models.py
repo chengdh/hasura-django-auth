@@ -407,6 +407,8 @@ class MthAdjustLine(models.Model):
     mth_adjust= models.ForeignKey(MthAdjust, verbose_name="月度电量调整主表",on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, verbose_name="关联客户",null=True,on_delete=models.SET_NULL)
 
+    contract = models.ForeignKey(Contract, verbose_name="关联合同",null=True,on_delete=models.SET_NULL)
+
     #调整前
     previous_plan_common_mth_1= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
     previous_plan_flat_mth_1= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
