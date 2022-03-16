@@ -138,6 +138,18 @@ class Customer(models.Model):
     updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
     updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
 
+class DeviceNo(models.Model):
+    """客户户号表
+
+    Args:
+        models (_type_): _description_
+    """
+    customer = models.ForeignKey(Customer, verbose_name="关联客户",on_delete=models.CASCADE)
+    device_no = models.CharField("电表号",max_length=40)
+    is_active = models.BooleanField("是否有效", default=True)
+    note = models.TextField("备注1",null=True,blank=True)
+
+
 class Contract(models.Model):
     """销售合同
     """
