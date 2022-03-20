@@ -585,7 +585,8 @@ class MthCustomerBillLine(models.Model):
     mth_customer_bill= models.ForeignKey(MthCustomerBill, verbose_name="月度电量结算单主表",on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, verbose_name="关联客户",null=True,on_delete=models.SET_NULL)
 
-    contract_name = models.CharField("合同名称",max_length=40)
+    contract = models.ForeignKey(Contract, verbose_name="关联合同",null=True,on_delete=models.SET_NULL)
+    # contract_name = models.CharField("合同名称",max_length=40)
     #结算电量
     act_common= models.DecimalField("月结算电量-常规",max_digits=20,decimal_places=4,default=0)
     act_flat= models.DecimalField("月结算电量-平时段",max_digits=20,decimal_places=4,default=0)
