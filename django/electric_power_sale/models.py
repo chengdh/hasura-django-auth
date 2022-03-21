@@ -665,7 +665,7 @@ class MthAgentBillLine(models.Model):
     act_agent_fee= models.DecimalField("实际结算居间分成费",max_digits=20,decimal_places=4,default=0)
 
 
-    agent_confirm_date= models.DateField("居间确认时间", default=default_cur_date)
+    agent_confirm_date= models.DateField("居间确认时间",null=True,blank=True, default=default_cur_date)
 
     state = models.CharField("状态",max_length=40,default="draft")
     note = models.TextField("备注",null=True,blank=True)
