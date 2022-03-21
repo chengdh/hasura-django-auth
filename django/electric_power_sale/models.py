@@ -641,12 +641,9 @@ class MthAgentBillLine(models.Model):
     mth_agent_bill= models.ForeignKey(MthAgentBill, verbose_name="月度电量结算单主表",on_delete=models.CASCADE)
     agent = models.ForeignKey(Agent, verbose_name="居间",null=True,on_delete=models.SET_NULL)
 
-    #计划电量
-    plan_common= models.DecimalField("调整前计划电量-常规",max_digits=20,decimal_places=4,default=0)
-    plan_flat= models.DecimalField("调整前计划电量-平时段",max_digits=20,decimal_places=4,default=0)
-    plan_valley= models.DecimalField("调整前计划电量-谷时段",max_digits=20,decimal_places=4,default=0)
-    plan_peak= models.DecimalField("调整前计划电量-峰时段",max_digits=20,decimal_places=4,default=0)
-
+    customer = models.ForeignKey(Customer, verbose_name="关联客户",null=True,on_delete=models.SET_NULL)
+    contract = models.ForeignKey(Contract, verbose_name="关联合同",null=True,on_delete=models.SET_NULL)
+ 
     #结算电量
     act_common= models.DecimalField("月结算电量-常规",max_digits=20,decimal_places=4,default=0)
     act_flat= models.DecimalField("月结算电量-平时段",max_digits=20,decimal_places=4,default=0)
