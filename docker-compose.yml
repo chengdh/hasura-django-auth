@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:12
     container_name: hda-postgres
-    restart: always
+    # restart: always
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_DB: 'postgres'
@@ -17,9 +17,9 @@ services:
   django:
     build: ./django
     container_name: hda-django
-    restart: always
+    # restart: always
     depends_on:
-      - 'postgres'
+      - postgres
     volumes:
       - ./django:/code
     environment:
@@ -35,11 +35,13 @@ services:
     # Uncomment and comment image below to disable migrations
     # image: hasura/graphql-engine:latest
     image: hasura/graphql-engine:latest.cli-migrations-v2
-    # volumes:
+    volumes:
       # - ./hasura/migrations:/hasura-migrations
-      # - ./hasura/metadata:/hasura-metadata
+      #- ./hasura/metadata:/hasura-metadata
+      - ./hasura:/hasura_project
     container_name: hda-hasura
-    restart: always
+    working_dir: /hasura_project
+    # restart: always
     depends_on:
       - 'postgres'
       - 'django'
@@ -53,6 +55,15 @@ services:
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs" }'
     ports:
       - "18080:8080"
+  pgweb:
+    container_name: pgweb
+    image: sosedoff/pgweb
+    ports: 
+      - "8091:8081" 
+    environment:
+      - DATABASE_URL=postgres://postgres:password@postgres:5432/postgres?sslmode=disable
+    depends_on:
+      - postgres
 
 volumes:
   hda-data:
