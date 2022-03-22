@@ -23,6 +23,7 @@ urlpatterns = [
     path('dj-rest-auth/providers/', include('api.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 
+    path('electric_power_sale/', include('electric_power_sale.urls')),
 
     #添加 allauth urls 否则会出错
     #https://stackoverflow.com/questions/40956530/django-rest-auth-facebook-noreversematchreverse-for-socialaccount-signup-with

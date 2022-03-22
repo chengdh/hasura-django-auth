@@ -46,6 +46,10 @@ class Agent(models.Model):
     updated_by = models.ForeignKey(HasuraUser, verbose_name="更新人",related_name="+",null=True,on_delete=models.SET_NULL)
     updated_at = models.DateTimeField("更新时间", default=default_cur_datetime)
 
+TRANSFORMER_TYPE_LT_35="transformer_type_lt_35"
+TRANSFORMER_TYPE_GT_35="transformer_type_gt_35"
+TRANSFORMER_TYPE_CHOICES = [(TRANSFORMER_TYPE_LT_35,"35KVA以下"),(TRANSFORMER_TYPE_LT_35,"35KVA以上")]
+ 
 # Create your models here.
 class Customer(models.Model):
     """客户资料
@@ -79,11 +83,7 @@ class Customer(models.Model):
     transformer_volume = models.CharField("变压器容量",null=True,blank=True,max_length=60)
 
     #服务费率
-    TRANSFORMER_TYPE_LT_35="transformer_type_lt_35"
-    TRANSFORMER_TYPE_GT_35="transformer_type_gt_35"
 
-    TRANSFORMER_TYPE_CHOICES = [(TRANSFORMER_TYPE_LT_35,"35KVA以下"),(TRANSFORMER_TYPE_LT_35,"35KVA以上")]
- 
     transformer_type = models.CharField("变压器容量类型",
         choices=TRANSFORMER_TYPE_CHOICES ,
         default=TRANSFORMER_TYPE_LT_35,
