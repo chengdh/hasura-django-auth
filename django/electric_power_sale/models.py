@@ -26,7 +26,10 @@ def default_year_end_date():
 def default_cur_year():
     return date.today().year
 
-
+STATE_DRAFT="draft"
+STATE_CONFIRMED="confirmed"
+STATE_CHOICES = [(STATE_DRAFT,"草稿"),(STATE_CONFIRMED,"已确认")]
+ 
 class Agent(models.Model):
     """居间资料
     """
@@ -180,7 +183,7 @@ class Contract(models.Model):
     price_flat= models.DecimalField("平时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
     price_valley = models.DecimalField("谷时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
 
-    state = models.CharField("状态",max_length=40,default="draft")
+    state = models.CharField("状态",choices=STATE_CHOICES,max_length=40,default=STATE_DRAFT)
     note = models.TextField("备注1",null=True,blank=True)
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
@@ -192,7 +195,7 @@ class Contract(models.Model):
 class ContractLine(models.Model):
     """合同明细(电量计划表)
     """
-    contract = models.ForeignKey(Contract, verbose_name="合同",on_delete=models.CASCADE)
+    contract = models.ForeignKey(Contract,related_name="lines", verbose_name="合同",on_delete=models.CASCADE)
 
     plan_common_mth_1= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
     plan_flat_mth_1= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)
