@@ -195,7 +195,7 @@ class Contract(models.Model):
 class ContractLine(models.Model):
     """合同明细(电量计划表)
     """
-    contract = models.ForeignKey(Contract,related_name="lines", verbose_name="合同",on_delete=models.CASCADE)
+    contract = models.ForeignKey(Contract,verbose_name="合同",on_delete=models.CASCADE)
 
     plan_common_mth_1= models.DecimalField("计划电量-常规",max_digits=20,decimal_places=4,default=0)
     plan_flat_mth_1= models.DecimalField("计划电量-平时段",max_digits=20,decimal_places=4,default=0)

@@ -1,5 +1,27 @@
 from rest_framework import serializers
 from .models import Customer,Agent,Contract,ContractLine
+
+class MethodField(serializers.SerializerMethodField):
+    """扩展methodField,使之可以接收其他参数
+        ref https://stackoverflow.com/questions/61500411/drf-serializermethodfield-how-to-pass-parameters
+
+    Args:
+        SerializerMethodField (_type_): _description_
+    """
+    def __init__(self, method_name=None, **kwargs):
+        # use kwargs for our function instead, not the base class
+
+        #处理参数,保留原有field参数,将其他参数传给method
+        reserv_arg_names = ["read_only","write_only","required","default","allow_null","source","validators","error_messages","label","help_text","initial","style"]
+        field_args = {key: kwargs[key] for key in kwargs.keys() if key in reserv_arg_names}
+        extra_args = {key: kwargs[key] for key in kwargs.keys() if not key in reserv_arg_names}
+        super().__init__(method_name,**field_args) 
+        self.func_kwargs = extra_args
+
+    def to_representation(self, value):
+        method = getattr(self.parent, self.method_name)
+        return method(value, **self.func_kwargs)
+
 class CustomerSerializer(serializers.ModelSerializer):
     """客户资料
     """
@@ -70,7 +92,12 @@ class ContractSerializer(serializers.ModelSerializer):
 
     contract_price_type = serializers.CharField(label="计费方式",source='get_contract_price_type_display')
     state = serializers.CharField(label="合同状态",source='get_state_display')
+    plan_common_mth_1 = MethodField(label="1月",method_name="get_field_by_name_and_mth",field_name="plan_common" ,mth=1)
+
+    def get_field_by_name_and_mth(self,obj,field_name,mth):
+        line = obj.contractline_set.all()[0]
+        return getattr(line,"{}_mth_{}".format(field_name,mth))
 
     class Meta:
         model = Contract 
-        fields = ["name" ,"organization" ,"customer" ,"contract_no" ,"contract_year" ,"contract_start_date" ,"lines","contract_end_date" ,"contract_price_type" ,"price_common" ,"price_peak" ,"price_flat" ,"price_valley" ,"state"] 
+        fields = ["name" ,"organization" ,"customer" ,"contract_no" ,"contract_year" ,"contract_start_date" ,"plan_common_mth_1","contract_end_date" ,"contract_price_type" ,"price_common" ,"price_peak" ,"price_flat" ,"price_valley" ,"state"] 

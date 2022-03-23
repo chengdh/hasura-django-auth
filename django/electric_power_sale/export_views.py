@@ -99,6 +99,12 @@ class CustomerExportViewSet(XLSXFileMixin, ListAPIView):
             },
         },
     }
+    def get_body(self):
+        return body
+
+    def get_column_header(self):
+        return column_header 
+
 
 class AgentExportViewSet(XLSXFileMixin, ListAPIView):
     """居间资料导出
@@ -116,6 +122,14 @@ class AgentExportViewSet(XLSXFileMixin, ListAPIView):
     filename = '居间信息.xlsx' 
     xlsx_ignore_headers = ["id"]
     filterset_fields = {"name": ["exact","iexact","contains","icontains"],"is_active": ["exact","in"]} 
+
+    def get_body(self):
+        return body
+
+    def get_column_header(self):
+        return column_header 
+
+
 
     header = {
         'tab_title': "居间资料",
@@ -160,6 +174,12 @@ class ContractExportViewSet(XLSXFileMixin, ListAPIView):
     filename = '合同资料.xlsx' 
     xlsx_ignore_headers = ["id"]
     filterset_fields = {"name": ["exact","iexact","contains","icontains"],"is_active": ["exact","in"]} 
+    def get_body(self):
+        return body
+
+    def get_column_header(self):
+        return column_header 
+
 
     header = {
         'tab_title': "合同资料",
