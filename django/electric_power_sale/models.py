@@ -152,6 +152,14 @@ class DeviceNo(models.Model):
     is_active = models.BooleanField("是否有效", default=True)
     note = models.TextField("备注1",null=True,blank=True)
 
+#电量计费方式
+#常规
+PRICE_TYPE_COMMON="price_type_common"
+#分时段
+PRICE_TYPE_SEPRATE_TIME="price_type_seprate_time"
+
+PRICE_TYPE_CHOICES = [(PRICE_TYPE_COMMON,"常规"),(PRICE_TYPE_SEPRATE_TIME,"分时段")]
+
 
 class Contract(models.Model):
     """销售合同
@@ -164,15 +172,7 @@ class Contract(models.Model):
     contract_start_date = models.DateField("合同生效日期",default=default_year_start_date)
     contract_end_date = models.DateField("合同结束日期",default=default_year_end_date)
 
-    #电量计费方式
-    #常规
-    PRICE_TYPE_COMMON="price_type_common"
-    #分时段
-    PRICE_TYPE_SEPRATE_TIME="price_type_seprate_time"
-
-    PRICE_TYPE_CHOICES = [(PRICE_TYPE_COMMON,"常规"),(PRICE_TYPE_SEPRATE_TIME,"分时段")]
-
-
+  
     contract_price_type = models.CharField("电价价方式",max_length=40,
         choices=PRICE_TYPE_CHOICES,
         default=PRICE_TYPE_COMMON)
