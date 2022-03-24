@@ -65,5 +65,12 @@ services:
     depends_on:
       - postgres
 
+  nginx:
+    image: nginx
+    ports:
+      - 28000:80
+    volumes:
+      - ./nginx:/usr/share/nginx/html
+
 volumes:
   hda-data:
