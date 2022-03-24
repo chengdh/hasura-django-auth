@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Customer,Agent,Contract,ContractLine,PRICE_TYPE_COMMON,PRICE_TYPE_SEPRATE_TIME
+from .models import Customer,Agent,Contract,ContractLine, MthCustomerBillLine,MthDraftCustomerBillLine,MthAgentBillLine,PRICE_TYPE_COMMON,PRICE_TYPE_SEPRATE_TIME
 
 class MethodField(serializers.SerializerMethodField):
     """扩展methodField,使之可以接收其他参数
@@ -180,4 +180,105 @@ class MthAdjustLineSerializer(serializers.ModelSerializer):
         adjust_plan_valley_fields = list("adjust_plan_valley_mth_{}".format(mth) for mth in range(1,13))
         adjust_plan_peak_fields = list("adjust_plan_peak_mth_{}".format(mth) for mth in range(1,13))
         fields = ["customer" ,"contract"] + adjust_plan_common_fields + adjust_plan_flat_fields + adjust_plan_valley_fields + adjust_plan_peak_fields
+
+class MthDraftCustomerBillLineSerializer(serializers.ModelSerializer):
+    """月度预结算单明细
+    """
+    customer = serializers.SlugRelatedField(
+        label="客户",
+        read_only=True,
+        slug_field='name'
+     )
+    class Meta:
+        model= MthDraftCustomerBillLine
+        fields = ["customer","customer_device_no" ,"act_common" ]
+
+class MthCustomerBillLineSerializer(serializers.ModelSerializer):
+    """月度电量结算明细
+    """
+    contract = serializers.SlugRelatedField(
+        label="合同名称",
+        read_only=True,
+        slug_field='name'
+     )
+    customer = serializers.SlugRelatedField(
+        label="客户",
+        read_only=True,
+        slug_field='name'
+     )
+    act_common = MethodField(label="结算电量",method_name="get_field_val",field_name="act_common")
+    act_flat= MethodField(label="结算电量(平)",method_name="get_field_val",field_name="act_flat")
+    act_valley= MethodField(label="结算电量(谷)",method_name="get_field_val",field_name="act_valley")
+    act_peak= MethodField(label="结算电量(峰)",method_name="get_field_val",field_name="act_peak")
+
+    #结算价格     
+    price_common = MethodField(label="结算单价",method_name="get_field_val",field_name="price_common")
+    price_peak = MethodField(label="结算单价(平)",method_name="get_field_val",field_name="price_peak")
+    price_flat= MethodField(label="结算单价(谷)",method_name="get_field_val",field_name="price_flat")
+    price_valley = MethodField(label="结算单价(峰)",method_name="get_field_val",field_name="price_valley")
+
+    def get_field_val(self,obj,field_name):
+        if not obj.contract:
+            return "/"
+        if obj.contract.contract_price_type == PRICE_TYPE_COMMON:
+            if field_name == 'act_common' or field_name == 'price_common':
+                return getattr(obj,field_name)
+            else:
+                return "/"
+        else:
+            if field_name == 'act_common'  or field_name == 'price_common':
+                return "/"
+            else:
+                return getattr(obj,field_name)
+
+    class Meta:
+        model = MthCustomerBillLine 
+        fields = ["customer" ,"contract","price_common","act_common","price_flat","act_flat","price_valley","act_valley","price_peak","act_peak","service_rate","service_fee"] 
+
+class MthAgentBillLineSerializer(serializers.ModelSerializer):
+    """月度居间结算明细
+    """
+    agent = serializers.SlugRelatedField(
+        label="居间",
+        read_only=True,
+        slug_field='name'
+     )
  
+    contract = serializers.SlugRelatedField(
+        label="合同名称",
+        read_only=True,
+        slug_field='name'
+     )
+    customer = serializers.SlugRelatedField(
+        label="客户",
+        read_only=True,
+        slug_field='name'
+     )
+    act_common = MethodField(label="结算电量",method_name="get_field_val",field_name="act_common")
+    act_flat= MethodField(label="结算电量(平)",method_name="get_field_val",field_name="act_flat")
+    act_valley= MethodField(label="结算电量(谷)",method_name="get_field_val",field_name="act_valley")
+    act_peak= MethodField(label="结算电量(峰)",method_name="get_field_val",field_name="act_peak")
+
+    #结算价格     
+    price_common = MethodField(label="结算单价",method_name="get_field_val",field_name="price_common")
+    price_peak = MethodField(label="结算单价(平)",method_name="get_field_val",field_name="price_peak")
+    price_flat= MethodField(label="结算单价(谷)",method_name="get_field_val",field_name="price_flat")
+    price_valley = MethodField(label="结算单价(峰)",method_name="get_field_val",field_name="price_valley")
+
+    def get_field_val(self,obj,field_name):
+        if not obj.contract:
+            return "/"
+        if obj.contract.contract_price_type == PRICE_TYPE_COMMON:
+            if field_name == 'act_common' or field_name == 'price_common':
+                return getattr(obj,field_name)
+            else:
+                return "/"
+        else:
+            if field_name == 'act_common'  or field_name == 'price_common':
+                return "/"
+            else:
+                return getattr(obj,field_name)
+
+    class Meta:
+        model = MthAgentBillLine 
+        fields = ["agent","customer" ,"contract","price_common","act_common","price_flat","act_flat","price_valley","act_valley","price_peak","act_peak","service_rate","service_fee","agent_rate","agent_fee","tax_diff","act_agent_fee"] 
