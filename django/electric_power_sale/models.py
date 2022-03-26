@@ -42,7 +42,7 @@ class Agent(models.Model):
     toucher_mobile_1 = models.CharField("联系电话1",null=True,blank=True,max_length=60)
     toucher_mobile_2 = models.CharField("联系电话2",null=True,blank=True,max_length=60)
     default_agent_rate = models.DecimalField("默认居间分成比例",max_digits=20,decimal_places=4,default=0)
-    note = models.TextField("备注1",null=True,blank=True)
+    note = models.TextField("备注",null=True,blank=True)
     is_active = models.BooleanField("是否有效", default=True)
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
     created_at = models.DateTimeField("录入时间", default=default_cur_datetime)
@@ -82,7 +82,20 @@ class Customer(models.Model):
     grid_account = models.CharField("电网账号",null=True,blank=True,max_length=60)
     grid_password = models.CharField("电网密码",null=True,blank=True,max_length=60)
 
-    elect_level = models.CharField("电压等级",null=True,blank=True,max_length=60)
+
+    #电压等级
+    ELECT_LEVEL_LT_1KV = "lt_1kv"
+    ELECT_LEVEL_1KV_1KV = "1kv_10kv"
+    ELECT_LEVEL_35KV = "35kv"
+    ELECT_LEVEL_110KV = "110kv"
+    ELECT_LEVEL_220KV = "220kv"
+    ELECT_LEVEL_CHOICES = [(ELECT_LEVEL_LT_1KV,"不满1千伏"),(ELECT_LEVEL_1KV_1KV, "1~10千伏"),(ELECT_LEVEL_35KV,"35千伏"),(ELECT_LEVEL_110KV, "110千伏"),(ELECT_LEVEL_220KV, "220千伏")]
+
+    elect_level = models.CharField("电压等级",
+        choices=ELECT_LEVEL_CHOICES ,
+        default=ELECT_LEVEL_35KV ,
+        null=True,blank=True,max_length=60)
+
     transformer_volume = models.CharField("变压器容量",null=True,blank=True,max_length=60)
 
     #服务费率
