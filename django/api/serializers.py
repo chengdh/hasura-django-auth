@@ -15,26 +15,25 @@ class FunctionCategorySerializer(serializers.ModelSerializer):
     # children = SystemFunctionSerializer(many = True)
     class Meta:
         model = FunctionCategory
-        fields = ["id","frontend_router_path","frontend_router_name","frontend_router_meta_title","frontend_router_meta_icon","rank","children" ]
+        fields = ["id","name","icon","is_active","rank" ]
+
+class SystemFunctionOperateSerializer(serializers.ModelSerializer):
+    """系统功能操作按钮
+    """
+    # system_function = SystemFunctionSerializer()
+    class Meta:
+        model = SystemFunctionOperate
+        fields = ["id","code","name","is_active","rank","note" ]
 
 
 class SystemFunctionSerializer(serializers.ModelSerializer):
     """系统功能
     """
     function_category = FunctionCategorySerializer()
-    # operates = SystemFunctionOperateSerializer(many=True)
+    operates = SystemFunctionOperateSerializer(many=True)
     class Meta:
         model = SystemFunction
-        fields = ["id","frontend_router_path","frontend_router_name","frontend_router_meta_title","frontend_router_meta_icon","rank","function_category","operates" ]
-
-
-class SystemFunctionOperateSerializer(serializers.ModelSerializer):
-    """系统功能操作按钮
-    """
-    system_function = SystemFunctionSerializer()
-    class Meta:
-        model = SystemFunctionOperate
-        fields = ["id","code","name","is_active","rank","note","system_function" ]
+        fields = ["id","name","icon","is_active","rank","function_category" ]
 
 
 class RoleSerializer(serializers.ModelSerializer):
@@ -45,6 +44,7 @@ class RoleSerializer(serializers.ModelSerializer):
 
     def get_routers(self,role_obj):
         """得到当前角色的权限列表
+        """
         """
         routers = [] 
         system_function_operate_ids = [sfo.id for sfo in role_obj.system_function_operates.all()]
@@ -94,7 +94,9 @@ class RoleSerializer(serializers.ModelSerializer):
                 route["children"] = sf_children
             
             routers.append(route)
-        return routers 
+
+    """
+        return [] 
 
     class Meta:
         model = Role 

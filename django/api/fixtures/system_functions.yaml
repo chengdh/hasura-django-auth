@@ -1,21 +1,16 @@
 - model: api.FunctionCategory
   pk: 1
   fields:
-    frontend_router_path: /permission
-    frontend_router_name: permission 
-    frontend_router_redirect: /permission/page/index
-    frontend_router_meta_title: 系统管理
-    frontend_router_meta_icon: lollipop 
+    name: 系统管理
+    icon: lollipop
     rank: 1
 
 - model: api.SystemFunction
   pk: 1
   fields:
     function_category: 1
-    frontend_router_path: /permission/page/index
-    frontend_router_name: permissionPage 
-    frontend_router_meta_title: 用户管理
-    frontend_router_meta_icon: ""
+    name: 用户管理
+    icon: ""
     rank: 1
 
 - model: api.SystemFunctionOperate
@@ -23,15 +18,15 @@
   fields:
     system_function: 1
     name: 查看用户
-    code: read_user
+    code: read_api_hasurauser
     rank: 1
 
 - model: api.SystemFunctionOperate
   pk: 2
   fields:
     system_function: 1
-    name: 修改用户 
-    code: update_user
+    name: 修改用户
+    code: edit_api_hasurauser
     rank: 1
 
 - model: api.SystemFunctionOperate
@@ -39,7 +34,7 @@
   fields:
     system_function: 1
     name: 删除用户
-    code: destroy_user
+    code: delete_api_hasurauser
     rank: 1
 
 - model: api.SystemFunctionOperate
@@ -47,51 +42,29 @@
   fields:
     system_function: 1
     name: 导出用户
-    code: export_user
+    code: export_api_hasurauser
     rank: 1
 
 - model: api.SystemFunction
   pk: 2
   fields:
     function_category: 1
-    frontend_router_path: /system_admin/role_admin 
-    frontend_router_name: system_admin_role_admin
-    frontend_router_meta_title: 角色管理
-    frontend_router_meta_icon: ""
+    name: 角色管理
+    icon: ""
     rank: 2
 
 - model: api.SystemFunctionOperate
   pk: 5
   fields:
     system_function: 2
-    name: 查看角色 
-    code: read_role
+    name: 查看角色
+    code: read_api_role
     rank: 1
 
 - model: api.SystemFunctionOperate
   pk: 6
   fields:
     system_function: 2
-    name: 修改角色 
-    code: update_role
-    rank: 1
-
-
-
-- model: api.SystemFunction
-  pk: 3
-  fields:
-    function_category: 1
-    frontend_router_path: /system_admin/log_admin 
-    frontend_router_name: system_admin_log_admin
-    frontend_router_meta_title: 操作日志 
-    frontend_router_meta_icon: ""
-    rank: 3
-
-- model: api.SystemFunctionOperate
-  pk: 7
-  fields:
-    system_function: 3
-    name: 查看日志
-    code: read_log
+    name: 修改角色
+    code: edit_api_role
     rank: 1

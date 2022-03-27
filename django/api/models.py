@@ -56,11 +56,8 @@ class FunctionCategory(models.Model):
     """
     功能分类
     """
-    frontend_router_path = models.CharField("路径",  max_length=200)
-    frontend_router_name = models.CharField("类别",help_text="对应前端router名称",  max_length=200)
-    frontend_router_redirect = models.CharField("重定向path",  max_length=200,null =True,blank=True)
-    frontend_router_meta_title = models.CharField("类别",  max_length=200)
-    frontend_router_meta_icon= models.CharField("显示图标",  max_length=200,null =True,blank=True)
+    name = models.CharField("类别",help_text="对应前端router名称",  max_length=200)
+    icon = models.CharField("显示图标",  max_length=200,null =True,blank=True)
     parent_function_category = models.ForeignKey("self", verbose_name="上级功能",null=True,blank=True, on_delete=models.CASCADE)
     rank = models.IntegerField("排序",default=1)
     is_active = models.BooleanField("是否有效", default=True)
@@ -75,11 +72,8 @@ class SystemFunction(models.Model):
     系统功能
     """
     function_category = models.ForeignKey("FunctionCategory",verbose_name="所属类别",on_delete=models.CASCADE,related_name="children")
-    frontend_router_path = models.CharField("路径",  max_length=200)
-    frontend_router_name = models.CharField("类别",help_text="对应前端router名称",  max_length=200)
-    frontend_router_redirect = models.CharField("重定向path",  max_length=200,null =True,blank=True)
-    frontend_router_meta_title = models.CharField("类别",  max_length=200)
-    frontend_router_meta_icon= models.CharField("显示图标",  max_length=200,null =True,blank=True)
+    name = models.CharField("类别",help_text="对应前端router名称",  max_length=200)
+    icon = models.CharField("显示图标",  max_length=200,null =True,blank=True)
     is_active = models.BooleanField("是否有效", default=True)
     rank = models.IntegerField("排序",default=1)
     note = models.TextField("备注",null=True,blank=True)
