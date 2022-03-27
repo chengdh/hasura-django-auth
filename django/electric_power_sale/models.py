@@ -6,8 +6,13 @@ def default_cur_date():
     return date.today()
 
 def default_cur_mth():
-    return int(date.today().strftime("%Y%m"))
+    return date.today().strftime("%Y-%m")
 
+def default_last_mth():
+    today = datetime.date.today()
+    first = today.replace(day=1)
+    last_month = first - datetime.timedelta(days=1)
+    return last_month .strftime("%Y-%m")
 
 def default_cur_datetime():
     return datetime.now()
@@ -413,7 +418,7 @@ class MthAdjust(models.Model):
         models (_type_): _description_
     """
     organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
-    mth = models.IntegerField("月份", default=default_cur_mth)
+    mth = models.CharField("月份",max_length=7,default=default_last_mth)
 
     state = models.CharField("状态",max_length=40,default="draft")
 
@@ -579,7 +584,7 @@ class MthCustomerBill(models.Model):
         models (_type_): _description_
     """
     organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
-    mth = models.IntegerField("月份", default=default_cur_mth)
+    mth = models.CharField("月份",max_length=7,default=default_last_mth)
 
     state = models.CharField("状态",max_length=40,default="draft")
 
@@ -635,7 +640,7 @@ class MthAgentBill(models.Model):
         models (_type_): _description_
     """
     organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
-    mth = models.IntegerField("月份", default=default_cur_mth)
+    mth = models.CharField("月份",max_length=7,default=default_last_mth)
 
     state = models.CharField("状态",max_length=40,default="draft")
 
@@ -701,7 +706,7 @@ class MthDraftCustomerBill(models.Model):
         models (_type_): _description_
     """
     organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
-    mth = models.IntegerField("月份", default=default_cur_mth)
+    mth = models.CharField("月份",max_length=7,default=default_last_mth)
 
     state = models.CharField("状态",max_length=40,default="draft")
 
@@ -747,7 +752,7 @@ class MthDiffCustomerBill(models.Model):
         models (_type_): _description_
     """
     organization = models.ForeignKey(Organization, verbose_name="所属机构",null=True,on_delete=models.SET_NULL)
-    mth = models.IntegerField("月份", default=default_cur_mth)
+    mth = models.CharField("月份",max_length=7,default=default_last_mth)
 
     state = models.CharField("状态",max_length=40,default="draft")
 
