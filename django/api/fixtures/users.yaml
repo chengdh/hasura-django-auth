@@ -18,15 +18,78 @@
 - model: api.Organization
   pk: 2
   fields:
-    name: 开封热电
-    address: 开封杜良
+    name: 销售公司
+    address: 郑州
     parent_org: 1
 
 - model: api.Organization
   pk: 3
   fields:
-    name: 周口热电
-    address: 周口市
+    name: 平顶山分公司
+    address: 平顶山
+    parent_org: 1
+
+- model: api.Organization
+  pk: 4
+  fields:
+    name: 沁阳分公司
+    address: 沁阳
+    parent_org: 1
+
+- model: api.Organization
+  pk: 5
+  fields:
+    name: 开封分公司
+    address: 开封
+    parent_org: 1
+
+- model: api.Organization
+  pk: 6
+  fields:
+    name: 郑州燃机
+    address: 郑州
+    parent_org: 1
+
+- model: api.Organization
+  pk: 7
+  fields:
+    name: 周口燃机
+    address: 周口
+    parent_org: 1
+
+- model: api.Organization
+  pk: 8
+  fields:
+    name: 新乡豫新
+    address: 新乡
+    parent_org: 1
+
+- model: api.Organization
+  pk: 9
+  fields:
+    name: 平顶山热电
+    address: 平顶山热
+    parent_org: 1
+
+- model: api.Organization
+  pk: 10
+  fields:
+    name: 南阳热电
+    address: 南阳
+    parent_org: 1
+
+- model: api.Organization
+  pk: 11
+  fields:
+    name: 河南新能源
+    address: 郑州
+    parent_org: 1
+
+- model: api.Organization
+  pk: 12
+  fields:
+    name: 湖北新能源
+    address: 湖北
     parent_org: 1
 
 - model: api.HasuraUser
@@ -36,7 +99,7 @@
     email: email2@123.com
     password: pbkdf2_sha256$260000$sjF9xiA0NrDUKrejWCgHxs$8NZ0hEHP/2Ya8GrzQWdVA2yfxbWE9oMR1bqU6/v5hgU=
     roles: [1, 2]
-    organizations: [1, 2, 3]
+    organizations: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
 - model: api.HasuraUser
   pk: 3
@@ -44,6 +107,8 @@
     username: admin3
     email: email@123.com
     password: pbkdf2_sha256$260000$sjF9xiA0NrDUKrejWCgHxs$8NZ0hEHP/2Ya8GrzQWdVA2yfxbWE9oMR1bqU6/v5hgU=
+    roles: [1, 2]
+    organizations: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
 - model: api.HasuraUser
   pk: 4
