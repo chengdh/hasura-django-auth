@@ -109,8 +109,25 @@ class HasuraUserSerializer(serializers.ModelSerializer):
         serializers (_type_): _description_
     """
 
-    roles = RoleSerializer(many = True)
-    organizations = OrganizationSerializer(many = True)
+    roles = RoleSerializer(many = True,read_only=True)
+    organizations = OrganizationSerializer(many = True,read_only=True)
+    password = serializers.CharField(write_only=True)
     class Meta:
         model = HasuraUser
-        fields = ["pk","username","email","roles","organizations"]
+        fields = ["pk","username","password","email","roles","organizations"]
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = HasuraUser(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
+
+    def update(self, user, validated_data):
+        password = validated_data.pop('password')
+        user.email = validated_data.get('email', user.email)
+        user.username = validated_data.get('username', user.username)
+        user.set_password(password)
+        user.save()
+        return user 

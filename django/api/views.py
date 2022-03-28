@@ -1,8 +1,8 @@
-from rest_framework.generics import GenericAPIView,ListAPIView, RetrieveAPIView
+from rest_framework.generics import GenericAPIView,CreateAPIView,UpdateAPIView,ListAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import ReadOnlyModelViewSet,ModelViewSet
 from django_filters import rest_framework as filters
 from drf_excel.mixins import XLSXFileMixin
 from drf_excel.renderers import XLSXRenderer
@@ -127,3 +127,8 @@ class RolesExportViewSet(XLSXFileMixin, ListAPIView):
         },
         'height': 40,
     }
+
+class UserView(ModelViewSet):
+    queryset = HasuraUser.objects.all()
+    serializer_class = HasuraUserSerializer
+    permission_classes = (IsAuthenticated,)
