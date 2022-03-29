@@ -1,0 +1,76 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:12
+    container_name: hda-postgres
+    # restart: always
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'postgres'
+      POSTGRES_PASSWORD: 'password'
+    ports:
+      - "15432:5432"
+    volumes:
+      - hda-data:/var/lib/postgresql/data
+
+
+  django:
+    image: hasura-django-auth_django:latest
+    container_name: hda-django
+    # restart: always
+    depends_on:
+      - postgres
+    volumes:
+      - ./django:/code
+    environment:
+      PYTHONUNBUFFERED: 1
+      # Any $ in your secret key needs another $ for interpolation. > ex. `...4v$0n^c...` becomes `...4v$$0n^c...` (read readme.md)
+      DJANGO_SECRET: 'T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs'
+    ports:
+      - "18000:8000"
+
+    command: python manage.py runserver 0.0.0.0:8000
+
+  hasura:
+    # Uncomment and comment image below to disable migrations
+    # image: hasura/graphql-engine:latest
+    image: hasura/graphql-engine:latest.cli-migrations-v2
+    volumes:
+      # - ./hasura/migrations:/hasura-migrations
+      #- ./hasura/metadata:/hasura-metadata
+      - ./hasura:/hasura_project
+    container_name: hda-hasura
+    working_dir: /hasura_project
+    # restart: always
+    depends_on:
+      - 'postgres'
+      - 'django'
+    environment:
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'public'
+      HASURA_GRAPHQL_DATABASE_URL: 'postgres://postgres:password@postgres:5432/postgres'
+      HASURA_GRAPHQL_ADMIN_SECRET: 'password'
+      # Any $ in your secret key needs another $ for interpolation. > ex. `...4v$0n^c...` becomes `...4v$$0n^c...` (read readme.md)
+      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "T2uy8pg3OjW26TdngnPA3LjuPlthW8AH6xIOBXu9oFs" }'
+    ports:
+      - "18080:8080"
+  pgweb:
+    container_name: pgweb
+    image: sosedoff/pgweb
+    ports: 
+      - "8091:8081" 
+    environment:
+      - DATABASE_URL=postgres://postgres:password@postgres:5432/postgres?sslmode=disable
+    depends_on:
+      - postgres
+
+  nginx:
+    image: nginx
+    ports:
+      - 28000:80
+    volumes:
+      - ./nginx:/usr/share/nginx/html
+
+volumes:
+  hda-data:

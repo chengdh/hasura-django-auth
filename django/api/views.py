@@ -6,7 +6,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet,ModelViewSet
 from django_filters import rest_framework as filters
 from drf_excel.mixins import XLSXFileMixin
 from drf_excel.renderers import XLSXRenderer
-from .serializers import RoleSerializer,SystemFunctionOperateSerializer,OrganizationSerializer,HasuraUserSerializer 
+from .serializers import RoleSerializer,SystemFunctionOperateSerializer,OrganizationSerializer,HasuraUserSerializer ,HasuraUserCreateSerializer ,HasuraUserUpdateSerializer 
 from .models import Role,HasuraUser
 from .filters import RoleFilter
 
@@ -130,5 +130,13 @@ class RolesExportViewSet(XLSXFileMixin, ListAPIView):
 
 class UserView(ModelViewSet):
     queryset = HasuraUser.objects.all()
-    serializer_class = HasuraUserSerializer
     permission_classes = (IsAuthenticated,)
+
+    def get_serializer_class(self):
+        """动态返回serializer class,create user时:需要password字段,update user时,password字段是可选的
+        ref: https://stackoverflow.com/questions/53735960/django-rest-framework-how-to-make-field-required-read-only-only-for-update-ac
+        """
+        if self.request.method == "POST":
+            return HasuraUserCreateSerializer
+        elif self.request.method in ["PUT", "PATCH"]:
+            return HasuraUserUpdateSerializer

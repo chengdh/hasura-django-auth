@@ -111,11 +111,23 @@ class HasuraUserSerializer(serializers.ModelSerializer):
 
     roles = RoleSerializer(many = True,read_only=True)
     organizations = OrganizationSerializer(many = True,read_only=True)
+    class Meta:
+        model = HasuraUser
+        fields = ["pk","username","password","email","is_active","roles","organizations"]
+
+
+
+class HasuraUserCreateSerializer(serializers.ModelSerializer):
+    """用户信息序列化器,创建用户时使用
+
+    Args:
+        serializers (_type_): _description_
+    """
+
     password = serializers.CharField(write_only=True)
     class Meta:
         model = HasuraUser
-        fields = ["pk","username","password","email","roles","organizations"]
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = ["pk","username","password","email","is_active"]
 
     def create(self, validated_data):
         password = validated_data.pop('password')
@@ -123,11 +135,24 @@ class HasuraUserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+    
+class HasuraUserUpdateSerializer(serializers.ModelSerializer):
+    """用户信息序列化器,修改用户时使用
+
+    Args:
+        serializers (_type_): _description_
+    """
+
+    password = serializers.CharField(write_only=True,required=False,allow_null=True)
+    class Meta:
+        model = HasuraUser
+        fields = ["pk","username","password","email","is_active"]
 
     def update(self, user, validated_data):
         password = validated_data.pop('password')
         user.email = validated_data.get('email', user.email)
         user.username = validated_data.get('username', user.username)
-        user.set_password(password)
+        if password:
+            user.set_password(password)
         user.save()
-        return user 
+        return user
