@@ -149,7 +149,7 @@ class HasuraUserUpdateSerializer(serializers.ModelSerializer):
         fields = ["pk","username","password","email","is_active"]
 
     def update(self, user, validated_data):
-        password = validated_data.pop('password')
+        password = validated_data.pop('password',False)
         user.email = validated_data.get('email', user.email)
         user.username = validated_data.get('username', user.username)
         if password:
