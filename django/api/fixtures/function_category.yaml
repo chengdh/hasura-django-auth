@@ -1,0 +1,34 @@
+- model: api.FunctionCategory
+  pk: 1
+  fields:
+    name: 基础信息管理
+    icon: lollipop
+    rank: 1
+
+- model: api.FunctionCategory
+  pk: 2
+  fields:
+    name: 销售合同
+    icon: lollipop
+    rank: 1
+
+- model: api.FunctionCategory
+  pk: 3
+  fields:
+    name: 结算管理
+    icon: lollipop
+    rank: 1
+
+- model: api.FunctionCategory
+  pk: 4
+  fields:
+    name: 统计分析
+    icon: lollipop
+    rank: 1
+
+- model: api.FunctionCategory
+  pk: 5
+  fields:
+    name: 系统管理
+    icon: lollipop
+    rank: 1

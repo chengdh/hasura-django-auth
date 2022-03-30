@@ -1,0 +1,391 @@
+- model: api.SystemFunctionOperate
+  pk: 1
+  fields:
+    system_function: 1
+    name: 查看客户资料
+    code: read_electric_power_sale_customer
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 2
+  fields:
+    system_function: 1
+    name: 修改客户资料
+    code: edit_electric_power_sale_customer
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 3
+  fields:
+    system_function: 1
+    name: 删除客户资料
+    code: delete_electric_power_sale_customer
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 4
+  fields:
+    system_function: 1
+    name: 导出客户资料
+    code: export_electric_power_sale_customer
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 5
+  fields:
+    system_function: 1
+    name: 导入客户资料
+    code: import_electric_power_sale_customer
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 6
+  fields:
+    system_function: 1
+    name: 新建客户资料
+    code: create_electric_power_sale_customer
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 7
+  fields:
+    system_function: 2
+    name: 查看居间资料
+    code: read_electric_power_sale_agent
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 8
+  fields:
+    system_function: 2
+    name: 修改居间资料
+    code: edit_electric_power_sale_agent
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 9
+  fields:
+    system_function: 2
+    name: 删除居家资料
+    code: delete_electric_power_sale_agent
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 10
+  fields:
+    system_function: 2
+    name: 导出居间资料
+    code: export_electric_power_sale_agent
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 11
+  fields:
+    system_function: 2
+    name: 导入居间资料
+    code: import_electric_power_sale_agent
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 12
+  fields:
+    system_function: 2
+    name: 新建居间资料
+    code: create_electric_power_sale_agent
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 13
+  fields:
+    system_function: 3
+    name: 查看售电合同
+    code: read_electric_power_sale_contract
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 14
+  fields:
+    system_function: 3
+    name: 修改售电合同
+    code: edit_electric_power_sale_contract
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 15
+  fields:
+    system_function: 3
+    name: 删除售电合同
+    code: delete_electric_power_sale_contract
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 16
+  fields:
+    system_function: 3
+    name: 导入售电合同
+    code: import_electric_power_sale_contract
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 17
+  fields:
+    system_function: 3
+    name: 导出售电合同
+    code: export_electric_power_sale_contract
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 18
+  fields:
+    system_function: 3
+    name: 新建售电合同
+    code: create_electric_power_sale_contract
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 19
+  fields:
+    system_function: 4
+    name: 查看电量调整单
+    code: read_electric_power_sale_mthadjust
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 20
+  fields:
+    system_function: 4
+    name: 修改电量调整单
+    code: edit_electric_power_sale_mthadjust
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 21
+  fields:
+    system_function: 4
+    name: 删除电量调整单
+    code: delete_electric_power_sale_mthadjust
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 22
+  fields:
+    system_function: 4
+    name: 导入电量调整单
+    code: import_electric_power_sale_mthadjust
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 23
+  fields:
+    system_function: 4
+    name: 导出电量调整单
+    code: export_electric_power_sale_mthadjust
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 24
+  fields:
+    system_function: 4
+    name: 新建电量调整单
+    code: create_electric_power_sale_mthadjust
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 25
+  fields:
+    system_function: 5
+    name: 查看电量预结算单
+    code: read_electric_power_sale_mthdraftcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 26
+  fields:
+    system_function: 5
+    name: 修改电量预结算单
+    code: edit_electric_power_sale_mthdraftcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 27
+  fields:
+    system_function: 5
+    name: 删除电量调整单
+    code: delete_electric_power_sale_mthdraftcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 28
+  fields:
+    system_function: 5
+    name: 导入电量预结算单
+    code: import_electric_power_sale_mthdraftcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 29
+  fields:
+    system_function: 5
+    name: 导出电量预结算单
+    code: export_electric_power_sale_mthdraftcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 30
+  fields:
+    system_function: 5
+    name: 新建电量预结算单
+    code: create_electric_power_sale_mthdraftcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 31
+  fields:
+    system_function: 6
+    name: 查看电量结算单
+    code: read_electric_power_sale_mthcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 32
+  fields:
+    system_function: 6
+    name: 修改电量结算单
+    code: edit_electric_power_sale_mthcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 33
+  fields:
+    system_function: 6
+    name: 删除电量调整单
+    code: delete_electric_power_sale_mthcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 34
+  fields:
+    system_function: 6
+    name: 导入电量结算单
+    code: import_electric_power_sale_mthcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 35
+  fields:
+    system_function: 6
+    name: 导出电量结算单
+    code: export_electric_power_sale_mthcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 36
+  fields:
+    system_function: 6
+    name: 新建电量结算单
+    code: create_electric_power_sale_mthcustomerbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 37
+  fields:
+    system_function: 7
+    name: 查看居间结算单
+    code: read_electric_power_sale_mthagentbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 38
+  fields:
+    system_function: 7
+    name: 修改居间结算单
+    code: edit_electric_power_sale_mthagentbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 39
+  fields:
+    system_function: 7
+    name: 删除居间结算单
+    code: delete_electric_power_sale_mthagentbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 40
+  fields:
+    system_function: 7
+    name: 导入居间结算单
+    code: import_electric_power_sale_mthagentbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 41
+  fields:
+    system_function: 7
+    name: 导出居间结算单
+    code: export_electric_power_sale_mthagentbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 42
+  fields:
+    system_function: 7
+    name: 新建居间结算单
+    code: create_electric_power_sale_mthagentbill
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 43
+  fields:
+    system_function: 8
+    name: 查看用户
+    code: read_api_hasurauser
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 44
+  fields:
+    system_function: 8
+    name: 修改用户
+    code: edit_api_hasurauser
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 45
+  fields:
+    system_function: 8
+    name: 删除用户
+    code: delete_api_hasurauser
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 46
+  fields:
+    system_function: 8
+    name: 导出用户
+    code: export_api_hasurauser
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 47
+  fields:
+    system_function: 9
+    name: 查看角色
+    code: read_api_role
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 48
+  fields:
+    system_function: 9
+    name: 修改角色
+    code: edit_api_role
+    rank: 1
+
+- model: api.SystemFunctionOperate
+  pk: 49
+  fields:
+    system_function: 9
+    name: 删除角色
+    code: delete_api_role
+    rank: 1
