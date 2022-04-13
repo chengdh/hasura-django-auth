@@ -2,7 +2,58 @@
   pk: 1
   fields:
     name: 管理员
-    system_function_operates: [1, 2, 3, 4, 5, 6, 36, 37, 38, 39, 40, 41, 42]
+    system_function_operates:
+      [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+      ]
 
 - model: api.Role
   pk: 2
@@ -93,10 +144,9 @@
     parent_org: 1
 
 - model: api.HasuraUser
-  pk: 2
   fields:
-    username: rabbitchengh
-    email: email2@123.com
+    username: admin
+    email: admin@123.com
     password: pbkdf2_sha256$260000$sjF9xiA0NrDUKrejWCgHxs$8NZ0hEHP/2Ya8GrzQWdVA2yfxbWE9oMR1bqU6/v5hgU=
     roles: [1, 2]
     organizations: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -104,15 +154,98 @@
 - model: api.HasuraUser
   pk: 3
   fields:
-    username: admin3
-    email: email@123.com
-    password: pbkdf2_sha256$260000$sjF9xiA0NrDUKrejWCgHxs$8NZ0hEHP/2Ya8GrzQWdVA2yfxbWE9oMR1bqU6/v5hgU=
-    roles: [1, 2]
+    username: 销售公司
+    email: xsgs@123.com
+    password: pbkdf2_sha256$260000$9tFLpECySSYel125tOX4Py$oWVYzz8CS+SPZETxarB21qSsgQ82Wr68pWY3Ciuandk=
+    roles: [1]
     organizations: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
 - model: api.HasuraUser
   pk: 4
   fields:
-    username: 普通用户
-    email: email4@123.com
+    username: 平顶山分公司
+    email: pdsfgs@123.com
+    password: pbkdf2_sha256$260000$9tFLpECySSYel125tOX4Py$oWVYzz8CS+SPZETxarB21qSsgQ82Wr68pWY3Ciuandk=
+    roles: [1]
+    organizations: [3]
+
+- model: api.HasuraUser
+  pk: 5
+  fields:
+    username: 沁阳分公司
+    email: qyfgs@123.com
+    password: pbkdf2_sha256$260000$9tFLpECySSYel125tOX4Py$oWVYzz8CS+SPZETxarB21qSsgQ82Wr68pWY3Ciuandk=
+    roles: [1]
+    organizations: [4]
+
+- model: api.HasuraUser
+  pk: 6
+  fields:
+    username: 开封分公司
+    email: kffgs@123.com
+    password: pbkdf2_sha256$260000$9tFLpECySSYel125tOX4Py$oWVYzz8CS+SPZETxarB21qSsgQ82Wr68pWY3Ciuandk=
+    roles: [1]
+    organizations: [5]
+
+- model: api.HasuraUser
+  pk: 7
+  fields:
+    username: 郑州燃机
+    email: zzrj@123.com
+    password: pbkdf2_sha256$260000$9tFLpECySSYel125tOX4Py$oWVYzz8CS+SPZETxarB21qSsgQ82Wr68pWY3Ciuandk=
+    roles: [1]
+    organizations: [6]
+
+- model: api.HasuraUser
+  pk: 8
+  fields:
+    username: 周口燃机
+    email: zkrj@123.com
+    password: pbkdf2_sha256$260000$9tFLpECySSYel125tOX4Py$oWVYzz8CS+SPZETxarB21qSsgQ82Wr68pWY3Ciuandk=
+    roles: [1]
+    organizations: [7]
+
+- model: api.HasuraUser
+  pk: 9
+  fields:
+    username: 新乡豫新
+    email: xxys@123.com
+    password: pbkdf2_sha256$260000$9tFLpECySSYel125tOX4Py$oWVYzz8CS+SPZETxarB21qSsgQ82Wr68pWY3Ciuandk=
+    roles: [1]
+    organizations: [8]
+
+- model: api.HasuraUser
+  pk: 10
+  fields:
+    username: 平顶山热电
+    email: pdsrd@123.com
+    password: pbkdf2_sha256$260000$9tFLpECySSYel125tOX4Py$oWVYzz8CS+SPZETxarB21qSsgQ82Wr68pWY3Ciuandk=
+    roles: [1]
+    organizations: [9]
+
+- model: api.HasuraUser
+  pk: 11
+  fields:
+    username: 南阳热电
+    email: nyrd@123.com
     password: pbkdf2_sha256$260000$sjF9xiA0NrDUKrejWCgHxs$8NZ0hEHP/2Ya8GrzQWdVA2yfxbWE9oMR1bqU6/v5hgU=
+    roles: [1]
+    organizations: [10]
+
+- model: api.HasuraUser
+  pk: 12
+  fields:
+    username: 河南新能源
+    email: hnxny@123.com
+    password: pbkdf2_sha256$260000$sjF9xiA0NrDUKrejWCgHxs$8NZ0hEHP/2Ya8GrzQWdVA2yfxbWE9oMR1bqU6/v5hgU=
+    roles: [1]
+    organizations: [11]
+
+- model: api.HasuraUser
+  pk: 13
+  fields:
+    username: 湖北新能源
+    email: hbxny@123.com
+    password: pbkdf2_sha256$260000$sjF9xiA0NrDUKrejWCgHxs$8NZ0hEHP/2Ya8GrzQWdVA2yfxbWE9oMR1bqU6/v5hgU=
+    roles: [1]
+    organizations: [12]
