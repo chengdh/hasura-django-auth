@@ -48,7 +48,8 @@ class Organization(models.Model):
     name = models.CharField("机构名称", null=False, max_length=200)
     address = models.CharField("地址", max_length=200)
     note = models.TextField("备注",null=True,blank=True)
-    parent_org = models.ForeignKey("self", verbose_name="上级机构",null=True, on_delete=models.CASCADE)
+    parent = models.ForeignKey("self", verbose_name="上级机构",null=True, on_delete=models.CASCADE)
+    position = models.IntegerField("排序",default=1)
     header = models.ForeignKey(HasuraUser, verbose_name="负责人",null=True, on_delete=models.SET_NULL)
     is_active = models.BooleanField("是否有效", default=True)
 
