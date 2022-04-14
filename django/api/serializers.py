@@ -6,7 +6,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Organization 
-        fields = ["id","name","address","parent_org","is_active" ]
+        fields = ["id","name","address","parent","is_active" ]
 
 
 class FunctionCategorySerializer(serializers.ModelSerializer):

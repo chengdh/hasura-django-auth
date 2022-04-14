@@ -71,77 +71,91 @@
   fields:
     name: 销售公司
     address: 郑州
-    parent_org: 1
+    parent: 1
+
+- model: api.Organization
+  pk: 40
+  fields:
+    name: 销售公司-销售部
+    address: 郑州
+    parent: 2
+
+- model: api.Organization
+  pk: 41
+  fields:
+    name: 销售公司-办公室
+    address: 郑州
+    parent: 2
 
 - model: api.Organization
   pk: 3
   fields:
     name: 平顶山分公司
     address: 平顶山
-    parent_org: 1
+    parent: 1
 
 - model: api.Organization
   pk: 4
   fields:
     name: 沁阳分公司
     address: 沁阳
-    parent_org: 1
+    parent: 1
 
 - model: api.Organization
   pk: 5
   fields:
     name: 开封分公司
     address: 开封
-    parent_org: 1
+    parent: 1
 
 - model: api.Organization
   pk: 6
   fields:
     name: 郑州燃机
     address: 郑州
-    parent_org: 1
+    parent: 1
 
 - model: api.Organization
   pk: 7
   fields:
     name: 周口燃机
     address: 周口
-    parent_org: 1
+    parent: 1
 
 - model: api.Organization
   pk: 8
   fields:
     name: 新乡豫新
     address: 新乡
-    parent_org: 1
+    parent: 1
 
 - model: api.Organization
   pk: 9
   fields:
     name: 平顶山热电
     address: 平顶山热
-    parent_org: 1
+    parent: 1
 
 - model: api.Organization
   pk: 10
   fields:
     name: 南阳热电
     address: 南阳
-    parent_org: 1
+    parent: 1
 
 - model: api.Organization
   pk: 11
   fields:
     name: 河南新能源
     address: 郑州
-    parent_org: 1
+    parent: 1
 
 - model: api.Organization
   pk: 12
   fields:
     name: 湖北新能源
     address: 湖北
-    parent_org: 1
+    parent: 1
 
 - model: api.HasuraUser
   fields:
