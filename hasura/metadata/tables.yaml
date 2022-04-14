@@ -345,9 +345,9 @@
   - name: api_hasurauser
     using:
       foreign_key_constraint_on: header_id
-  - name: api_organization
+  - name: parent
     using:
-      foreign_key_constraint_on: parent_org_id
+      foreign_key_constraint_on: parent_id
   array_relationships:
   - name: api_hasurauser_organizations
     using:
@@ -363,10 +363,10 @@
         table:
           schema: public
           name: api_hasurauser
-  - name: api_organizations
+  - name: children
     using:
       foreign_key_constraint_on:
-        column: parent_org_id
+        column: parent_id
         table:
           schema: public
           name: api_organization
