@@ -202,6 +202,9 @@ class Contract(models.Model):
     price_valley = models.DecimalField("谷时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
 
     year_plan = models.DecimalField("年度签约电量(兆瓦时)",max_digits=20,decimal_places=4,default=0)
+    year_plan_peak = models.DecimalField("年度签约电量-峰(兆瓦时)",max_digits=20,decimal_places=4,default=0)
+    year_plan_flat = models.DecimalField("年度签约电量-平(兆瓦时)",max_digits=20,decimal_places=4,default=0)
+    year_plan_valley = models.DecimalField("年度签约电量-谷(兆瓦时)",max_digits=20,decimal_places=4,default=0)
 
     state = models.CharField("状态",choices=STATE_CHOICES,max_length=40,default=STATE_DRAFT)
     note = models.TextField("备注1",null=True,blank=True)
