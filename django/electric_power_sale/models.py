@@ -201,6 +201,8 @@ class Contract(models.Model):
     price_flat= models.DecimalField("平时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
     price_valley = models.DecimalField("谷时段电价(元/KWA)",max_digits=20,decimal_places=4,default=0)
 
+    year_plan = models.DecimalField("年度签约电量(兆瓦时)",max_digits=20,decimal_places=4,default=0)
+
     state = models.CharField("状态",choices=STATE_CHOICES,max_length=40,default=STATE_DRAFT)
     note = models.TextField("备注1",null=True,blank=True)
     created_by = models.ForeignKey(HasuraUser, verbose_name="录入人",null=True,on_delete=models.SET_NULL)
