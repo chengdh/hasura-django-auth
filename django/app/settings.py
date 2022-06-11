@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'dj_rest_auth',
     'dj_rest_auth.registration',
+    'django_filters',
 
     'allauth',
     'allauth.account',
@@ -47,14 +48,14 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
     # 'django_rest_passwordreset',
-    # 'corsheaders',
+    'corsheaders',
     # 'import_export',
     'api.apps.APIConfig',
+    'electric_power_sale.apps.ElectricPowerSaleConfig',
 ]
 
 SITE_ID = 1
 
-CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -70,7 +71,7 @@ ROOT_URLCONF = 'app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,13 +144,19 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    )
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'drf_excel.renderers.XLSXRenderer',
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    
 }
-# SIMPLE_JWT = {
-#     'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
-#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-#     'REFRESH_TOKEN_LIFETIME': timedelta(weeks=1)
-# }
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
+}
 REST_AUTH_SERIALIZERS = {
     'JWT_TOKEN_CLAIMS_SERIALIZER': 'api.auth.HasuraTokenObtainPairSerializer'
 }
@@ -158,9 +165,15 @@ REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
-CSRF_COOKIE_SECURE = False
-CSRF_TRUSTED_ORIGINS = ['localhost']
-CORS_ORIGIN_WHITELIST = ['http://localhost:8080', 'http://localhost:3000']
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
 
 #disable email confirmation
 ACCOUNT_EMAIL_VERIFICATION = "none"

@@ -1,0 +1,7669 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""whether this query should be cached (Hasura Cloud only)"""
+directive @cached(
+  """measured in seconds"""
+  ttl: Int! = 60
+
+  """refresh the cache entry"""
+  refresh: Boolean! = false
+) on QUERY
+
+"""
+Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+"""
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _is_null: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _is_null: Boolean
+
+  """does the column match the given pattern"""
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+}
+
+"""
+columns and relationships of "account_emailaddress"
+"""
+type account_emailaddress {
+  email: String!
+  id: Int!
+  primary: Boolean!
+  user_id: Int!
+  verified: Boolean!
+}
+
+"""
+aggregated selection of "account_emailaddress"
+"""
+type account_emailaddress_aggregate {
+  aggregate: account_emailaddress_aggregate_fields
+  nodes: [account_emailaddress!]!
+}
+
+"""
+aggregate fields of "account_emailaddress"
+"""
+type account_emailaddress_aggregate_fields {
+  avg: account_emailaddress_avg_fields
+  count(columns: [account_emailaddress_select_column!], distinct: Boolean): Int!
+  max: account_emailaddress_max_fields
+  min: account_emailaddress_min_fields
+  stddev: account_emailaddress_stddev_fields
+  stddev_pop: account_emailaddress_stddev_pop_fields
+  stddev_samp: account_emailaddress_stddev_samp_fields
+  sum: account_emailaddress_sum_fields
+  var_pop: account_emailaddress_var_pop_fields
+  var_samp: account_emailaddress_var_samp_fields
+  variance: account_emailaddress_variance_fields
+}
+
+"""aggregate avg on columns"""
+type account_emailaddress_avg_fields {
+  id: Float
+  user_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "account_emailaddress". All fields are combined with a logical 'AND'.
+"""
+input account_emailaddress_bool_exp {
+  _and: [account_emailaddress_bool_exp!]
+  _not: account_emailaddress_bool_exp
+  _or: [account_emailaddress_bool_exp!]
+  email: String_comparison_exp
+  id: Int_comparison_exp
+  primary: Boolean_comparison_exp
+  user_id: Int_comparison_exp
+  verified: Boolean_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "account_emailaddress"
+"""
+enum account_emailaddress_constraint {
+  """unique or primary key constraint"""
+  account_emailaddress_email_key
+
+  """unique or primary key constraint"""
+  account_emailaddress_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "account_emailaddress"
+"""
+input account_emailaddress_inc_input {
+  id: Int
+  user_id: Int
+}
+
+"""
+input type for inserting data into table "account_emailaddress"
+"""
+input account_emailaddress_insert_input {
+  email: String
+  id: Int
+  primary: Boolean
+  user_id: Int
+  verified: Boolean
+}
+
+"""aggregate max on columns"""
+type account_emailaddress_max_fields {
+  email: String
+  id: Int
+  user_id: Int
+}
+
+"""aggregate min on columns"""
+type account_emailaddress_min_fields {
+  email: String
+  id: Int
+  user_id: Int
+}
+
+"""
+response of any mutation on the table "account_emailaddress"
+"""
+type account_emailaddress_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [account_emailaddress!]!
+}
+
+"""
+on conflict condition type for table "account_emailaddress"
+"""
+input account_emailaddress_on_conflict {
+  constraint: account_emailaddress_constraint!
+  update_columns: [account_emailaddress_update_column!]! = []
+  where: account_emailaddress_bool_exp
+}
+
+"""Ordering options when selecting data from "account_emailaddress"."""
+input account_emailaddress_order_by {
+  email: order_by
+  id: order_by
+  primary: order_by
+  user_id: order_by
+  verified: order_by
+}
+
+"""primary key columns input for table: account_emailaddress"""
+input account_emailaddress_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "account_emailaddress"
+"""
+enum account_emailaddress_select_column {
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  primary
+
+  """column name"""
+  user_id
+
+  """column name"""
+  verified
+}
+
+"""
+input type for updating data in table "account_emailaddress"
+"""
+input account_emailaddress_set_input {
+  email: String
+  id: Int
+  primary: Boolean
+  user_id: Int
+  verified: Boolean
+}
+
+"""aggregate stddev on columns"""
+type account_emailaddress_stddev_fields {
+  id: Float
+  user_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type account_emailaddress_stddev_pop_fields {
+  id: Float
+  user_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type account_emailaddress_stddev_samp_fields {
+  id: Float
+  user_id: Float
+}
+
+"""aggregate sum on columns"""
+type account_emailaddress_sum_fields {
+  id: Int
+  user_id: Int
+}
+
+"""
+update columns of table "account_emailaddress"
+"""
+enum account_emailaddress_update_column {
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  primary
+
+  """column name"""
+  user_id
+
+  """column name"""
+  verified
+}
+
+"""aggregate var_pop on columns"""
+type account_emailaddress_var_pop_fields {
+  id: Float
+  user_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type account_emailaddress_var_samp_fields {
+  id: Float
+  user_id: Float
+}
+
+"""aggregate variance on columns"""
+type account_emailaddress_variance_fields {
+  id: Float
+  user_id: Float
+}
+
+"""
+columns and relationships of "account_emailconfirmation"
+"""
+type account_emailconfirmation {
+  created: timestamptz!
+  email_address_id: Int!
+  id: Int!
+  key: String!
+  sent: timestamptz
+}
+
+"""
+aggregated selection of "account_emailconfirmation"
+"""
+type account_emailconfirmation_aggregate {
+  aggregate: account_emailconfirmation_aggregate_fields
+  nodes: [account_emailconfirmation!]!
+}
+
+"""
+aggregate fields of "account_emailconfirmation"
+"""
+type account_emailconfirmation_aggregate_fields {
+  avg: account_emailconfirmation_avg_fields
+  count(columns: [account_emailconfirmation_select_column!], distinct: Boolean): Int!
+  max: account_emailconfirmation_max_fields
+  min: account_emailconfirmation_min_fields
+  stddev: account_emailconfirmation_stddev_fields
+  stddev_pop: account_emailconfirmation_stddev_pop_fields
+  stddev_samp: account_emailconfirmation_stddev_samp_fields
+  sum: account_emailconfirmation_sum_fields
+  var_pop: account_emailconfirmation_var_pop_fields
+  var_samp: account_emailconfirmation_var_samp_fields
+  variance: account_emailconfirmation_variance_fields
+}
+
+"""aggregate avg on columns"""
+type account_emailconfirmation_avg_fields {
+  email_address_id: Float
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "account_emailconfirmation". All fields are combined with a logical 'AND'.
+"""
+input account_emailconfirmation_bool_exp {
+  _and: [account_emailconfirmation_bool_exp!]
+  _not: account_emailconfirmation_bool_exp
+  _or: [account_emailconfirmation_bool_exp!]
+  created: timestamptz_comparison_exp
+  email_address_id: Int_comparison_exp
+  id: Int_comparison_exp
+  key: String_comparison_exp
+  sent: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "account_emailconfirmation"
+"""
+enum account_emailconfirmation_constraint {
+  """unique or primary key constraint"""
+  account_emailconfirmation_key_key
+
+  """unique or primary key constraint"""
+  account_emailconfirmation_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "account_emailconfirmation"
+"""
+input account_emailconfirmation_inc_input {
+  email_address_id: Int
+  id: Int
+}
+
+"""
+input type for inserting data into table "account_emailconfirmation"
+"""
+input account_emailconfirmation_insert_input {
+  created: timestamptz
+  email_address_id: Int
+  id: Int
+  key: String
+  sent: timestamptz
+}
+
+"""aggregate max on columns"""
+type account_emailconfirmation_max_fields {
+  created: timestamptz
+  email_address_id: Int
+  id: Int
+  key: String
+  sent: timestamptz
+}
+
+"""aggregate min on columns"""
+type account_emailconfirmation_min_fields {
+  created: timestamptz
+  email_address_id: Int
+  id: Int
+  key: String
+  sent: timestamptz
+}
+
+"""
+response of any mutation on the table "account_emailconfirmation"
+"""
+type account_emailconfirmation_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [account_emailconfirmation!]!
+}
+
+"""
+on conflict condition type for table "account_emailconfirmation"
+"""
+input account_emailconfirmation_on_conflict {
+  constraint: account_emailconfirmation_constraint!
+  update_columns: [account_emailconfirmation_update_column!]! = []
+  where: account_emailconfirmation_bool_exp
+}
+
+"""Ordering options when selecting data from "account_emailconfirmation"."""
+input account_emailconfirmation_order_by {
+  created: order_by
+  email_address_id: order_by
+  id: order_by
+  key: order_by
+  sent: order_by
+}
+
+"""primary key columns input for table: account_emailconfirmation"""
+input account_emailconfirmation_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "account_emailconfirmation"
+"""
+enum account_emailconfirmation_select_column {
+  """column name"""
+  created
+
+  """column name"""
+  email_address_id
+
+  """column name"""
+  id
+
+  """column name"""
+  key
+
+  """column name"""
+  sent
+}
+
+"""
+input type for updating data in table "account_emailconfirmation"
+"""
+input account_emailconfirmation_set_input {
+  created: timestamptz
+  email_address_id: Int
+  id: Int
+  key: String
+  sent: timestamptz
+}
+
+"""aggregate stddev on columns"""
+type account_emailconfirmation_stddev_fields {
+  email_address_id: Float
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type account_emailconfirmation_stddev_pop_fields {
+  email_address_id: Float
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type account_emailconfirmation_stddev_samp_fields {
+  email_address_id: Float
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type account_emailconfirmation_sum_fields {
+  email_address_id: Int
+  id: Int
+}
+
+"""
+update columns of table "account_emailconfirmation"
+"""
+enum account_emailconfirmation_update_column {
+  """column name"""
+  created
+
+  """column name"""
+  email_address_id
+
+  """column name"""
+  id
+
+  """column name"""
+  key
+
+  """column name"""
+  sent
+}
+
+"""aggregate var_pop on columns"""
+type account_emailconfirmation_var_pop_fields {
+  email_address_id: Float
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type account_emailconfirmation_var_samp_fields {
+  email_address_id: Float
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type account_emailconfirmation_variance_fields {
+  email_address_id: Float
+  id: Float
+}
+
+"""
+columns and relationships of "api_hasurauser"
+"""
+type api_hasurauser {
+  avatar_url: String!
+  date_joined: timestamptz!
+  default_group_id: Int
+  default_org_id: Int
+  email: String!
+  first_name: String!
+  id: Int!
+  is_active: Boolean!
+  is_staff: Boolean!
+  is_superuser: Boolean!
+  last_login: timestamptz
+  last_name: String!
+  note: String!
+  password: String!
+  username: String!
+}
+
+"""
+aggregated selection of "api_hasurauser"
+"""
+type api_hasurauser_aggregate {
+  aggregate: api_hasurauser_aggregate_fields
+  nodes: [api_hasurauser!]!
+}
+
+"""
+aggregate fields of "api_hasurauser"
+"""
+type api_hasurauser_aggregate_fields {
+  avg: api_hasurauser_avg_fields
+  count(columns: [api_hasurauser_select_column!], distinct: Boolean): Int!
+  max: api_hasurauser_max_fields
+  min: api_hasurauser_min_fields
+  stddev: api_hasurauser_stddev_fields
+  stddev_pop: api_hasurauser_stddev_pop_fields
+  stddev_samp: api_hasurauser_stddev_samp_fields
+  sum: api_hasurauser_sum_fields
+  var_pop: api_hasurauser_var_pop_fields
+  var_samp: api_hasurauser_var_samp_fields
+  variance: api_hasurauser_variance_fields
+}
+
+"""aggregate avg on columns"""
+type api_hasurauser_avg_fields {
+  default_group_id: Float
+  default_org_id: Float
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "api_hasurauser". All fields are combined with a logical 'AND'.
+"""
+input api_hasurauser_bool_exp {
+  _and: [api_hasurauser_bool_exp!]
+  _not: api_hasurauser_bool_exp
+  _or: [api_hasurauser_bool_exp!]
+  avatar_url: String_comparison_exp
+  date_joined: timestamptz_comparison_exp
+  default_group_id: Int_comparison_exp
+  default_org_id: Int_comparison_exp
+  email: String_comparison_exp
+  first_name: String_comparison_exp
+  id: Int_comparison_exp
+  is_active: Boolean_comparison_exp
+  is_staff: Boolean_comparison_exp
+  is_superuser: Boolean_comparison_exp
+  last_login: timestamptz_comparison_exp
+  last_name: String_comparison_exp
+  note: String_comparison_exp
+  password: String_comparison_exp
+  username: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "api_hasurauser"
+"""
+enum api_hasurauser_constraint {
+  """unique or primary key constraint"""
+  api_hasurauser_pkey
+
+  """unique or primary key constraint"""
+  api_hasurauser_username_key
+}
+
+"""
+columns and relationships of "api_hasurauser_groups"
+"""
+type api_hasurauser_groups {
+  group_id: Int!
+  hasurauser_id: Int!
+  id: Int!
+}
+
+"""
+aggregated selection of "api_hasurauser_groups"
+"""
+type api_hasurauser_groups_aggregate {
+  aggregate: api_hasurauser_groups_aggregate_fields
+  nodes: [api_hasurauser_groups!]!
+}
+
+"""
+aggregate fields of "api_hasurauser_groups"
+"""
+type api_hasurauser_groups_aggregate_fields {
+  avg: api_hasurauser_groups_avg_fields
+  count(columns: [api_hasurauser_groups_select_column!], distinct: Boolean): Int!
+  max: api_hasurauser_groups_max_fields
+  min: api_hasurauser_groups_min_fields
+  stddev: api_hasurauser_groups_stddev_fields
+  stddev_pop: api_hasurauser_groups_stddev_pop_fields
+  stddev_samp: api_hasurauser_groups_stddev_samp_fields
+  sum: api_hasurauser_groups_sum_fields
+  var_pop: api_hasurauser_groups_var_pop_fields
+  var_samp: api_hasurauser_groups_var_samp_fields
+  variance: api_hasurauser_groups_variance_fields
+}
+
+"""aggregate avg on columns"""
+type api_hasurauser_groups_avg_fields {
+  group_id: Float
+  hasurauser_id: Float
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "api_hasurauser_groups". All fields are combined with a logical 'AND'.
+"""
+input api_hasurauser_groups_bool_exp {
+  _and: [api_hasurauser_groups_bool_exp!]
+  _not: api_hasurauser_groups_bool_exp
+  _or: [api_hasurauser_groups_bool_exp!]
+  group_id: Int_comparison_exp
+  hasurauser_id: Int_comparison_exp
+  id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "api_hasurauser_groups"
+"""
+enum api_hasurauser_groups_constraint {
+  """unique or primary key constraint"""
+  api_hasurauser_groups_hasurauser_id_group_id_eb5ac236_uniq
+
+  """unique or primary key constraint"""
+  api_hasurauser_groups_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "api_hasurauser_groups"
+"""
+input api_hasurauser_groups_inc_input {
+  group_id: Int
+  hasurauser_id: Int
+  id: Int
+}
+
+"""
+input type for inserting data into table "api_hasurauser_groups"
+"""
+input api_hasurauser_groups_insert_input {
+  group_id: Int
+  hasurauser_id: Int
+  id: Int
+}
+
+"""aggregate max on columns"""
+type api_hasurauser_groups_max_fields {
+  group_id: Int
+  hasurauser_id: Int
+  id: Int
+}
+
+"""aggregate min on columns"""
+type api_hasurauser_groups_min_fields {
+  group_id: Int
+  hasurauser_id: Int
+  id: Int
+}
+
+"""
+response of any mutation on the table "api_hasurauser_groups"
+"""
+type api_hasurauser_groups_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [api_hasurauser_groups!]!
+}
+
+"""
+on conflict condition type for table "api_hasurauser_groups"
+"""
+input api_hasurauser_groups_on_conflict {
+  constraint: api_hasurauser_groups_constraint!
+  update_columns: [api_hasurauser_groups_update_column!]! = []
+  where: api_hasurauser_groups_bool_exp
+}
+
+"""Ordering options when selecting data from "api_hasurauser_groups"."""
+input api_hasurauser_groups_order_by {
+  group_id: order_by
+  hasurauser_id: order_by
+  id: order_by
+}
+
+"""primary key columns input for table: api_hasurauser_groups"""
+input api_hasurauser_groups_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "api_hasurauser_groups"
+"""
+enum api_hasurauser_groups_select_column {
+  """column name"""
+  group_id
+
+  """column name"""
+  hasurauser_id
+
+  """column name"""
+  id
+}
+
+"""
+input type for updating data in table "api_hasurauser_groups"
+"""
+input api_hasurauser_groups_set_input {
+  group_id: Int
+  hasurauser_id: Int
+  id: Int
+}
+
+"""aggregate stddev on columns"""
+type api_hasurauser_groups_stddev_fields {
+  group_id: Float
+  hasurauser_id: Float
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type api_hasurauser_groups_stddev_pop_fields {
+  group_id: Float
+  hasurauser_id: Float
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type api_hasurauser_groups_stddev_samp_fields {
+  group_id: Float
+  hasurauser_id: Float
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type api_hasurauser_groups_sum_fields {
+  group_id: Int
+  hasurauser_id: Int
+  id: Int
+}
+
+"""
+update columns of table "api_hasurauser_groups"
+"""
+enum api_hasurauser_groups_update_column {
+  """column name"""
+  group_id
+
+  """column name"""
+  hasurauser_id
+
+  """column name"""
+  id
+}
+
+"""aggregate var_pop on columns"""
+type api_hasurauser_groups_var_pop_fields {
+  group_id: Float
+  hasurauser_id: Float
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type api_hasurauser_groups_var_samp_fields {
+  group_id: Float
+  hasurauser_id: Float
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type api_hasurauser_groups_variance_fields {
+  group_id: Float
+  hasurauser_id: Float
+  id: Float
+}
+
+"""
+input type for incrementing numeric columns in table "api_hasurauser"
+"""
+input api_hasurauser_inc_input {
+  default_group_id: Int
+  default_org_id: Int
+  id: Int
+}
+
+"""
+input type for inserting data into table "api_hasurauser"
+"""
+input api_hasurauser_insert_input {
+  avatar_url: String
+  date_joined: timestamptz
+  default_group_id: Int
+  default_org_id: Int
+  email: String
+  first_name: String
+  id: Int
+  is_active: Boolean
+  is_staff: Boolean
+  is_superuser: Boolean
+  last_login: timestamptz
+  last_name: String
+  note: String
+  password: String
+  username: String
+}
+
+"""aggregate max on columns"""
+type api_hasurauser_max_fields {
+  avatar_url: String
+  date_joined: timestamptz
+  default_group_id: Int
+  default_org_id: Int
+  email: String
+  first_name: String
+  id: Int
+  last_login: timestamptz
+  last_name: String
+  note: String
+  password: String
+  username: String
+}
+
+"""aggregate min on columns"""
+type api_hasurauser_min_fields {
+  avatar_url: String
+  date_joined: timestamptz
+  default_group_id: Int
+  default_org_id: Int
+  email: String
+  first_name: String
+  id: Int
+  last_login: timestamptz
+  last_name: String
+  note: String
+  password: String
+  username: String
+}
+
+"""
+response of any mutation on the table "api_hasurauser"
+"""
+type api_hasurauser_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [api_hasurauser!]!
+}
+
+"""
+on conflict condition type for table "api_hasurauser"
+"""
+input api_hasurauser_on_conflict {
+  constraint: api_hasurauser_constraint!
+  update_columns: [api_hasurauser_update_column!]! = []
+  where: api_hasurauser_bool_exp
+}
+
+"""Ordering options when selecting data from "api_hasurauser"."""
+input api_hasurauser_order_by {
+  avatar_url: order_by
+  date_joined: order_by
+  default_group_id: order_by
+  default_org_id: order_by
+  email: order_by
+  first_name: order_by
+  id: order_by
+  is_active: order_by
+  is_staff: order_by
+  is_superuser: order_by
+  last_login: order_by
+  last_name: order_by
+  note: order_by
+  password: order_by
+  username: order_by
+}
+
+"""primary key columns input for table: api_hasurauser"""
+input api_hasurauser_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "api_hasurauser"
+"""
+enum api_hasurauser_select_column {
+  """column name"""
+  avatar_url
+
+  """column name"""
+  date_joined
+
+  """column name"""
+  default_group_id
+
+  """column name"""
+  default_org_id
+
+  """column name"""
+  email
+
+  """column name"""
+  first_name
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  is_staff
+
+  """column name"""
+  is_superuser
+
+  """column name"""
+  last_login
+
+  """column name"""
+  last_name
+
+  """column name"""
+  note
+
+  """column name"""
+  password
+
+  """column name"""
+  username
+}
+
+"""
+input type for updating data in table "api_hasurauser"
+"""
+input api_hasurauser_set_input {
+  avatar_url: String
+  date_joined: timestamptz
+  default_group_id: Int
+  default_org_id: Int
+  email: String
+  first_name: String
+  id: Int
+  is_active: Boolean
+  is_staff: Boolean
+  is_superuser: Boolean
+  last_login: timestamptz
+  last_name: String
+  note: String
+  password: String
+  username: String
+}
+
+"""aggregate stddev on columns"""
+type api_hasurauser_stddev_fields {
+  default_group_id: Float
+  default_org_id: Float
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type api_hasurauser_stddev_pop_fields {
+  default_group_id: Float
+  default_org_id: Float
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type api_hasurauser_stddev_samp_fields {
+  default_group_id: Float
+  default_org_id: Float
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type api_hasurauser_sum_fields {
+  default_group_id: Int
+  default_org_id: Int
+  id: Int
+}
+
+"""
+update columns of table "api_hasurauser"
+"""
+enum api_hasurauser_update_column {
+  """column name"""
+  avatar_url
+
+  """column name"""
+  date_joined
+
+  """column name"""
+  default_group_id
+
+  """column name"""
+  default_org_id
+
+  """column name"""
+  email
+
+  """column name"""
+  first_name
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  is_staff
+
+  """column name"""
+  is_superuser
+
+  """column name"""
+  last_login
+
+  """column name"""
+  last_name
+
+  """column name"""
+  note
+
+  """column name"""
+  password
+
+  """column name"""
+  username
+}
+
+"""
+columns and relationships of "api_hasurauser_user_permissions"
+"""
+type api_hasurauser_user_permissions {
+  hasurauser_id: Int!
+  id: Int!
+  permission_id: Int!
+}
+
+"""
+aggregated selection of "api_hasurauser_user_permissions"
+"""
+type api_hasurauser_user_permissions_aggregate {
+  aggregate: api_hasurauser_user_permissions_aggregate_fields
+  nodes: [api_hasurauser_user_permissions!]!
+}
+
+"""
+aggregate fields of "api_hasurauser_user_permissions"
+"""
+type api_hasurauser_user_permissions_aggregate_fields {
+  avg: api_hasurauser_user_permissions_avg_fields
+  count(columns: [api_hasurauser_user_permissions_select_column!], distinct: Boolean): Int!
+  max: api_hasurauser_user_permissions_max_fields
+  min: api_hasurauser_user_permissions_min_fields
+  stddev: api_hasurauser_user_permissions_stddev_fields
+  stddev_pop: api_hasurauser_user_permissions_stddev_pop_fields
+  stddev_samp: api_hasurauser_user_permissions_stddev_samp_fields
+  sum: api_hasurauser_user_permissions_sum_fields
+  var_pop: api_hasurauser_user_permissions_var_pop_fields
+  var_samp: api_hasurauser_user_permissions_var_samp_fields
+  variance: api_hasurauser_user_permissions_variance_fields
+}
+
+"""aggregate avg on columns"""
+type api_hasurauser_user_permissions_avg_fields {
+  hasurauser_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "api_hasurauser_user_permissions". All fields are combined with a logical 'AND'.
+"""
+input api_hasurauser_user_permissions_bool_exp {
+  _and: [api_hasurauser_user_permissions_bool_exp!]
+  _not: api_hasurauser_user_permissions_bool_exp
+  _or: [api_hasurauser_user_permissions_bool_exp!]
+  hasurauser_id: Int_comparison_exp
+  id: Int_comparison_exp
+  permission_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "api_hasurauser_user_permissions"
+"""
+enum api_hasurauser_user_permissions_constraint {
+  """unique or primary key constraint"""
+  api_hasurauser_user_perm_hasurauser_id_permission_9fd1d926_uniq
+
+  """unique or primary key constraint"""
+  api_hasurauser_user_permissions_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "api_hasurauser_user_permissions"
+"""
+input api_hasurauser_user_permissions_inc_input {
+  hasurauser_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""
+input type for inserting data into table "api_hasurauser_user_permissions"
+"""
+input api_hasurauser_user_permissions_insert_input {
+  hasurauser_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""aggregate max on columns"""
+type api_hasurauser_user_permissions_max_fields {
+  hasurauser_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""aggregate min on columns"""
+type api_hasurauser_user_permissions_min_fields {
+  hasurauser_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""
+response of any mutation on the table "api_hasurauser_user_permissions"
+"""
+type api_hasurauser_user_permissions_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [api_hasurauser_user_permissions!]!
+}
+
+"""
+on conflict condition type for table "api_hasurauser_user_permissions"
+"""
+input api_hasurauser_user_permissions_on_conflict {
+  constraint: api_hasurauser_user_permissions_constraint!
+  update_columns: [api_hasurauser_user_permissions_update_column!]! = []
+  where: api_hasurauser_user_permissions_bool_exp
+}
+
+"""
+Ordering options when selecting data from "api_hasurauser_user_permissions".
+"""
+input api_hasurauser_user_permissions_order_by {
+  hasurauser_id: order_by
+  id: order_by
+  permission_id: order_by
+}
+
+"""primary key columns input for table: api_hasurauser_user_permissions"""
+input api_hasurauser_user_permissions_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "api_hasurauser_user_permissions"
+"""
+enum api_hasurauser_user_permissions_select_column {
+  """column name"""
+  hasurauser_id
+
+  """column name"""
+  id
+
+  """column name"""
+  permission_id
+}
+
+"""
+input type for updating data in table "api_hasurauser_user_permissions"
+"""
+input api_hasurauser_user_permissions_set_input {
+  hasurauser_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""aggregate stddev on columns"""
+type api_hasurauser_user_permissions_stddev_fields {
+  hasurauser_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type api_hasurauser_user_permissions_stddev_pop_fields {
+  hasurauser_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type api_hasurauser_user_permissions_stddev_samp_fields {
+  hasurauser_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate sum on columns"""
+type api_hasurauser_user_permissions_sum_fields {
+  hasurauser_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""
+update columns of table "api_hasurauser_user_permissions"
+"""
+enum api_hasurauser_user_permissions_update_column {
+  """column name"""
+  hasurauser_id
+
+  """column name"""
+  id
+
+  """column name"""
+  permission_id
+}
+
+"""aggregate var_pop on columns"""
+type api_hasurauser_user_permissions_var_pop_fields {
+  hasurauser_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type api_hasurauser_user_permissions_var_samp_fields {
+  hasurauser_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate variance on columns"""
+type api_hasurauser_user_permissions_variance_fields {
+  hasurauser_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate var_pop on columns"""
+type api_hasurauser_var_pop_fields {
+  default_group_id: Float
+  default_org_id: Float
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type api_hasurauser_var_samp_fields {
+  default_group_id: Float
+  default_org_id: Float
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type api_hasurauser_variance_fields {
+  default_group_id: Float
+  default_org_id: Float
+  id: Float
+}
+
+"""
+columns and relationships of "api_organization"
+"""
+type api_organization {
+  address: String!
+  header_id: Int
+  id: Int!
+  is_active: Boolean!
+  name: String!
+  note: String!
+  parent_org_id: Int
+}
+
+"""
+aggregated selection of "api_organization"
+"""
+type api_organization_aggregate {
+  aggregate: api_organization_aggregate_fields
+  nodes: [api_organization!]!
+}
+
+"""
+aggregate fields of "api_organization"
+"""
+type api_organization_aggregate_fields {
+  avg: api_organization_avg_fields
+  count(columns: [api_organization_select_column!], distinct: Boolean): Int!
+  max: api_organization_max_fields
+  min: api_organization_min_fields
+  stddev: api_organization_stddev_fields
+  stddev_pop: api_organization_stddev_pop_fields
+  stddev_samp: api_organization_stddev_samp_fields
+  sum: api_organization_sum_fields
+  var_pop: api_organization_var_pop_fields
+  var_samp: api_organization_var_samp_fields
+  variance: api_organization_variance_fields
+}
+
+"""aggregate avg on columns"""
+type api_organization_avg_fields {
+  header_id: Float
+  id: Float
+  parent_org_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "api_organization". All fields are combined with a logical 'AND'.
+"""
+input api_organization_bool_exp {
+  _and: [api_organization_bool_exp!]
+  _not: api_organization_bool_exp
+  _or: [api_organization_bool_exp!]
+  address: String_comparison_exp
+  header_id: Int_comparison_exp
+  id: Int_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  note: String_comparison_exp
+  parent_org_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "api_organization"
+"""
+enum api_organization_constraint {
+  """unique or primary key constraint"""
+  api_organization_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "api_organization"
+"""
+input api_organization_inc_input {
+  header_id: Int
+  id: Int
+  parent_org_id: Int
+}
+
+"""
+input type for inserting data into table "api_organization"
+"""
+input api_organization_insert_input {
+  address: String
+  header_id: Int
+  id: Int
+  is_active: Boolean
+  name: String
+  note: String
+  parent_org_id: Int
+}
+
+"""aggregate max on columns"""
+type api_organization_max_fields {
+  address: String
+  header_id: Int
+  id: Int
+  name: String
+  note: String
+  parent_org_id: Int
+}
+
+"""aggregate min on columns"""
+type api_organization_min_fields {
+  address: String
+  header_id: Int
+  id: Int
+  name: String
+  note: String
+  parent_org_id: Int
+}
+
+"""
+response of any mutation on the table "api_organization"
+"""
+type api_organization_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [api_organization!]!
+}
+
+"""
+on conflict condition type for table "api_organization"
+"""
+input api_organization_on_conflict {
+  constraint: api_organization_constraint!
+  update_columns: [api_organization_update_column!]! = []
+  where: api_organization_bool_exp
+}
+
+"""Ordering options when selecting data from "api_organization"."""
+input api_organization_order_by {
+  address: order_by
+  header_id: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  note: order_by
+  parent_org_id: order_by
+}
+
+"""primary key columns input for table: api_organization"""
+input api_organization_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "api_organization"
+"""
+enum api_organization_select_column {
+  """column name"""
+  address
+
+  """column name"""
+  header_id
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  note
+
+  """column name"""
+  parent_org_id
+}
+
+"""
+input type for updating data in table "api_organization"
+"""
+input api_organization_set_input {
+  address: String
+  header_id: Int
+  id: Int
+  is_active: Boolean
+  name: String
+  note: String
+  parent_org_id: Int
+}
+
+"""aggregate stddev on columns"""
+type api_organization_stddev_fields {
+  header_id: Float
+  id: Float
+  parent_org_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type api_organization_stddev_pop_fields {
+  header_id: Float
+  id: Float
+  parent_org_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type api_organization_stddev_samp_fields {
+  header_id: Float
+  id: Float
+  parent_org_id: Float
+}
+
+"""aggregate sum on columns"""
+type api_organization_sum_fields {
+  header_id: Int
+  id: Int
+  parent_org_id: Int
+}
+
+"""
+update columns of table "api_organization"
+"""
+enum api_organization_update_column {
+  """column name"""
+  address
+
+  """column name"""
+  header_id
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  note
+
+  """column name"""
+  parent_org_id
+}
+
+"""
+columns and relationships of "api_organization_users"
+"""
+type api_organization_users {
+  hasurauser_id: Int!
+  id: Int!
+  organization_id: Int!
+}
+
+"""
+aggregated selection of "api_organization_users"
+"""
+type api_organization_users_aggregate {
+  aggregate: api_organization_users_aggregate_fields
+  nodes: [api_organization_users!]!
+}
+
+"""
+aggregate fields of "api_organization_users"
+"""
+type api_organization_users_aggregate_fields {
+  avg: api_organization_users_avg_fields
+  count(columns: [api_organization_users_select_column!], distinct: Boolean): Int!
+  max: api_organization_users_max_fields
+  min: api_organization_users_min_fields
+  stddev: api_organization_users_stddev_fields
+  stddev_pop: api_organization_users_stddev_pop_fields
+  stddev_samp: api_organization_users_stddev_samp_fields
+  sum: api_organization_users_sum_fields
+  var_pop: api_organization_users_var_pop_fields
+  var_samp: api_organization_users_var_samp_fields
+  variance: api_organization_users_variance_fields
+}
+
+"""aggregate avg on columns"""
+type api_organization_users_avg_fields {
+  hasurauser_id: Float
+  id: Float
+  organization_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "api_organization_users". All fields are combined with a logical 'AND'.
+"""
+input api_organization_users_bool_exp {
+  _and: [api_organization_users_bool_exp!]
+  _not: api_organization_users_bool_exp
+  _or: [api_organization_users_bool_exp!]
+  hasurauser_id: Int_comparison_exp
+  id: Int_comparison_exp
+  organization_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "api_organization_users"
+"""
+enum api_organization_users_constraint {
+  """unique or primary key constraint"""
+  api_organization_users_organization_id_hasuraus_fd0aec3a_uniq
+
+  """unique or primary key constraint"""
+  api_organization_users_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "api_organization_users"
+"""
+input api_organization_users_inc_input {
+  hasurauser_id: Int
+  id: Int
+  organization_id: Int
+}
+
+"""
+input type for inserting data into table "api_organization_users"
+"""
+input api_organization_users_insert_input {
+  hasurauser_id: Int
+  id: Int
+  organization_id: Int
+}
+
+"""aggregate max on columns"""
+type api_organization_users_max_fields {
+  hasurauser_id: Int
+  id: Int
+  organization_id: Int
+}
+
+"""aggregate min on columns"""
+type api_organization_users_min_fields {
+  hasurauser_id: Int
+  id: Int
+  organization_id: Int
+}
+
+"""
+response of any mutation on the table "api_organization_users"
+"""
+type api_organization_users_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [api_organization_users!]!
+}
+
+"""
+on conflict condition type for table "api_organization_users"
+"""
+input api_organization_users_on_conflict {
+  constraint: api_organization_users_constraint!
+  update_columns: [api_organization_users_update_column!]! = []
+  where: api_organization_users_bool_exp
+}
+
+"""Ordering options when selecting data from "api_organization_users"."""
+input api_organization_users_order_by {
+  hasurauser_id: order_by
+  id: order_by
+  organization_id: order_by
+}
+
+"""primary key columns input for table: api_organization_users"""
+input api_organization_users_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "api_organization_users"
+"""
+enum api_organization_users_select_column {
+  """column name"""
+  hasurauser_id
+
+  """column name"""
+  id
+
+  """column name"""
+  organization_id
+}
+
+"""
+input type for updating data in table "api_organization_users"
+"""
+input api_organization_users_set_input {
+  hasurauser_id: Int
+  id: Int
+  organization_id: Int
+}
+
+"""aggregate stddev on columns"""
+type api_organization_users_stddev_fields {
+  hasurauser_id: Float
+  id: Float
+  organization_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type api_organization_users_stddev_pop_fields {
+  hasurauser_id: Float
+  id: Float
+  organization_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type api_organization_users_stddev_samp_fields {
+  hasurauser_id: Float
+  id: Float
+  organization_id: Float
+}
+
+"""aggregate sum on columns"""
+type api_organization_users_sum_fields {
+  hasurauser_id: Int
+  id: Int
+  organization_id: Int
+}
+
+"""
+update columns of table "api_organization_users"
+"""
+enum api_organization_users_update_column {
+  """column name"""
+  hasurauser_id
+
+  """column name"""
+  id
+
+  """column name"""
+  organization_id
+}
+
+"""aggregate var_pop on columns"""
+type api_organization_users_var_pop_fields {
+  hasurauser_id: Float
+  id: Float
+  organization_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type api_organization_users_var_samp_fields {
+  hasurauser_id: Float
+  id: Float
+  organization_id: Float
+}
+
+"""aggregate variance on columns"""
+type api_organization_users_variance_fields {
+  hasurauser_id: Float
+  id: Float
+  organization_id: Float
+}
+
+"""aggregate var_pop on columns"""
+type api_organization_var_pop_fields {
+  header_id: Float
+  id: Float
+  parent_org_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type api_organization_var_samp_fields {
+  header_id: Float
+  id: Float
+  parent_org_id: Float
+}
+
+"""aggregate variance on columns"""
+type api_organization_variance_fields {
+  header_id: Float
+  id: Float
+  parent_org_id: Float
+}
+
+"""
+columns and relationships of "auth_group"
+"""
+type auth_group {
+  id: Int!
+  name: String!
+}
+
+"""
+aggregated selection of "auth_group"
+"""
+type auth_group_aggregate {
+  aggregate: auth_group_aggregate_fields
+  nodes: [auth_group!]!
+}
+
+"""
+aggregate fields of "auth_group"
+"""
+type auth_group_aggregate_fields {
+  avg: auth_group_avg_fields
+  count(columns: [auth_group_select_column!], distinct: Boolean): Int!
+  max: auth_group_max_fields
+  min: auth_group_min_fields
+  stddev: auth_group_stddev_fields
+  stddev_pop: auth_group_stddev_pop_fields
+  stddev_samp: auth_group_stddev_samp_fields
+  sum: auth_group_sum_fields
+  var_pop: auth_group_var_pop_fields
+  var_samp: auth_group_var_samp_fields
+  variance: auth_group_variance_fields
+}
+
+"""aggregate avg on columns"""
+type auth_group_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "auth_group". All fields are combined with a logical 'AND'.
+"""
+input auth_group_bool_exp {
+  _and: [auth_group_bool_exp!]
+  _not: auth_group_bool_exp
+  _or: [auth_group_bool_exp!]
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "auth_group"
+"""
+enum auth_group_constraint {
+  """unique or primary key constraint"""
+  auth_group_name_key
+
+  """unique or primary key constraint"""
+  auth_group_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "auth_group"
+"""
+input auth_group_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "auth_group"
+"""
+input auth_group_insert_input {
+  id: Int
+  name: String
+}
+
+"""aggregate max on columns"""
+type auth_group_max_fields {
+  id: Int
+  name: String
+}
+
+"""aggregate min on columns"""
+type auth_group_min_fields {
+  id: Int
+  name: String
+}
+
+"""
+response of any mutation on the table "auth_group"
+"""
+type auth_group_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [auth_group!]!
+}
+
+"""
+on conflict condition type for table "auth_group"
+"""
+input auth_group_on_conflict {
+  constraint: auth_group_constraint!
+  update_columns: [auth_group_update_column!]! = []
+  where: auth_group_bool_exp
+}
+
+"""Ordering options when selecting data from "auth_group"."""
+input auth_group_order_by {
+  id: order_by
+  name: order_by
+}
+
+"""
+columns and relationships of "auth_group_permissions"
+"""
+type auth_group_permissions {
+  group_id: Int!
+  id: Int!
+  permission_id: Int!
+}
+
+"""
+aggregated selection of "auth_group_permissions"
+"""
+type auth_group_permissions_aggregate {
+  aggregate: auth_group_permissions_aggregate_fields
+  nodes: [auth_group_permissions!]!
+}
+
+"""
+aggregate fields of "auth_group_permissions"
+"""
+type auth_group_permissions_aggregate_fields {
+  avg: auth_group_permissions_avg_fields
+  count(columns: [auth_group_permissions_select_column!], distinct: Boolean): Int!
+  max: auth_group_permissions_max_fields
+  min: auth_group_permissions_min_fields
+  stddev: auth_group_permissions_stddev_fields
+  stddev_pop: auth_group_permissions_stddev_pop_fields
+  stddev_samp: auth_group_permissions_stddev_samp_fields
+  sum: auth_group_permissions_sum_fields
+  var_pop: auth_group_permissions_var_pop_fields
+  var_samp: auth_group_permissions_var_samp_fields
+  variance: auth_group_permissions_variance_fields
+}
+
+"""aggregate avg on columns"""
+type auth_group_permissions_avg_fields {
+  group_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "auth_group_permissions". All fields are combined with a logical 'AND'.
+"""
+input auth_group_permissions_bool_exp {
+  _and: [auth_group_permissions_bool_exp!]
+  _not: auth_group_permissions_bool_exp
+  _or: [auth_group_permissions_bool_exp!]
+  group_id: Int_comparison_exp
+  id: Int_comparison_exp
+  permission_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "auth_group_permissions"
+"""
+enum auth_group_permissions_constraint {
+  """unique or primary key constraint"""
+  auth_group_permissions_group_id_permission_id_0cd325b0_uniq
+
+  """unique or primary key constraint"""
+  auth_group_permissions_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "auth_group_permissions"
+"""
+input auth_group_permissions_inc_input {
+  group_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""
+input type for inserting data into table "auth_group_permissions"
+"""
+input auth_group_permissions_insert_input {
+  group_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""aggregate max on columns"""
+type auth_group_permissions_max_fields {
+  group_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""aggregate min on columns"""
+type auth_group_permissions_min_fields {
+  group_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""
+response of any mutation on the table "auth_group_permissions"
+"""
+type auth_group_permissions_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [auth_group_permissions!]!
+}
+
+"""
+on conflict condition type for table "auth_group_permissions"
+"""
+input auth_group_permissions_on_conflict {
+  constraint: auth_group_permissions_constraint!
+  update_columns: [auth_group_permissions_update_column!]! = []
+  where: auth_group_permissions_bool_exp
+}
+
+"""Ordering options when selecting data from "auth_group_permissions"."""
+input auth_group_permissions_order_by {
+  group_id: order_by
+  id: order_by
+  permission_id: order_by
+}
+
+"""primary key columns input for table: auth_group_permissions"""
+input auth_group_permissions_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "auth_group_permissions"
+"""
+enum auth_group_permissions_select_column {
+  """column name"""
+  group_id
+
+  """column name"""
+  id
+
+  """column name"""
+  permission_id
+}
+
+"""
+input type for updating data in table "auth_group_permissions"
+"""
+input auth_group_permissions_set_input {
+  group_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""aggregate stddev on columns"""
+type auth_group_permissions_stddev_fields {
+  group_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type auth_group_permissions_stddev_pop_fields {
+  group_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type auth_group_permissions_stddev_samp_fields {
+  group_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate sum on columns"""
+type auth_group_permissions_sum_fields {
+  group_id: Int
+  id: Int
+  permission_id: Int
+}
+
+"""
+update columns of table "auth_group_permissions"
+"""
+enum auth_group_permissions_update_column {
+  """column name"""
+  group_id
+
+  """column name"""
+  id
+
+  """column name"""
+  permission_id
+}
+
+"""aggregate var_pop on columns"""
+type auth_group_permissions_var_pop_fields {
+  group_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type auth_group_permissions_var_samp_fields {
+  group_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""aggregate variance on columns"""
+type auth_group_permissions_variance_fields {
+  group_id: Float
+  id: Float
+  permission_id: Float
+}
+
+"""primary key columns input for table: auth_group"""
+input auth_group_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "auth_group"
+"""
+enum auth_group_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""
+input type for updating data in table "auth_group"
+"""
+input auth_group_set_input {
+  id: Int
+  name: String
+}
+
+"""aggregate stddev on columns"""
+type auth_group_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type auth_group_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type auth_group_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type auth_group_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "auth_group"
+"""
+enum auth_group_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""aggregate var_pop on columns"""
+type auth_group_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type auth_group_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type auth_group_variance_fields {
+  id: Float
+}
+
+"""
+columns and relationships of "auth_permission"
+"""
+type auth_permission {
+  codename: String!
+  content_type_id: Int!
+  id: Int!
+  name: String!
+}
+
+"""
+aggregated selection of "auth_permission"
+"""
+type auth_permission_aggregate {
+  aggregate: auth_permission_aggregate_fields
+  nodes: [auth_permission!]!
+}
+
+"""
+aggregate fields of "auth_permission"
+"""
+type auth_permission_aggregate_fields {
+  avg: auth_permission_avg_fields
+  count(columns: [auth_permission_select_column!], distinct: Boolean): Int!
+  max: auth_permission_max_fields
+  min: auth_permission_min_fields
+  stddev: auth_permission_stddev_fields
+  stddev_pop: auth_permission_stddev_pop_fields
+  stddev_samp: auth_permission_stddev_samp_fields
+  sum: auth_permission_sum_fields
+  var_pop: auth_permission_var_pop_fields
+  var_samp: auth_permission_var_samp_fields
+  variance: auth_permission_variance_fields
+}
+
+"""aggregate avg on columns"""
+type auth_permission_avg_fields {
+  content_type_id: Float
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "auth_permission". All fields are combined with a logical 'AND'.
+"""
+input auth_permission_bool_exp {
+  _and: [auth_permission_bool_exp!]
+  _not: auth_permission_bool_exp
+  _or: [auth_permission_bool_exp!]
+  codename: String_comparison_exp
+  content_type_id: Int_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "auth_permission"
+"""
+enum auth_permission_constraint {
+  """unique or primary key constraint"""
+  auth_permission_content_type_id_codename_01ab375a_uniq
+
+  """unique or primary key constraint"""
+  auth_permission_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "auth_permission"
+"""
+input auth_permission_inc_input {
+  content_type_id: Int
+  id: Int
+}
+
+"""
+input type for inserting data into table "auth_permission"
+"""
+input auth_permission_insert_input {
+  codename: String
+  content_type_id: Int
+  id: Int
+  name: String
+}
+
+"""aggregate max on columns"""
+type auth_permission_max_fields {
+  codename: String
+  content_type_id: Int
+  id: Int
+  name: String
+}
+
+"""aggregate min on columns"""
+type auth_permission_min_fields {
+  codename: String
+  content_type_id: Int
+  id: Int
+  name: String
+}
+
+"""
+response of any mutation on the table "auth_permission"
+"""
+type auth_permission_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [auth_permission!]!
+}
+
+"""
+on conflict condition type for table "auth_permission"
+"""
+input auth_permission_on_conflict {
+  constraint: auth_permission_constraint!
+  update_columns: [auth_permission_update_column!]! = []
+  where: auth_permission_bool_exp
+}
+
+"""Ordering options when selecting data from "auth_permission"."""
+input auth_permission_order_by {
+  codename: order_by
+  content_type_id: order_by
+  id: order_by
+  name: order_by
+}
+
+"""primary key columns input for table: auth_permission"""
+input auth_permission_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "auth_permission"
+"""
+enum auth_permission_select_column {
+  """column name"""
+  codename
+
+  """column name"""
+  content_type_id
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""
+input type for updating data in table "auth_permission"
+"""
+input auth_permission_set_input {
+  codename: String
+  content_type_id: Int
+  id: Int
+  name: String
+}
+
+"""aggregate stddev on columns"""
+type auth_permission_stddev_fields {
+  content_type_id: Float
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type auth_permission_stddev_pop_fields {
+  content_type_id: Float
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type auth_permission_stddev_samp_fields {
+  content_type_id: Float
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type auth_permission_sum_fields {
+  content_type_id: Int
+  id: Int
+}
+
+"""
+update columns of table "auth_permission"
+"""
+enum auth_permission_update_column {
+  """column name"""
+  codename
+
+  """column name"""
+  content_type_id
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""aggregate var_pop on columns"""
+type auth_permission_var_pop_fields {
+  content_type_id: Float
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type auth_permission_var_samp_fields {
+  content_type_id: Float
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type auth_permission_variance_fields {
+  content_type_id: Float
+  id: Float
+}
+
+"""
+columns and relationships of "authtoken_token"
+"""
+type authtoken_token {
+  created: timestamptz!
+  key: String!
+  user_id: Int!
+}
+
+"""
+aggregated selection of "authtoken_token"
+"""
+type authtoken_token_aggregate {
+  aggregate: authtoken_token_aggregate_fields
+  nodes: [authtoken_token!]!
+}
+
+"""
+aggregate fields of "authtoken_token"
+"""
+type authtoken_token_aggregate_fields {
+  avg: authtoken_token_avg_fields
+  count(columns: [authtoken_token_select_column!], distinct: Boolean): Int!
+  max: authtoken_token_max_fields
+  min: authtoken_token_min_fields
+  stddev: authtoken_token_stddev_fields
+  stddev_pop: authtoken_token_stddev_pop_fields
+  stddev_samp: authtoken_token_stddev_samp_fields
+  sum: authtoken_token_sum_fields
+  var_pop: authtoken_token_var_pop_fields
+  var_samp: authtoken_token_var_samp_fields
+  variance: authtoken_token_variance_fields
+}
+
+"""aggregate avg on columns"""
+type authtoken_token_avg_fields {
+  user_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "authtoken_token". All fields are combined with a logical 'AND'.
+"""
+input authtoken_token_bool_exp {
+  _and: [authtoken_token_bool_exp!]
+  _not: authtoken_token_bool_exp
+  _or: [authtoken_token_bool_exp!]
+  created: timestamptz_comparison_exp
+  key: String_comparison_exp
+  user_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "authtoken_token"
+"""
+enum authtoken_token_constraint {
+  """unique or primary key constraint"""
+  authtoken_token_pkey
+
+  """unique or primary key constraint"""
+  authtoken_token_user_id_key
+}
+
+"""
+input type for incrementing numeric columns in table "authtoken_token"
+"""
+input authtoken_token_inc_input {
+  user_id: Int
+}
+
+"""
+input type for inserting data into table "authtoken_token"
+"""
+input authtoken_token_insert_input {
+  created: timestamptz
+  key: String
+  user_id: Int
+}
+
+"""aggregate max on columns"""
+type authtoken_token_max_fields {
+  created: timestamptz
+  key: String
+  user_id: Int
+}
+
+"""aggregate min on columns"""
+type authtoken_token_min_fields {
+  created: timestamptz
+  key: String
+  user_id: Int
+}
+
+"""
+response of any mutation on the table "authtoken_token"
+"""
+type authtoken_token_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [authtoken_token!]!
+}
+
+"""
+on conflict condition type for table "authtoken_token"
+"""
+input authtoken_token_on_conflict {
+  constraint: authtoken_token_constraint!
+  update_columns: [authtoken_token_update_column!]! = []
+  where: authtoken_token_bool_exp
+}
+
+"""Ordering options when selecting data from "authtoken_token"."""
+input authtoken_token_order_by {
+  created: order_by
+  key: order_by
+  user_id: order_by
+}
+
+"""primary key columns input for table: authtoken_token"""
+input authtoken_token_pk_columns_input {
+  key: String!
+}
+
+"""
+select columns of table "authtoken_token"
+"""
+enum authtoken_token_select_column {
+  """column name"""
+  created
+
+  """column name"""
+  key
+
+  """column name"""
+  user_id
+}
+
+"""
+input type for updating data in table "authtoken_token"
+"""
+input authtoken_token_set_input {
+  created: timestamptz
+  key: String
+  user_id: Int
+}
+
+"""aggregate stddev on columns"""
+type authtoken_token_stddev_fields {
+  user_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type authtoken_token_stddev_pop_fields {
+  user_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type authtoken_token_stddev_samp_fields {
+  user_id: Float
+}
+
+"""aggregate sum on columns"""
+type authtoken_token_sum_fields {
+  user_id: Int
+}
+
+"""
+update columns of table "authtoken_token"
+"""
+enum authtoken_token_update_column {
+  """column name"""
+  created
+
+  """column name"""
+  key
+
+  """column name"""
+  user_id
+}
+
+"""aggregate var_pop on columns"""
+type authtoken_token_var_pop_fields {
+  user_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type authtoken_token_var_samp_fields {
+  user_id: Float
+}
+
+"""aggregate variance on columns"""
+type authtoken_token_variance_fields {
+  user_id: Float
+}
+
+"""
+columns and relationships of "django_admin_log"
+"""
+type django_admin_log {
+  action_flag: smallint!
+  action_time: timestamptz!
+  change_message: String!
+  content_type_id: Int
+  id: Int!
+  object_id: String
+  object_repr: String!
+  user_id: Int!
+}
+
+"""
+aggregated selection of "django_admin_log"
+"""
+type django_admin_log_aggregate {
+  aggregate: django_admin_log_aggregate_fields
+  nodes: [django_admin_log!]!
+}
+
+"""
+aggregate fields of "django_admin_log"
+"""
+type django_admin_log_aggregate_fields {
+  avg: django_admin_log_avg_fields
+  count(columns: [django_admin_log_select_column!], distinct: Boolean): Int!
+  max: django_admin_log_max_fields
+  min: django_admin_log_min_fields
+  stddev: django_admin_log_stddev_fields
+  stddev_pop: django_admin_log_stddev_pop_fields
+  stddev_samp: django_admin_log_stddev_samp_fields
+  sum: django_admin_log_sum_fields
+  var_pop: django_admin_log_var_pop_fields
+  var_samp: django_admin_log_var_samp_fields
+  variance: django_admin_log_variance_fields
+}
+
+"""aggregate avg on columns"""
+type django_admin_log_avg_fields {
+  action_flag: Float
+  content_type_id: Float
+  id: Float
+  user_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "django_admin_log". All fields are combined with a logical 'AND'.
+"""
+input django_admin_log_bool_exp {
+  _and: [django_admin_log_bool_exp!]
+  _not: django_admin_log_bool_exp
+  _or: [django_admin_log_bool_exp!]
+  action_flag: smallint_comparison_exp
+  action_time: timestamptz_comparison_exp
+  change_message: String_comparison_exp
+  content_type_id: Int_comparison_exp
+  id: Int_comparison_exp
+  object_id: String_comparison_exp
+  object_repr: String_comparison_exp
+  user_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "django_admin_log"
+"""
+enum django_admin_log_constraint {
+  """unique or primary key constraint"""
+  django_admin_log_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "django_admin_log"
+"""
+input django_admin_log_inc_input {
+  action_flag: smallint
+  content_type_id: Int
+  id: Int
+  user_id: Int
+}
+
+"""
+input type for inserting data into table "django_admin_log"
+"""
+input django_admin_log_insert_input {
+  action_flag: smallint
+  action_time: timestamptz
+  change_message: String
+  content_type_id: Int
+  id: Int
+  object_id: String
+  object_repr: String
+  user_id: Int
+}
+
+"""aggregate max on columns"""
+type django_admin_log_max_fields {
+  action_flag: smallint
+  action_time: timestamptz
+  change_message: String
+  content_type_id: Int
+  id: Int
+  object_id: String
+  object_repr: String
+  user_id: Int
+}
+
+"""aggregate min on columns"""
+type django_admin_log_min_fields {
+  action_flag: smallint
+  action_time: timestamptz
+  change_message: String
+  content_type_id: Int
+  id: Int
+  object_id: String
+  object_repr: String
+  user_id: Int
+}
+
+"""
+response of any mutation on the table "django_admin_log"
+"""
+type django_admin_log_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [django_admin_log!]!
+}
+
+"""
+on conflict condition type for table "django_admin_log"
+"""
+input django_admin_log_on_conflict {
+  constraint: django_admin_log_constraint!
+  update_columns: [django_admin_log_update_column!]! = []
+  where: django_admin_log_bool_exp
+}
+
+"""Ordering options when selecting data from "django_admin_log"."""
+input django_admin_log_order_by {
+  action_flag: order_by
+  action_time: order_by
+  change_message: order_by
+  content_type_id: order_by
+  id: order_by
+  object_id: order_by
+  object_repr: order_by
+  user_id: order_by
+}
+
+"""primary key columns input for table: django_admin_log"""
+input django_admin_log_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "django_admin_log"
+"""
+enum django_admin_log_select_column {
+  """column name"""
+  action_flag
+
+  """column name"""
+  action_time
+
+  """column name"""
+  change_message
+
+  """column name"""
+  content_type_id
+
+  """column name"""
+  id
+
+  """column name"""
+  object_id
+
+  """column name"""
+  object_repr
+
+  """column name"""
+  user_id
+}
+
+"""
+input type for updating data in table "django_admin_log"
+"""
+input django_admin_log_set_input {
+  action_flag: smallint
+  action_time: timestamptz
+  change_message: String
+  content_type_id: Int
+  id: Int
+  object_id: String
+  object_repr: String
+  user_id: Int
+}
+
+"""aggregate stddev on columns"""
+type django_admin_log_stddev_fields {
+  action_flag: Float
+  content_type_id: Float
+  id: Float
+  user_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type django_admin_log_stddev_pop_fields {
+  action_flag: Float
+  content_type_id: Float
+  id: Float
+  user_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type django_admin_log_stddev_samp_fields {
+  action_flag: Float
+  content_type_id: Float
+  id: Float
+  user_id: Float
+}
+
+"""aggregate sum on columns"""
+type django_admin_log_sum_fields {
+  action_flag: smallint
+  content_type_id: Int
+  id: Int
+  user_id: Int
+}
+
+"""
+update columns of table "django_admin_log"
+"""
+enum django_admin_log_update_column {
+  """column name"""
+  action_flag
+
+  """column name"""
+  action_time
+
+  """column name"""
+  change_message
+
+  """column name"""
+  content_type_id
+
+  """column name"""
+  id
+
+  """column name"""
+  object_id
+
+  """column name"""
+  object_repr
+
+  """column name"""
+  user_id
+}
+
+"""aggregate var_pop on columns"""
+type django_admin_log_var_pop_fields {
+  action_flag: Float
+  content_type_id: Float
+  id: Float
+  user_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type django_admin_log_var_samp_fields {
+  action_flag: Float
+  content_type_id: Float
+  id: Float
+  user_id: Float
+}
+
+"""aggregate variance on columns"""
+type django_admin_log_variance_fields {
+  action_flag: Float
+  content_type_id: Float
+  id: Float
+  user_id: Float
+}
+
+"""
+columns and relationships of "django_content_type"
+"""
+type django_content_type {
+  app_label: String!
+  id: Int!
+  model: String!
+}
+
+"""
+aggregated selection of "django_content_type"
+"""
+type django_content_type_aggregate {
+  aggregate: django_content_type_aggregate_fields
+  nodes: [django_content_type!]!
+}
+
+"""
+aggregate fields of "django_content_type"
+"""
+type django_content_type_aggregate_fields {
+  avg: django_content_type_avg_fields
+  count(columns: [django_content_type_select_column!], distinct: Boolean): Int!
+  max: django_content_type_max_fields
+  min: django_content_type_min_fields
+  stddev: django_content_type_stddev_fields
+  stddev_pop: django_content_type_stddev_pop_fields
+  stddev_samp: django_content_type_stddev_samp_fields
+  sum: django_content_type_sum_fields
+  var_pop: django_content_type_var_pop_fields
+  var_samp: django_content_type_var_samp_fields
+  variance: django_content_type_variance_fields
+}
+
+"""aggregate avg on columns"""
+type django_content_type_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "django_content_type". All fields are combined with a logical 'AND'.
+"""
+input django_content_type_bool_exp {
+  _and: [django_content_type_bool_exp!]
+  _not: django_content_type_bool_exp
+  _or: [django_content_type_bool_exp!]
+  app_label: String_comparison_exp
+  id: Int_comparison_exp
+  model: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "django_content_type"
+"""
+enum django_content_type_constraint {
+  """unique or primary key constraint"""
+  django_content_type_app_label_model_76bd3d3b_uniq
+
+  """unique or primary key constraint"""
+  django_content_type_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "django_content_type"
+"""
+input django_content_type_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "django_content_type"
+"""
+input django_content_type_insert_input {
+  app_label: String
+  id: Int
+  model: String
+}
+
+"""aggregate max on columns"""
+type django_content_type_max_fields {
+  app_label: String
+  id: Int
+  model: String
+}
+
+"""aggregate min on columns"""
+type django_content_type_min_fields {
+  app_label: String
+  id: Int
+  model: String
+}
+
+"""
+response of any mutation on the table "django_content_type"
+"""
+type django_content_type_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [django_content_type!]!
+}
+
+"""
+on conflict condition type for table "django_content_type"
+"""
+input django_content_type_on_conflict {
+  constraint: django_content_type_constraint!
+  update_columns: [django_content_type_update_column!]! = []
+  where: django_content_type_bool_exp
+}
+
+"""Ordering options when selecting data from "django_content_type"."""
+input django_content_type_order_by {
+  app_label: order_by
+  id: order_by
+  model: order_by
+}
+
+"""primary key columns input for table: django_content_type"""
+input django_content_type_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "django_content_type"
+"""
+enum django_content_type_select_column {
+  """column name"""
+  app_label
+
+  """column name"""
+  id
+
+  """column name"""
+  model
+}
+
+"""
+input type for updating data in table "django_content_type"
+"""
+input django_content_type_set_input {
+  app_label: String
+  id: Int
+  model: String
+}
+
+"""aggregate stddev on columns"""
+type django_content_type_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type django_content_type_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type django_content_type_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type django_content_type_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "django_content_type"
+"""
+enum django_content_type_update_column {
+  """column name"""
+  app_label
+
+  """column name"""
+  id
+
+  """column name"""
+  model
+}
+
+"""aggregate var_pop on columns"""
+type django_content_type_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type django_content_type_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type django_content_type_variance_fields {
+  id: Float
+}
+
+"""
+columns and relationships of "django_migrations"
+"""
+type django_migrations {
+  app: String!
+  applied: timestamptz!
+  id: Int!
+  name: String!
+}
+
+"""
+aggregated selection of "django_migrations"
+"""
+type django_migrations_aggregate {
+  aggregate: django_migrations_aggregate_fields
+  nodes: [django_migrations!]!
+}
+
+"""
+aggregate fields of "django_migrations"
+"""
+type django_migrations_aggregate_fields {
+  avg: django_migrations_avg_fields
+  count(columns: [django_migrations_select_column!], distinct: Boolean): Int!
+  max: django_migrations_max_fields
+  min: django_migrations_min_fields
+  stddev: django_migrations_stddev_fields
+  stddev_pop: django_migrations_stddev_pop_fields
+  stddev_samp: django_migrations_stddev_samp_fields
+  sum: django_migrations_sum_fields
+  var_pop: django_migrations_var_pop_fields
+  var_samp: django_migrations_var_samp_fields
+  variance: django_migrations_variance_fields
+}
+
+"""aggregate avg on columns"""
+type django_migrations_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "django_migrations". All fields are combined with a logical 'AND'.
+"""
+input django_migrations_bool_exp {
+  _and: [django_migrations_bool_exp!]
+  _not: django_migrations_bool_exp
+  _or: [django_migrations_bool_exp!]
+  app: String_comparison_exp
+  applied: timestamptz_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "django_migrations"
+"""
+enum django_migrations_constraint {
+  """unique or primary key constraint"""
+  django_migrations_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "django_migrations"
+"""
+input django_migrations_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "django_migrations"
+"""
+input django_migrations_insert_input {
+  app: String
+  applied: timestamptz
+  id: Int
+  name: String
+}
+
+"""aggregate max on columns"""
+type django_migrations_max_fields {
+  app: String
+  applied: timestamptz
+  id: Int
+  name: String
+}
+
+"""aggregate min on columns"""
+type django_migrations_min_fields {
+  app: String
+  applied: timestamptz
+  id: Int
+  name: String
+}
+
+"""
+response of any mutation on the table "django_migrations"
+"""
+type django_migrations_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [django_migrations!]!
+}
+
+"""
+on conflict condition type for table "django_migrations"
+"""
+input django_migrations_on_conflict {
+  constraint: django_migrations_constraint!
+  update_columns: [django_migrations_update_column!]! = []
+  where: django_migrations_bool_exp
+}
+
+"""Ordering options when selecting data from "django_migrations"."""
+input django_migrations_order_by {
+  app: order_by
+  applied: order_by
+  id: order_by
+  name: order_by
+}
+
+"""primary key columns input for table: django_migrations"""
+input django_migrations_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "django_migrations"
+"""
+enum django_migrations_select_column {
+  """column name"""
+  app
+
+  """column name"""
+  applied
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""
+input type for updating data in table "django_migrations"
+"""
+input django_migrations_set_input {
+  app: String
+  applied: timestamptz
+  id: Int
+  name: String
+}
+
+"""aggregate stddev on columns"""
+type django_migrations_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type django_migrations_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type django_migrations_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type django_migrations_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "django_migrations"
+"""
+enum django_migrations_update_column {
+  """column name"""
+  app
+
+  """column name"""
+  applied
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""aggregate var_pop on columns"""
+type django_migrations_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type django_migrations_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type django_migrations_variance_fields {
+  id: Float
+}
+
+"""
+columns and relationships of "django_session"
+"""
+type django_session {
+  expire_date: timestamptz!
+  session_data: String!
+  session_key: String!
+}
+
+"""
+aggregated selection of "django_session"
+"""
+type django_session_aggregate {
+  aggregate: django_session_aggregate_fields
+  nodes: [django_session!]!
+}
+
+"""
+aggregate fields of "django_session"
+"""
+type django_session_aggregate_fields {
+  count(columns: [django_session_select_column!], distinct: Boolean): Int!
+  max: django_session_max_fields
+  min: django_session_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "django_session". All fields are combined with a logical 'AND'.
+"""
+input django_session_bool_exp {
+  _and: [django_session_bool_exp!]
+  _not: django_session_bool_exp
+  _or: [django_session_bool_exp!]
+  expire_date: timestamptz_comparison_exp
+  session_data: String_comparison_exp
+  session_key: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "django_session"
+"""
+enum django_session_constraint {
+  """unique or primary key constraint"""
+  django_session_pkey
+}
+
+"""
+input type for inserting data into table "django_session"
+"""
+input django_session_insert_input {
+  expire_date: timestamptz
+  session_data: String
+  session_key: String
+}
+
+"""aggregate max on columns"""
+type django_session_max_fields {
+  expire_date: timestamptz
+  session_data: String
+  session_key: String
+}
+
+"""aggregate min on columns"""
+type django_session_min_fields {
+  expire_date: timestamptz
+  session_data: String
+  session_key: String
+}
+
+"""
+response of any mutation on the table "django_session"
+"""
+type django_session_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [django_session!]!
+}
+
+"""
+on conflict condition type for table "django_session"
+"""
+input django_session_on_conflict {
+  constraint: django_session_constraint!
+  update_columns: [django_session_update_column!]! = []
+  where: django_session_bool_exp
+}
+
+"""Ordering options when selecting data from "django_session"."""
+input django_session_order_by {
+  expire_date: order_by
+  session_data: order_by
+  session_key: order_by
+}
+
+"""primary key columns input for table: django_session"""
+input django_session_pk_columns_input {
+  session_key: String!
+}
+
+"""
+select columns of table "django_session"
+"""
+enum django_session_select_column {
+  """column name"""
+  expire_date
+
+  """column name"""
+  session_data
+
+  """column name"""
+  session_key
+}
+
+"""
+input type for updating data in table "django_session"
+"""
+input django_session_set_input {
+  expire_date: timestamptz
+  session_data: String
+  session_key: String
+}
+
+"""
+update columns of table "django_session"
+"""
+enum django_session_update_column {
+  """column name"""
+  expire_date
+
+  """column name"""
+  session_data
+
+  """column name"""
+  session_key
+}
+
+"""
+columns and relationships of "django_site"
+"""
+type django_site {
+  domain: String!
+  id: Int!
+  name: String!
+}
+
+"""
+aggregated selection of "django_site"
+"""
+type django_site_aggregate {
+  aggregate: django_site_aggregate_fields
+  nodes: [django_site!]!
+}
+
+"""
+aggregate fields of "django_site"
+"""
+type django_site_aggregate_fields {
+  avg: django_site_avg_fields
+  count(columns: [django_site_select_column!], distinct: Boolean): Int!
+  max: django_site_max_fields
+  min: django_site_min_fields
+  stddev: django_site_stddev_fields
+  stddev_pop: django_site_stddev_pop_fields
+  stddev_samp: django_site_stddev_samp_fields
+  sum: django_site_sum_fields
+  var_pop: django_site_var_pop_fields
+  var_samp: django_site_var_samp_fields
+  variance: django_site_variance_fields
+}
+
+"""aggregate avg on columns"""
+type django_site_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "django_site". All fields are combined with a logical 'AND'.
+"""
+input django_site_bool_exp {
+  _and: [django_site_bool_exp!]
+  _not: django_site_bool_exp
+  _or: [django_site_bool_exp!]
+  domain: String_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "django_site"
+"""
+enum django_site_constraint {
+  """unique or primary key constraint"""
+  django_site_domain_a2e37b91_uniq
+
+  """unique or primary key constraint"""
+  django_site_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "django_site"
+"""
+input django_site_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "django_site"
+"""
+input django_site_insert_input {
+  domain: String
+  id: Int
+  name: String
+}
+
+"""aggregate max on columns"""
+type django_site_max_fields {
+  domain: String
+  id: Int
+  name: String
+}
+
+"""aggregate min on columns"""
+type django_site_min_fields {
+  domain: String
+  id: Int
+  name: String
+}
+
+"""
+response of any mutation on the table "django_site"
+"""
+type django_site_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [django_site!]!
+}
+
+"""
+on conflict condition type for table "django_site"
+"""
+input django_site_on_conflict {
+  constraint: django_site_constraint!
+  update_columns: [django_site_update_column!]! = []
+  where: django_site_bool_exp
+}
+
+"""Ordering options when selecting data from "django_site"."""
+input django_site_order_by {
+  domain: order_by
+  id: order_by
+  name: order_by
+}
+
+"""primary key columns input for table: django_site"""
+input django_site_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "django_site"
+"""
+enum django_site_select_column {
+  """column name"""
+  domain
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""
+input type for updating data in table "django_site"
+"""
+input django_site_set_input {
+  domain: String
+  id: Int
+  name: String
+}
+
+"""aggregate stddev on columns"""
+type django_site_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type django_site_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type django_site_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type django_site_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "django_site"
+"""
+enum django_site_update_column {
+  """column name"""
+  domain
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""aggregate var_pop on columns"""
+type django_site_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type django_site_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type django_site_variance_fields {
+  id: Float
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  delete data from the table: "account_emailaddress"
+  """
+  delete_account_emailaddress(
+    """filter the rows which have to be deleted"""
+    where: account_emailaddress_bool_exp!
+  ): account_emailaddress_mutation_response
+
+  """
+  delete single row from the table: "account_emailaddress"
+  """
+  delete_account_emailaddress_by_pk(id: Int!): account_emailaddress
+
+  """
+  delete data from the table: "account_emailconfirmation"
+  """
+  delete_account_emailconfirmation(
+    """filter the rows which have to be deleted"""
+    where: account_emailconfirmation_bool_exp!
+  ): account_emailconfirmation_mutation_response
+
+  """
+  delete single row from the table: "account_emailconfirmation"
+  """
+  delete_account_emailconfirmation_by_pk(id: Int!): account_emailconfirmation
+
+  """
+  delete data from the table: "api_hasurauser"
+  """
+  delete_api_hasurauser(
+    """filter the rows which have to be deleted"""
+    where: api_hasurauser_bool_exp!
+  ): api_hasurauser_mutation_response
+
+  """
+  delete single row from the table: "api_hasurauser"
+  """
+  delete_api_hasurauser_by_pk(id: Int!): api_hasurauser
+
+  """
+  delete data from the table: "api_hasurauser_groups"
+  """
+  delete_api_hasurauser_groups(
+    """filter the rows which have to be deleted"""
+    where: api_hasurauser_groups_bool_exp!
+  ): api_hasurauser_groups_mutation_response
+
+  """
+  delete single row from the table: "api_hasurauser_groups"
+  """
+  delete_api_hasurauser_groups_by_pk(id: Int!): api_hasurauser_groups
+
+  """
+  delete data from the table: "api_hasurauser_user_permissions"
+  """
+  delete_api_hasurauser_user_permissions(
+    """filter the rows which have to be deleted"""
+    where: api_hasurauser_user_permissions_bool_exp!
+  ): api_hasurauser_user_permissions_mutation_response
+
+  """
+  delete single row from the table: "api_hasurauser_user_permissions"
+  """
+  delete_api_hasurauser_user_permissions_by_pk(id: Int!): api_hasurauser_user_permissions
+
+  """
+  delete data from the table: "api_organization"
+  """
+  delete_api_organization(
+    """filter the rows which have to be deleted"""
+    where: api_organization_bool_exp!
+  ): api_organization_mutation_response
+
+  """
+  delete single row from the table: "api_organization"
+  """
+  delete_api_organization_by_pk(id: Int!): api_organization
+
+  """
+  delete data from the table: "api_organization_users"
+  """
+  delete_api_organization_users(
+    """filter the rows which have to be deleted"""
+    where: api_organization_users_bool_exp!
+  ): api_organization_users_mutation_response
+
+  """
+  delete single row from the table: "api_organization_users"
+  """
+  delete_api_organization_users_by_pk(id: Int!): api_organization_users
+
+  """
+  delete data from the table: "auth_group"
+  """
+  delete_auth_group(
+    """filter the rows which have to be deleted"""
+    where: auth_group_bool_exp!
+  ): auth_group_mutation_response
+
+  """
+  delete single row from the table: "auth_group"
+  """
+  delete_auth_group_by_pk(id: Int!): auth_group
+
+  """
+  delete data from the table: "auth_group_permissions"
+  """
+  delete_auth_group_permissions(
+    """filter the rows which have to be deleted"""
+    where: auth_group_permissions_bool_exp!
+  ): auth_group_permissions_mutation_response
+
+  """
+  delete single row from the table: "auth_group_permissions"
+  """
+  delete_auth_group_permissions_by_pk(id: Int!): auth_group_permissions
+
+  """
+  delete data from the table: "auth_permission"
+  """
+  delete_auth_permission(
+    """filter the rows which have to be deleted"""
+    where: auth_permission_bool_exp!
+  ): auth_permission_mutation_response
+
+  """
+  delete single row from the table: "auth_permission"
+  """
+  delete_auth_permission_by_pk(id: Int!): auth_permission
+
+  """
+  delete data from the table: "authtoken_token"
+  """
+  delete_authtoken_token(
+    """filter the rows which have to be deleted"""
+    where: authtoken_token_bool_exp!
+  ): authtoken_token_mutation_response
+
+  """
+  delete single row from the table: "authtoken_token"
+  """
+  delete_authtoken_token_by_pk(key: String!): authtoken_token
+
+  """
+  delete data from the table: "django_admin_log"
+  """
+  delete_django_admin_log(
+    """filter the rows which have to be deleted"""
+    where: django_admin_log_bool_exp!
+  ): django_admin_log_mutation_response
+
+  """
+  delete single row from the table: "django_admin_log"
+  """
+  delete_django_admin_log_by_pk(id: Int!): django_admin_log
+
+  """
+  delete data from the table: "django_content_type"
+  """
+  delete_django_content_type(
+    """filter the rows which have to be deleted"""
+    where: django_content_type_bool_exp!
+  ): django_content_type_mutation_response
+
+  """
+  delete single row from the table: "django_content_type"
+  """
+  delete_django_content_type_by_pk(id: Int!): django_content_type
+
+  """
+  delete data from the table: "django_migrations"
+  """
+  delete_django_migrations(
+    """filter the rows which have to be deleted"""
+    where: django_migrations_bool_exp!
+  ): django_migrations_mutation_response
+
+  """
+  delete single row from the table: "django_migrations"
+  """
+  delete_django_migrations_by_pk(id: Int!): django_migrations
+
+  """
+  delete data from the table: "django_session"
+  """
+  delete_django_session(
+    """filter the rows which have to be deleted"""
+    where: django_session_bool_exp!
+  ): django_session_mutation_response
+
+  """
+  delete single row from the table: "django_session"
+  """
+  delete_django_session_by_pk(session_key: String!): django_session
+
+  """
+  delete data from the table: "django_site"
+  """
+  delete_django_site(
+    """filter the rows which have to be deleted"""
+    where: django_site_bool_exp!
+  ): django_site_mutation_response
+
+  """
+  delete single row from the table: "django_site"
+  """
+  delete_django_site_by_pk(id: Int!): django_site
+
+  """
+  delete data from the table: "socialaccount_socialaccount"
+  """
+  delete_socialaccount_socialaccount(
+    """filter the rows which have to be deleted"""
+    where: socialaccount_socialaccount_bool_exp!
+  ): socialaccount_socialaccount_mutation_response
+
+  """
+  delete single row from the table: "socialaccount_socialaccount"
+  """
+  delete_socialaccount_socialaccount_by_pk(id: Int!): socialaccount_socialaccount
+
+  """
+  delete data from the table: "socialaccount_socialapp"
+  """
+  delete_socialaccount_socialapp(
+    """filter the rows which have to be deleted"""
+    where: socialaccount_socialapp_bool_exp!
+  ): socialaccount_socialapp_mutation_response
+
+  """
+  delete single row from the table: "socialaccount_socialapp"
+  """
+  delete_socialaccount_socialapp_by_pk(id: Int!): socialaccount_socialapp
+
+  """
+  delete data from the table: "socialaccount_socialapp_sites"
+  """
+  delete_socialaccount_socialapp_sites(
+    """filter the rows which have to be deleted"""
+    where: socialaccount_socialapp_sites_bool_exp!
+  ): socialaccount_socialapp_sites_mutation_response
+
+  """
+  delete single row from the table: "socialaccount_socialapp_sites"
+  """
+  delete_socialaccount_socialapp_sites_by_pk(id: Int!): socialaccount_socialapp_sites
+
+  """
+  delete data from the table: "socialaccount_socialtoken"
+  """
+  delete_socialaccount_socialtoken(
+    """filter the rows which have to be deleted"""
+    where: socialaccount_socialtoken_bool_exp!
+  ): socialaccount_socialtoken_mutation_response
+
+  """
+  delete single row from the table: "socialaccount_socialtoken"
+  """
+  delete_socialaccount_socialtoken_by_pk(id: Int!): socialaccount_socialtoken
+
+  """
+  insert data into the table: "account_emailaddress"
+  """
+  insert_account_emailaddress(
+    """the rows to be inserted"""
+    objects: [account_emailaddress_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: account_emailaddress_on_conflict
+  ): account_emailaddress_mutation_response
+
+  """
+  insert a single row into the table: "account_emailaddress"
+  """
+  insert_account_emailaddress_one(
+    """the row to be inserted"""
+    object: account_emailaddress_insert_input!
+
+    """on conflict condition"""
+    on_conflict: account_emailaddress_on_conflict
+  ): account_emailaddress
+
+  """
+  insert data into the table: "account_emailconfirmation"
+  """
+  insert_account_emailconfirmation(
+    """the rows to be inserted"""
+    objects: [account_emailconfirmation_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: account_emailconfirmation_on_conflict
+  ): account_emailconfirmation_mutation_response
+
+  """
+  insert a single row into the table: "account_emailconfirmation"
+  """
+  insert_account_emailconfirmation_one(
+    """the row to be inserted"""
+    object: account_emailconfirmation_insert_input!
+
+    """on conflict condition"""
+    on_conflict: account_emailconfirmation_on_conflict
+  ): account_emailconfirmation
+
+  """
+  insert data into the table: "api_hasurauser"
+  """
+  insert_api_hasurauser(
+    """the rows to be inserted"""
+    objects: [api_hasurauser_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: api_hasurauser_on_conflict
+  ): api_hasurauser_mutation_response
+
+  """
+  insert data into the table: "api_hasurauser_groups"
+  """
+  insert_api_hasurauser_groups(
+    """the rows to be inserted"""
+    objects: [api_hasurauser_groups_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: api_hasurauser_groups_on_conflict
+  ): api_hasurauser_groups_mutation_response
+
+  """
+  insert a single row into the table: "api_hasurauser_groups"
+  """
+  insert_api_hasurauser_groups_one(
+    """the row to be inserted"""
+    object: api_hasurauser_groups_insert_input!
+
+    """on conflict condition"""
+    on_conflict: api_hasurauser_groups_on_conflict
+  ): api_hasurauser_groups
+
+  """
+  insert a single row into the table: "api_hasurauser"
+  """
+  insert_api_hasurauser_one(
+    """the row to be inserted"""
+    object: api_hasurauser_insert_input!
+
+    """on conflict condition"""
+    on_conflict: api_hasurauser_on_conflict
+  ): api_hasurauser
+
+  """
+  insert data into the table: "api_hasurauser_user_permissions"
+  """
+  insert_api_hasurauser_user_permissions(
+    """the rows to be inserted"""
+    objects: [api_hasurauser_user_permissions_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: api_hasurauser_user_permissions_on_conflict
+  ): api_hasurauser_user_permissions_mutation_response
+
+  """
+  insert a single row into the table: "api_hasurauser_user_permissions"
+  """
+  insert_api_hasurauser_user_permissions_one(
+    """the row to be inserted"""
+    object: api_hasurauser_user_permissions_insert_input!
+
+    """on conflict condition"""
+    on_conflict: api_hasurauser_user_permissions_on_conflict
+  ): api_hasurauser_user_permissions
+
+  """
+  insert data into the table: "api_organization"
+  """
+  insert_api_organization(
+    """the rows to be inserted"""
+    objects: [api_organization_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: api_organization_on_conflict
+  ): api_organization_mutation_response
+
+  """
+  insert a single row into the table: "api_organization"
+  """
+  insert_api_organization_one(
+    """the row to be inserted"""
+    object: api_organization_insert_input!
+
+    """on conflict condition"""
+    on_conflict: api_organization_on_conflict
+  ): api_organization
+
+  """
+  insert data into the table: "api_organization_users"
+  """
+  insert_api_organization_users(
+    """the rows to be inserted"""
+    objects: [api_organization_users_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: api_organization_users_on_conflict
+  ): api_organization_users_mutation_response
+
+  """
+  insert a single row into the table: "api_organization_users"
+  """
+  insert_api_organization_users_one(
+    """the row to be inserted"""
+    object: api_organization_users_insert_input!
+
+    """on conflict condition"""
+    on_conflict: api_organization_users_on_conflict
+  ): api_organization_users
+
+  """
+  insert data into the table: "auth_group"
+  """
+  insert_auth_group(
+    """the rows to be inserted"""
+    objects: [auth_group_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: auth_group_on_conflict
+  ): auth_group_mutation_response
+
+  """
+  insert a single row into the table: "auth_group"
+  """
+  insert_auth_group_one(
+    """the row to be inserted"""
+    object: auth_group_insert_input!
+
+    """on conflict condition"""
+    on_conflict: auth_group_on_conflict
+  ): auth_group
+
+  """
+  insert data into the table: "auth_group_permissions"
+  """
+  insert_auth_group_permissions(
+    """the rows to be inserted"""
+    objects: [auth_group_permissions_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: auth_group_permissions_on_conflict
+  ): auth_group_permissions_mutation_response
+
+  """
+  insert a single row into the table: "auth_group_permissions"
+  """
+  insert_auth_group_permissions_one(
+    """the row to be inserted"""
+    object: auth_group_permissions_insert_input!
+
+    """on conflict condition"""
+    on_conflict: auth_group_permissions_on_conflict
+  ): auth_group_permissions
+
+  """
+  insert data into the table: "auth_permission"
+  """
+  insert_auth_permission(
+    """the rows to be inserted"""
+    objects: [auth_permission_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: auth_permission_on_conflict
+  ): auth_permission_mutation_response
+
+  """
+  insert a single row into the table: "auth_permission"
+  """
+  insert_auth_permission_one(
+    """the row to be inserted"""
+    object: auth_permission_insert_input!
+
+    """on conflict condition"""
+    on_conflict: auth_permission_on_conflict
+  ): auth_permission
+
+  """
+  insert data into the table: "authtoken_token"
+  """
+  insert_authtoken_token(
+    """the rows to be inserted"""
+    objects: [authtoken_token_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: authtoken_token_on_conflict
+  ): authtoken_token_mutation_response
+
+  """
+  insert a single row into the table: "authtoken_token"
+  """
+  insert_authtoken_token_one(
+    """the row to be inserted"""
+    object: authtoken_token_insert_input!
+
+    """on conflict condition"""
+    on_conflict: authtoken_token_on_conflict
+  ): authtoken_token
+
+  """
+  insert data into the table: "django_admin_log"
+  """
+  insert_django_admin_log(
+    """the rows to be inserted"""
+    objects: [django_admin_log_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: django_admin_log_on_conflict
+  ): django_admin_log_mutation_response
+
+  """
+  insert a single row into the table: "django_admin_log"
+  """
+  insert_django_admin_log_one(
+    """the row to be inserted"""
+    object: django_admin_log_insert_input!
+
+    """on conflict condition"""
+    on_conflict: django_admin_log_on_conflict
+  ): django_admin_log
+
+  """
+  insert data into the table: "django_content_type"
+  """
+  insert_django_content_type(
+    """the rows to be inserted"""
+    objects: [django_content_type_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: django_content_type_on_conflict
+  ): django_content_type_mutation_response
+
+  """
+  insert a single row into the table: "django_content_type"
+  """
+  insert_django_content_type_one(
+    """the row to be inserted"""
+    object: django_content_type_insert_input!
+
+    """on conflict condition"""
+    on_conflict: django_content_type_on_conflict
+  ): django_content_type
+
+  """
+  insert data into the table: "django_migrations"
+  """
+  insert_django_migrations(
+    """the rows to be inserted"""
+    objects: [django_migrations_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: django_migrations_on_conflict
+  ): django_migrations_mutation_response
+
+  """
+  insert a single row into the table: "django_migrations"
+  """
+  insert_django_migrations_one(
+    """the row to be inserted"""
+    object: django_migrations_insert_input!
+
+    """on conflict condition"""
+    on_conflict: django_migrations_on_conflict
+  ): django_migrations
+
+  """
+  insert data into the table: "django_session"
+  """
+  insert_django_session(
+    """the rows to be inserted"""
+    objects: [django_session_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: django_session_on_conflict
+  ): django_session_mutation_response
+
+  """
+  insert a single row into the table: "django_session"
+  """
+  insert_django_session_one(
+    """the row to be inserted"""
+    object: django_session_insert_input!
+
+    """on conflict condition"""
+    on_conflict: django_session_on_conflict
+  ): django_session
+
+  """
+  insert data into the table: "django_site"
+  """
+  insert_django_site(
+    """the rows to be inserted"""
+    objects: [django_site_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: django_site_on_conflict
+  ): django_site_mutation_response
+
+  """
+  insert a single row into the table: "django_site"
+  """
+  insert_django_site_one(
+    """the row to be inserted"""
+    object: django_site_insert_input!
+
+    """on conflict condition"""
+    on_conflict: django_site_on_conflict
+  ): django_site
+
+  """
+  insert data into the table: "socialaccount_socialaccount"
+  """
+  insert_socialaccount_socialaccount(
+    """the rows to be inserted"""
+    objects: [socialaccount_socialaccount_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: socialaccount_socialaccount_on_conflict
+  ): socialaccount_socialaccount_mutation_response
+
+  """
+  insert a single row into the table: "socialaccount_socialaccount"
+  """
+  insert_socialaccount_socialaccount_one(
+    """the row to be inserted"""
+    object: socialaccount_socialaccount_insert_input!
+
+    """on conflict condition"""
+    on_conflict: socialaccount_socialaccount_on_conflict
+  ): socialaccount_socialaccount
+
+  """
+  insert data into the table: "socialaccount_socialapp"
+  """
+  insert_socialaccount_socialapp(
+    """the rows to be inserted"""
+    objects: [socialaccount_socialapp_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: socialaccount_socialapp_on_conflict
+  ): socialaccount_socialapp_mutation_response
+
+  """
+  insert a single row into the table: "socialaccount_socialapp"
+  """
+  insert_socialaccount_socialapp_one(
+    """the row to be inserted"""
+    object: socialaccount_socialapp_insert_input!
+
+    """on conflict condition"""
+    on_conflict: socialaccount_socialapp_on_conflict
+  ): socialaccount_socialapp
+
+  """
+  insert data into the table: "socialaccount_socialapp_sites"
+  """
+  insert_socialaccount_socialapp_sites(
+    """the rows to be inserted"""
+    objects: [socialaccount_socialapp_sites_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: socialaccount_socialapp_sites_on_conflict
+  ): socialaccount_socialapp_sites_mutation_response
+
+  """
+  insert a single row into the table: "socialaccount_socialapp_sites"
+  """
+  insert_socialaccount_socialapp_sites_one(
+    """the row to be inserted"""
+    object: socialaccount_socialapp_sites_insert_input!
+
+    """on conflict condition"""
+    on_conflict: socialaccount_socialapp_sites_on_conflict
+  ): socialaccount_socialapp_sites
+
+  """
+  insert data into the table: "socialaccount_socialtoken"
+  """
+  insert_socialaccount_socialtoken(
+    """the rows to be inserted"""
+    objects: [socialaccount_socialtoken_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: socialaccount_socialtoken_on_conflict
+  ): socialaccount_socialtoken_mutation_response
+
+  """
+  insert a single row into the table: "socialaccount_socialtoken"
+  """
+  insert_socialaccount_socialtoken_one(
+    """the row to be inserted"""
+    object: socialaccount_socialtoken_insert_input!
+
+    """on conflict condition"""
+    on_conflict: socialaccount_socialtoken_on_conflict
+  ): socialaccount_socialtoken
+
+  """
+  update data of the table: "account_emailaddress"
+  """
+  update_account_emailaddress(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: account_emailaddress_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: account_emailaddress_set_input
+
+    """filter the rows which have to be updated"""
+    where: account_emailaddress_bool_exp!
+  ): account_emailaddress_mutation_response
+
+  """
+  update single row of the table: "account_emailaddress"
+  """
+  update_account_emailaddress_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: account_emailaddress_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: account_emailaddress_set_input
+    pk_columns: account_emailaddress_pk_columns_input!
+  ): account_emailaddress
+
+  """
+  update data of the table: "account_emailconfirmation"
+  """
+  update_account_emailconfirmation(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: account_emailconfirmation_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: account_emailconfirmation_set_input
+
+    """filter the rows which have to be updated"""
+    where: account_emailconfirmation_bool_exp!
+  ): account_emailconfirmation_mutation_response
+
+  """
+  update single row of the table: "account_emailconfirmation"
+  """
+  update_account_emailconfirmation_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: account_emailconfirmation_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: account_emailconfirmation_set_input
+    pk_columns: account_emailconfirmation_pk_columns_input!
+  ): account_emailconfirmation
+
+  """
+  update data of the table: "api_hasurauser"
+  """
+  update_api_hasurauser(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: api_hasurauser_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: api_hasurauser_set_input
+
+    """filter the rows which have to be updated"""
+    where: api_hasurauser_bool_exp!
+  ): api_hasurauser_mutation_response
+
+  """
+  update single row of the table: "api_hasurauser"
+  """
+  update_api_hasurauser_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: api_hasurauser_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: api_hasurauser_set_input
+    pk_columns: api_hasurauser_pk_columns_input!
+  ): api_hasurauser
+
+  """
+  update data of the table: "api_hasurauser_groups"
+  """
+  update_api_hasurauser_groups(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: api_hasurauser_groups_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: api_hasurauser_groups_set_input
+
+    """filter the rows which have to be updated"""
+    where: api_hasurauser_groups_bool_exp!
+  ): api_hasurauser_groups_mutation_response
+
+  """
+  update single row of the table: "api_hasurauser_groups"
+  """
+  update_api_hasurauser_groups_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: api_hasurauser_groups_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: api_hasurauser_groups_set_input
+    pk_columns: api_hasurauser_groups_pk_columns_input!
+  ): api_hasurauser_groups
+
+  """
+  update data of the table: "api_hasurauser_user_permissions"
+  """
+  update_api_hasurauser_user_permissions(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: api_hasurauser_user_permissions_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: api_hasurauser_user_permissions_set_input
+
+    """filter the rows which have to be updated"""
+    where: api_hasurauser_user_permissions_bool_exp!
+  ): api_hasurauser_user_permissions_mutation_response
+
+  """
+  update single row of the table: "api_hasurauser_user_permissions"
+  """
+  update_api_hasurauser_user_permissions_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: api_hasurauser_user_permissions_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: api_hasurauser_user_permissions_set_input
+    pk_columns: api_hasurauser_user_permissions_pk_columns_input!
+  ): api_hasurauser_user_permissions
+
+  """
+  update data of the table: "api_organization"
+  """
+  update_api_organization(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: api_organization_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: api_organization_set_input
+
+    """filter the rows which have to be updated"""
+    where: api_organization_bool_exp!
+  ): api_organization_mutation_response
+
+  """
+  update single row of the table: "api_organization"
+  """
+  update_api_organization_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: api_organization_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: api_organization_set_input
+    pk_columns: api_organization_pk_columns_input!
+  ): api_organization
+
+  """
+  update data of the table: "api_organization_users"
+  """
+  update_api_organization_users(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: api_organization_users_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: api_organization_users_set_input
+
+    """filter the rows which have to be updated"""
+    where: api_organization_users_bool_exp!
+  ): api_organization_users_mutation_response
+
+  """
+  update single row of the table: "api_organization_users"
+  """
+  update_api_organization_users_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: api_organization_users_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: api_organization_users_set_input
+    pk_columns: api_organization_users_pk_columns_input!
+  ): api_organization_users
+
+  """
+  update data of the table: "auth_group"
+  """
+  update_auth_group(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: auth_group_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: auth_group_set_input
+
+    """filter the rows which have to be updated"""
+    where: auth_group_bool_exp!
+  ): auth_group_mutation_response
+
+  """
+  update single row of the table: "auth_group"
+  """
+  update_auth_group_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: auth_group_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: auth_group_set_input
+    pk_columns: auth_group_pk_columns_input!
+  ): auth_group
+
+  """
+  update data of the table: "auth_group_permissions"
+  """
+  update_auth_group_permissions(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: auth_group_permissions_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: auth_group_permissions_set_input
+
+    """filter the rows which have to be updated"""
+    where: auth_group_permissions_bool_exp!
+  ): auth_group_permissions_mutation_response
+
+  """
+  update single row of the table: "auth_group_permissions"
+  """
+  update_auth_group_permissions_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: auth_group_permissions_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: auth_group_permissions_set_input
+    pk_columns: auth_group_permissions_pk_columns_input!
+  ): auth_group_permissions
+
+  """
+  update data of the table: "auth_permission"
+  """
+  update_auth_permission(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: auth_permission_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: auth_permission_set_input
+
+    """filter the rows which have to be updated"""
+    where: auth_permission_bool_exp!
+  ): auth_permission_mutation_response
+
+  """
+  update single row of the table: "auth_permission"
+  """
+  update_auth_permission_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: auth_permission_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: auth_permission_set_input
+    pk_columns: auth_permission_pk_columns_input!
+  ): auth_permission
+
+  """
+  update data of the table: "authtoken_token"
+  """
+  update_authtoken_token(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: authtoken_token_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: authtoken_token_set_input
+
+    """filter the rows which have to be updated"""
+    where: authtoken_token_bool_exp!
+  ): authtoken_token_mutation_response
+
+  """
+  update single row of the table: "authtoken_token"
+  """
+  update_authtoken_token_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: authtoken_token_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: authtoken_token_set_input
+    pk_columns: authtoken_token_pk_columns_input!
+  ): authtoken_token
+
+  """
+  update data of the table: "django_admin_log"
+  """
+  update_django_admin_log(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: django_admin_log_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: django_admin_log_set_input
+
+    """filter the rows which have to be updated"""
+    where: django_admin_log_bool_exp!
+  ): django_admin_log_mutation_response
+
+  """
+  update single row of the table: "django_admin_log"
+  """
+  update_django_admin_log_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: django_admin_log_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: django_admin_log_set_input
+    pk_columns: django_admin_log_pk_columns_input!
+  ): django_admin_log
+
+  """
+  update data of the table: "django_content_type"
+  """
+  update_django_content_type(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: django_content_type_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: django_content_type_set_input
+
+    """filter the rows which have to be updated"""
+    where: django_content_type_bool_exp!
+  ): django_content_type_mutation_response
+
+  """
+  update single row of the table: "django_content_type"
+  """
+  update_django_content_type_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: django_content_type_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: django_content_type_set_input
+    pk_columns: django_content_type_pk_columns_input!
+  ): django_content_type
+
+  """
+  update data of the table: "django_migrations"
+  """
+  update_django_migrations(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: django_migrations_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: django_migrations_set_input
+
+    """filter the rows which have to be updated"""
+    where: django_migrations_bool_exp!
+  ): django_migrations_mutation_response
+
+  """
+  update single row of the table: "django_migrations"
+  """
+  update_django_migrations_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: django_migrations_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: django_migrations_set_input
+    pk_columns: django_migrations_pk_columns_input!
+  ): django_migrations
+
+  """
+  update data of the table: "django_session"
+  """
+  update_django_session(
+    """sets the columns of the filtered rows to the given values"""
+    _set: django_session_set_input
+
+    """filter the rows which have to be updated"""
+    where: django_session_bool_exp!
+  ): django_session_mutation_response
+
+  """
+  update single row of the table: "django_session"
+  """
+  update_django_session_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: django_session_set_input
+    pk_columns: django_session_pk_columns_input!
+  ): django_session
+
+  """
+  update data of the table: "django_site"
+  """
+  update_django_site(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: django_site_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: django_site_set_input
+
+    """filter the rows which have to be updated"""
+    where: django_site_bool_exp!
+  ): django_site_mutation_response
+
+  """
+  update single row of the table: "django_site"
+  """
+  update_django_site_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: django_site_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: django_site_set_input
+    pk_columns: django_site_pk_columns_input!
+  ): django_site
+
+  """
+  update data of the table: "socialaccount_socialaccount"
+  """
+  update_socialaccount_socialaccount(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: socialaccount_socialaccount_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: socialaccount_socialaccount_set_input
+
+    """filter the rows which have to be updated"""
+    where: socialaccount_socialaccount_bool_exp!
+  ): socialaccount_socialaccount_mutation_response
+
+  """
+  update single row of the table: "socialaccount_socialaccount"
+  """
+  update_socialaccount_socialaccount_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: socialaccount_socialaccount_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: socialaccount_socialaccount_set_input
+    pk_columns: socialaccount_socialaccount_pk_columns_input!
+  ): socialaccount_socialaccount
+
+  """
+  update data of the table: "socialaccount_socialapp"
+  """
+  update_socialaccount_socialapp(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: socialaccount_socialapp_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: socialaccount_socialapp_set_input
+
+    """filter the rows which have to be updated"""
+    where: socialaccount_socialapp_bool_exp!
+  ): socialaccount_socialapp_mutation_response
+
+  """
+  update single row of the table: "socialaccount_socialapp"
+  """
+  update_socialaccount_socialapp_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: socialaccount_socialapp_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: socialaccount_socialapp_set_input
+    pk_columns: socialaccount_socialapp_pk_columns_input!
+  ): socialaccount_socialapp
+
+  """
+  update data of the table: "socialaccount_socialapp_sites"
+  """
+  update_socialaccount_socialapp_sites(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: socialaccount_socialapp_sites_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: socialaccount_socialapp_sites_set_input
+
+    """filter the rows which have to be updated"""
+    where: socialaccount_socialapp_sites_bool_exp!
+  ): socialaccount_socialapp_sites_mutation_response
+
+  """
+  update single row of the table: "socialaccount_socialapp_sites"
+  """
+  update_socialaccount_socialapp_sites_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: socialaccount_socialapp_sites_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: socialaccount_socialapp_sites_set_input
+    pk_columns: socialaccount_socialapp_sites_pk_columns_input!
+  ): socialaccount_socialapp_sites
+
+  """
+  update data of the table: "socialaccount_socialtoken"
+  """
+  update_socialaccount_socialtoken(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: socialaccount_socialtoken_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: socialaccount_socialtoken_set_input
+
+    """filter the rows which have to be updated"""
+    where: socialaccount_socialtoken_bool_exp!
+  ): socialaccount_socialtoken_mutation_response
+
+  """
+  update single row of the table: "socialaccount_socialtoken"
+  """
+  update_socialaccount_socialtoken_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: socialaccount_socialtoken_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: socialaccount_socialtoken_set_input
+    pk_columns: socialaccount_socialtoken_pk_columns_input!
+  ): socialaccount_socialtoken
+}
+
+"""column ordering options"""
+enum order_by {
+  """in ascending order, nulls last"""
+  asc
+
+  """in ascending order, nulls first"""
+  asc_nulls_first
+
+  """in ascending order, nulls last"""
+  asc_nulls_last
+
+  """in descending order, nulls first"""
+  desc
+
+  """in descending order, nulls first"""
+  desc_nulls_first
+
+  """in descending order, nulls last"""
+  desc_nulls_last
+}
+
+type query_root {
+  """
+  fetch data from the table: "account_emailaddress"
+  """
+  account_emailaddress(
+    """distinct select on columns"""
+    distinct_on: [account_emailaddress_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_emailaddress_order_by!]
+
+    """filter the rows returned"""
+    where: account_emailaddress_bool_exp
+  ): [account_emailaddress!]!
+
+  """
+  fetch aggregated fields from the table: "account_emailaddress"
+  """
+  account_emailaddress_aggregate(
+    """distinct select on columns"""
+    distinct_on: [account_emailaddress_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_emailaddress_order_by!]
+
+    """filter the rows returned"""
+    where: account_emailaddress_bool_exp
+  ): account_emailaddress_aggregate!
+
+  """
+  fetch data from the table: "account_emailaddress" using primary key columns
+  """
+  account_emailaddress_by_pk(id: Int!): account_emailaddress
+
+  """
+  fetch data from the table: "account_emailconfirmation"
+  """
+  account_emailconfirmation(
+    """distinct select on columns"""
+    distinct_on: [account_emailconfirmation_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_emailconfirmation_order_by!]
+
+    """filter the rows returned"""
+    where: account_emailconfirmation_bool_exp
+  ): [account_emailconfirmation!]!
+
+  """
+  fetch aggregated fields from the table: "account_emailconfirmation"
+  """
+  account_emailconfirmation_aggregate(
+    """distinct select on columns"""
+    distinct_on: [account_emailconfirmation_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_emailconfirmation_order_by!]
+
+    """filter the rows returned"""
+    where: account_emailconfirmation_bool_exp
+  ): account_emailconfirmation_aggregate!
+
+  """
+  fetch data from the table: "account_emailconfirmation" using primary key columns
+  """
+  account_emailconfirmation_by_pk(id: Int!): account_emailconfirmation
+
+  """
+  fetch data from the table: "api_hasurauser"
+  """
+  api_hasurauser(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_bool_exp
+  ): [api_hasurauser!]!
+
+  """
+  fetch aggregated fields from the table: "api_hasurauser"
+  """
+  api_hasurauser_aggregate(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_bool_exp
+  ): api_hasurauser_aggregate!
+
+  """fetch data from the table: "api_hasurauser" using primary key columns"""
+  api_hasurauser_by_pk(id: Int!): api_hasurauser
+
+  """
+  fetch data from the table: "api_hasurauser_groups"
+  """
+  api_hasurauser_groups(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_groups_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_groups_bool_exp
+  ): [api_hasurauser_groups!]!
+
+  """
+  fetch aggregated fields from the table: "api_hasurauser_groups"
+  """
+  api_hasurauser_groups_aggregate(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_groups_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_groups_bool_exp
+  ): api_hasurauser_groups_aggregate!
+
+  """
+  fetch data from the table: "api_hasurauser_groups" using primary key columns
+  """
+  api_hasurauser_groups_by_pk(id: Int!): api_hasurauser_groups
+
+  """
+  fetch data from the table: "api_hasurauser_user_permissions"
+  """
+  api_hasurauser_user_permissions(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_user_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_user_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_user_permissions_bool_exp
+  ): [api_hasurauser_user_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "api_hasurauser_user_permissions"
+  """
+  api_hasurauser_user_permissions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_user_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_user_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_user_permissions_bool_exp
+  ): api_hasurauser_user_permissions_aggregate!
+
+  """
+  fetch data from the table: "api_hasurauser_user_permissions" using primary key columns
+  """
+  api_hasurauser_user_permissions_by_pk(id: Int!): api_hasurauser_user_permissions
+
+  """
+  fetch data from the table: "api_organization"
+  """
+  api_organization(
+    """distinct select on columns"""
+    distinct_on: [api_organization_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_organization_order_by!]
+
+    """filter the rows returned"""
+    where: api_organization_bool_exp
+  ): [api_organization!]!
+
+  """
+  fetch aggregated fields from the table: "api_organization"
+  """
+  api_organization_aggregate(
+    """distinct select on columns"""
+    distinct_on: [api_organization_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_organization_order_by!]
+
+    """filter the rows returned"""
+    where: api_organization_bool_exp
+  ): api_organization_aggregate!
+
+  """
+  fetch data from the table: "api_organization" using primary key columns
+  """
+  api_organization_by_pk(id: Int!): api_organization
+
+  """
+  fetch data from the table: "api_organization_users"
+  """
+  api_organization_users(
+    """distinct select on columns"""
+    distinct_on: [api_organization_users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_organization_users_order_by!]
+
+    """filter the rows returned"""
+    where: api_organization_users_bool_exp
+  ): [api_organization_users!]!
+
+  """
+  fetch aggregated fields from the table: "api_organization_users"
+  """
+  api_organization_users_aggregate(
+    """distinct select on columns"""
+    distinct_on: [api_organization_users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_organization_users_order_by!]
+
+    """filter the rows returned"""
+    where: api_organization_users_bool_exp
+  ): api_organization_users_aggregate!
+
+  """
+  fetch data from the table: "api_organization_users" using primary key columns
+  """
+  api_organization_users_by_pk(id: Int!): api_organization_users
+
+  """
+  fetch data from the table: "auth_group"
+  """
+  auth_group(
+    """distinct select on columns"""
+    distinct_on: [auth_group_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_group_order_by!]
+
+    """filter the rows returned"""
+    where: auth_group_bool_exp
+  ): [auth_group!]!
+
+  """
+  fetch aggregated fields from the table: "auth_group"
+  """
+  auth_group_aggregate(
+    """distinct select on columns"""
+    distinct_on: [auth_group_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_group_order_by!]
+
+    """filter the rows returned"""
+    where: auth_group_bool_exp
+  ): auth_group_aggregate!
+
+  """fetch data from the table: "auth_group" using primary key columns"""
+  auth_group_by_pk(id: Int!): auth_group
+
+  """
+  fetch data from the table: "auth_group_permissions"
+  """
+  auth_group_permissions(
+    """distinct select on columns"""
+    distinct_on: [auth_group_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_group_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: auth_group_permissions_bool_exp
+  ): [auth_group_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "auth_group_permissions"
+  """
+  auth_group_permissions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [auth_group_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_group_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: auth_group_permissions_bool_exp
+  ): auth_group_permissions_aggregate!
+
+  """
+  fetch data from the table: "auth_group_permissions" using primary key columns
+  """
+  auth_group_permissions_by_pk(id: Int!): auth_group_permissions
+
+  """
+  fetch data from the table: "auth_permission"
+  """
+  auth_permission(
+    """distinct select on columns"""
+    distinct_on: [auth_permission_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_permission_order_by!]
+
+    """filter the rows returned"""
+    where: auth_permission_bool_exp
+  ): [auth_permission!]!
+
+  """
+  fetch aggregated fields from the table: "auth_permission"
+  """
+  auth_permission_aggregate(
+    """distinct select on columns"""
+    distinct_on: [auth_permission_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_permission_order_by!]
+
+    """filter the rows returned"""
+    where: auth_permission_bool_exp
+  ): auth_permission_aggregate!
+
+  """fetch data from the table: "auth_permission" using primary key columns"""
+  auth_permission_by_pk(id: Int!): auth_permission
+
+  """
+  fetch data from the table: "authtoken_token"
+  """
+  authtoken_token(
+    """distinct select on columns"""
+    distinct_on: [authtoken_token_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authtoken_token_order_by!]
+
+    """filter the rows returned"""
+    where: authtoken_token_bool_exp
+  ): [authtoken_token!]!
+
+  """
+  fetch aggregated fields from the table: "authtoken_token"
+  """
+  authtoken_token_aggregate(
+    """distinct select on columns"""
+    distinct_on: [authtoken_token_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authtoken_token_order_by!]
+
+    """filter the rows returned"""
+    where: authtoken_token_bool_exp
+  ): authtoken_token_aggregate!
+
+  """fetch data from the table: "authtoken_token" using primary key columns"""
+  authtoken_token_by_pk(key: String!): authtoken_token
+
+  """
+  fetch data from the table: "django_admin_log"
+  """
+  django_admin_log(
+    """distinct select on columns"""
+    distinct_on: [django_admin_log_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_admin_log_order_by!]
+
+    """filter the rows returned"""
+    where: django_admin_log_bool_exp
+  ): [django_admin_log!]!
+
+  """
+  fetch aggregated fields from the table: "django_admin_log"
+  """
+  django_admin_log_aggregate(
+    """distinct select on columns"""
+    distinct_on: [django_admin_log_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_admin_log_order_by!]
+
+    """filter the rows returned"""
+    where: django_admin_log_bool_exp
+  ): django_admin_log_aggregate!
+
+  """
+  fetch data from the table: "django_admin_log" using primary key columns
+  """
+  django_admin_log_by_pk(id: Int!): django_admin_log
+
+  """
+  fetch data from the table: "django_content_type"
+  """
+  django_content_type(
+    """distinct select on columns"""
+    distinct_on: [django_content_type_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_content_type_order_by!]
+
+    """filter the rows returned"""
+    where: django_content_type_bool_exp
+  ): [django_content_type!]!
+
+  """
+  fetch aggregated fields from the table: "django_content_type"
+  """
+  django_content_type_aggregate(
+    """distinct select on columns"""
+    distinct_on: [django_content_type_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_content_type_order_by!]
+
+    """filter the rows returned"""
+    where: django_content_type_bool_exp
+  ): django_content_type_aggregate!
+
+  """
+  fetch data from the table: "django_content_type" using primary key columns
+  """
+  django_content_type_by_pk(id: Int!): django_content_type
+
+  """
+  fetch data from the table: "django_migrations"
+  """
+  django_migrations(
+    """distinct select on columns"""
+    distinct_on: [django_migrations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_migrations_order_by!]
+
+    """filter the rows returned"""
+    where: django_migrations_bool_exp
+  ): [django_migrations!]!
+
+  """
+  fetch aggregated fields from the table: "django_migrations"
+  """
+  django_migrations_aggregate(
+    """distinct select on columns"""
+    distinct_on: [django_migrations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_migrations_order_by!]
+
+    """filter the rows returned"""
+    where: django_migrations_bool_exp
+  ): django_migrations_aggregate!
+
+  """
+  fetch data from the table: "django_migrations" using primary key columns
+  """
+  django_migrations_by_pk(id: Int!): django_migrations
+
+  """
+  fetch data from the table: "django_session"
+  """
+  django_session(
+    """distinct select on columns"""
+    distinct_on: [django_session_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_session_order_by!]
+
+    """filter the rows returned"""
+    where: django_session_bool_exp
+  ): [django_session!]!
+
+  """
+  fetch aggregated fields from the table: "django_session"
+  """
+  django_session_aggregate(
+    """distinct select on columns"""
+    distinct_on: [django_session_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_session_order_by!]
+
+    """filter the rows returned"""
+    where: django_session_bool_exp
+  ): django_session_aggregate!
+
+  """fetch data from the table: "django_session" using primary key columns"""
+  django_session_by_pk(session_key: String!): django_session
+
+  """
+  fetch data from the table: "django_site"
+  """
+  django_site(
+    """distinct select on columns"""
+    distinct_on: [django_site_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_site_order_by!]
+
+    """filter the rows returned"""
+    where: django_site_bool_exp
+  ): [django_site!]!
+
+  """
+  fetch aggregated fields from the table: "django_site"
+  """
+  django_site_aggregate(
+    """distinct select on columns"""
+    distinct_on: [django_site_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_site_order_by!]
+
+    """filter the rows returned"""
+    where: django_site_bool_exp
+  ): django_site_aggregate!
+
+  """fetch data from the table: "django_site" using primary key columns"""
+  django_site_by_pk(id: Int!): django_site
+
+  """
+  fetch data from the table: "socialaccount_socialaccount"
+  """
+  socialaccount_socialaccount(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialaccount_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialaccount_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialaccount_bool_exp
+  ): [socialaccount_socialaccount!]!
+
+  """
+  fetch aggregated fields from the table: "socialaccount_socialaccount"
+  """
+  socialaccount_socialaccount_aggregate(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialaccount_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialaccount_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialaccount_bool_exp
+  ): socialaccount_socialaccount_aggregate!
+
+  """
+  fetch data from the table: "socialaccount_socialaccount" using primary key columns
+  """
+  socialaccount_socialaccount_by_pk(id: Int!): socialaccount_socialaccount
+
+  """
+  fetch data from the table: "socialaccount_socialapp"
+  """
+  socialaccount_socialapp(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialapp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialapp_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialapp_bool_exp
+  ): [socialaccount_socialapp!]!
+
+  """
+  fetch aggregated fields from the table: "socialaccount_socialapp"
+  """
+  socialaccount_socialapp_aggregate(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialapp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialapp_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialapp_bool_exp
+  ): socialaccount_socialapp_aggregate!
+
+  """
+  fetch data from the table: "socialaccount_socialapp" using primary key columns
+  """
+  socialaccount_socialapp_by_pk(id: Int!): socialaccount_socialapp
+
+  """
+  fetch data from the table: "socialaccount_socialapp_sites"
+  """
+  socialaccount_socialapp_sites(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialapp_sites_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialapp_sites_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialapp_sites_bool_exp
+  ): [socialaccount_socialapp_sites!]!
+
+  """
+  fetch aggregated fields from the table: "socialaccount_socialapp_sites"
+  """
+  socialaccount_socialapp_sites_aggregate(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialapp_sites_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialapp_sites_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialapp_sites_bool_exp
+  ): socialaccount_socialapp_sites_aggregate!
+
+  """
+  fetch data from the table: "socialaccount_socialapp_sites" using primary key columns
+  """
+  socialaccount_socialapp_sites_by_pk(id: Int!): socialaccount_socialapp_sites
+
+  """
+  fetch data from the table: "socialaccount_socialtoken"
+  """
+  socialaccount_socialtoken(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialtoken_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialtoken_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialtoken_bool_exp
+  ): [socialaccount_socialtoken!]!
+
+  """
+  fetch aggregated fields from the table: "socialaccount_socialtoken"
+  """
+  socialaccount_socialtoken_aggregate(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialtoken_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialtoken_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialtoken_bool_exp
+  ): socialaccount_socialtoken_aggregate!
+
+  """
+  fetch data from the table: "socialaccount_socialtoken" using primary key columns
+  """
+  socialaccount_socialtoken_by_pk(id: Int!): socialaccount_socialtoken
+}
+
+scalar smallint
+
+"""
+Boolean expression to compare columns of type "smallint". All fields are combined with logical 'AND'.
+"""
+input smallint_comparison_exp {
+  _eq: smallint
+  _gt: smallint
+  _gte: smallint
+  _in: [smallint!]
+  _is_null: Boolean
+  _lt: smallint
+  _lte: smallint
+  _neq: smallint
+  _nin: [smallint!]
+}
+
+"""
+columns and relationships of "socialaccount_socialaccount"
+"""
+type socialaccount_socialaccount {
+  date_joined: timestamptz!
+  extra_data: String!
+  id: Int!
+  last_login: timestamptz!
+  provider: String!
+  uid: String!
+  user_id: Int!
+}
+
+"""
+aggregated selection of "socialaccount_socialaccount"
+"""
+type socialaccount_socialaccount_aggregate {
+  aggregate: socialaccount_socialaccount_aggregate_fields
+  nodes: [socialaccount_socialaccount!]!
+}
+
+"""
+aggregate fields of "socialaccount_socialaccount"
+"""
+type socialaccount_socialaccount_aggregate_fields {
+  avg: socialaccount_socialaccount_avg_fields
+  count(columns: [socialaccount_socialaccount_select_column!], distinct: Boolean): Int!
+  max: socialaccount_socialaccount_max_fields
+  min: socialaccount_socialaccount_min_fields
+  stddev: socialaccount_socialaccount_stddev_fields
+  stddev_pop: socialaccount_socialaccount_stddev_pop_fields
+  stddev_samp: socialaccount_socialaccount_stddev_samp_fields
+  sum: socialaccount_socialaccount_sum_fields
+  var_pop: socialaccount_socialaccount_var_pop_fields
+  var_samp: socialaccount_socialaccount_var_samp_fields
+  variance: socialaccount_socialaccount_variance_fields
+}
+
+"""aggregate avg on columns"""
+type socialaccount_socialaccount_avg_fields {
+  id: Float
+  user_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "socialaccount_socialaccount". All fields are combined with a logical 'AND'.
+"""
+input socialaccount_socialaccount_bool_exp {
+  _and: [socialaccount_socialaccount_bool_exp!]
+  _not: socialaccount_socialaccount_bool_exp
+  _or: [socialaccount_socialaccount_bool_exp!]
+  date_joined: timestamptz_comparison_exp
+  extra_data: String_comparison_exp
+  id: Int_comparison_exp
+  last_login: timestamptz_comparison_exp
+  provider: String_comparison_exp
+  uid: String_comparison_exp
+  user_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "socialaccount_socialaccount"
+"""
+enum socialaccount_socialaccount_constraint {
+  """unique or primary key constraint"""
+  socialaccount_socialaccount_pkey
+
+  """unique or primary key constraint"""
+  socialaccount_socialaccount_provider_uid_fc810c6e_uniq
+}
+
+"""
+input type for incrementing numeric columns in table "socialaccount_socialaccount"
+"""
+input socialaccount_socialaccount_inc_input {
+  id: Int
+  user_id: Int
+}
+
+"""
+input type for inserting data into table "socialaccount_socialaccount"
+"""
+input socialaccount_socialaccount_insert_input {
+  date_joined: timestamptz
+  extra_data: String
+  id: Int
+  last_login: timestamptz
+  provider: String
+  uid: String
+  user_id: Int
+}
+
+"""aggregate max on columns"""
+type socialaccount_socialaccount_max_fields {
+  date_joined: timestamptz
+  extra_data: String
+  id: Int
+  last_login: timestamptz
+  provider: String
+  uid: String
+  user_id: Int
+}
+
+"""aggregate min on columns"""
+type socialaccount_socialaccount_min_fields {
+  date_joined: timestamptz
+  extra_data: String
+  id: Int
+  last_login: timestamptz
+  provider: String
+  uid: String
+  user_id: Int
+}
+
+"""
+response of any mutation on the table "socialaccount_socialaccount"
+"""
+type socialaccount_socialaccount_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [socialaccount_socialaccount!]!
+}
+
+"""
+on conflict condition type for table "socialaccount_socialaccount"
+"""
+input socialaccount_socialaccount_on_conflict {
+  constraint: socialaccount_socialaccount_constraint!
+  update_columns: [socialaccount_socialaccount_update_column!]! = []
+  where: socialaccount_socialaccount_bool_exp
+}
+
+"""
+Ordering options when selecting data from "socialaccount_socialaccount".
+"""
+input socialaccount_socialaccount_order_by {
+  date_joined: order_by
+  extra_data: order_by
+  id: order_by
+  last_login: order_by
+  provider: order_by
+  uid: order_by
+  user_id: order_by
+}
+
+"""primary key columns input for table: socialaccount_socialaccount"""
+input socialaccount_socialaccount_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "socialaccount_socialaccount"
+"""
+enum socialaccount_socialaccount_select_column {
+  """column name"""
+  date_joined
+
+  """column name"""
+  extra_data
+
+  """column name"""
+  id
+
+  """column name"""
+  last_login
+
+  """column name"""
+  provider
+
+  """column name"""
+  uid
+
+  """column name"""
+  user_id
+}
+
+"""
+input type for updating data in table "socialaccount_socialaccount"
+"""
+input socialaccount_socialaccount_set_input {
+  date_joined: timestamptz
+  extra_data: String
+  id: Int
+  last_login: timestamptz
+  provider: String
+  uid: String
+  user_id: Int
+}
+
+"""aggregate stddev on columns"""
+type socialaccount_socialaccount_stddev_fields {
+  id: Float
+  user_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type socialaccount_socialaccount_stddev_pop_fields {
+  id: Float
+  user_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type socialaccount_socialaccount_stddev_samp_fields {
+  id: Float
+  user_id: Float
+}
+
+"""aggregate sum on columns"""
+type socialaccount_socialaccount_sum_fields {
+  id: Int
+  user_id: Int
+}
+
+"""
+update columns of table "socialaccount_socialaccount"
+"""
+enum socialaccount_socialaccount_update_column {
+  """column name"""
+  date_joined
+
+  """column name"""
+  extra_data
+
+  """column name"""
+  id
+
+  """column name"""
+  last_login
+
+  """column name"""
+  provider
+
+  """column name"""
+  uid
+
+  """column name"""
+  user_id
+}
+
+"""aggregate var_pop on columns"""
+type socialaccount_socialaccount_var_pop_fields {
+  id: Float
+  user_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type socialaccount_socialaccount_var_samp_fields {
+  id: Float
+  user_id: Float
+}
+
+"""aggregate variance on columns"""
+type socialaccount_socialaccount_variance_fields {
+  id: Float
+  user_id: Float
+}
+
+"""
+columns and relationships of "socialaccount_socialapp"
+"""
+type socialaccount_socialapp {
+  client_id: String!
+  id: Int!
+  key: String!
+  name: String!
+  provider: String!
+  secret: String!
+}
+
+"""
+aggregated selection of "socialaccount_socialapp"
+"""
+type socialaccount_socialapp_aggregate {
+  aggregate: socialaccount_socialapp_aggregate_fields
+  nodes: [socialaccount_socialapp!]!
+}
+
+"""
+aggregate fields of "socialaccount_socialapp"
+"""
+type socialaccount_socialapp_aggregate_fields {
+  avg: socialaccount_socialapp_avg_fields
+  count(columns: [socialaccount_socialapp_select_column!], distinct: Boolean): Int!
+  max: socialaccount_socialapp_max_fields
+  min: socialaccount_socialapp_min_fields
+  stddev: socialaccount_socialapp_stddev_fields
+  stddev_pop: socialaccount_socialapp_stddev_pop_fields
+  stddev_samp: socialaccount_socialapp_stddev_samp_fields
+  sum: socialaccount_socialapp_sum_fields
+  var_pop: socialaccount_socialapp_var_pop_fields
+  var_samp: socialaccount_socialapp_var_samp_fields
+  variance: socialaccount_socialapp_variance_fields
+}
+
+"""aggregate avg on columns"""
+type socialaccount_socialapp_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "socialaccount_socialapp". All fields are combined with a logical 'AND'.
+"""
+input socialaccount_socialapp_bool_exp {
+  _and: [socialaccount_socialapp_bool_exp!]
+  _not: socialaccount_socialapp_bool_exp
+  _or: [socialaccount_socialapp_bool_exp!]
+  client_id: String_comparison_exp
+  id: Int_comparison_exp
+  key: String_comparison_exp
+  name: String_comparison_exp
+  provider: String_comparison_exp
+  secret: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "socialaccount_socialapp"
+"""
+enum socialaccount_socialapp_constraint {
+  """unique or primary key constraint"""
+  socialaccount_socialapp_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "socialaccount_socialapp"
+"""
+input socialaccount_socialapp_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "socialaccount_socialapp"
+"""
+input socialaccount_socialapp_insert_input {
+  client_id: String
+  id: Int
+  key: String
+  name: String
+  provider: String
+  secret: String
+}
+
+"""aggregate max on columns"""
+type socialaccount_socialapp_max_fields {
+  client_id: String
+  id: Int
+  key: String
+  name: String
+  provider: String
+  secret: String
+}
+
+"""aggregate min on columns"""
+type socialaccount_socialapp_min_fields {
+  client_id: String
+  id: Int
+  key: String
+  name: String
+  provider: String
+  secret: String
+}
+
+"""
+response of any mutation on the table "socialaccount_socialapp"
+"""
+type socialaccount_socialapp_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [socialaccount_socialapp!]!
+}
+
+"""
+on conflict condition type for table "socialaccount_socialapp"
+"""
+input socialaccount_socialapp_on_conflict {
+  constraint: socialaccount_socialapp_constraint!
+  update_columns: [socialaccount_socialapp_update_column!]! = []
+  where: socialaccount_socialapp_bool_exp
+}
+
+"""Ordering options when selecting data from "socialaccount_socialapp"."""
+input socialaccount_socialapp_order_by {
+  client_id: order_by
+  id: order_by
+  key: order_by
+  name: order_by
+  provider: order_by
+  secret: order_by
+}
+
+"""primary key columns input for table: socialaccount_socialapp"""
+input socialaccount_socialapp_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "socialaccount_socialapp"
+"""
+enum socialaccount_socialapp_select_column {
+  """column name"""
+  client_id
+
+  """column name"""
+  id
+
+  """column name"""
+  key
+
+  """column name"""
+  name
+
+  """column name"""
+  provider
+
+  """column name"""
+  secret
+}
+
+"""
+input type for updating data in table "socialaccount_socialapp"
+"""
+input socialaccount_socialapp_set_input {
+  client_id: String
+  id: Int
+  key: String
+  name: String
+  provider: String
+  secret: String
+}
+
+"""
+columns and relationships of "socialaccount_socialapp_sites"
+"""
+type socialaccount_socialapp_sites {
+  id: Int!
+  site_id: Int!
+  socialapp_id: Int!
+}
+
+"""
+aggregated selection of "socialaccount_socialapp_sites"
+"""
+type socialaccount_socialapp_sites_aggregate {
+  aggregate: socialaccount_socialapp_sites_aggregate_fields
+  nodes: [socialaccount_socialapp_sites!]!
+}
+
+"""
+aggregate fields of "socialaccount_socialapp_sites"
+"""
+type socialaccount_socialapp_sites_aggregate_fields {
+  avg: socialaccount_socialapp_sites_avg_fields
+  count(columns: [socialaccount_socialapp_sites_select_column!], distinct: Boolean): Int!
+  max: socialaccount_socialapp_sites_max_fields
+  min: socialaccount_socialapp_sites_min_fields
+  stddev: socialaccount_socialapp_sites_stddev_fields
+  stddev_pop: socialaccount_socialapp_sites_stddev_pop_fields
+  stddev_samp: socialaccount_socialapp_sites_stddev_samp_fields
+  sum: socialaccount_socialapp_sites_sum_fields
+  var_pop: socialaccount_socialapp_sites_var_pop_fields
+  var_samp: socialaccount_socialapp_sites_var_samp_fields
+  variance: socialaccount_socialapp_sites_variance_fields
+}
+
+"""aggregate avg on columns"""
+type socialaccount_socialapp_sites_avg_fields {
+  id: Float
+  site_id: Float
+  socialapp_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "socialaccount_socialapp_sites". All fields are combined with a logical 'AND'.
+"""
+input socialaccount_socialapp_sites_bool_exp {
+  _and: [socialaccount_socialapp_sites_bool_exp!]
+  _not: socialaccount_socialapp_sites_bool_exp
+  _or: [socialaccount_socialapp_sites_bool_exp!]
+  id: Int_comparison_exp
+  site_id: Int_comparison_exp
+  socialapp_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "socialaccount_socialapp_sites"
+"""
+enum socialaccount_socialapp_sites_constraint {
+  """unique or primary key constraint"""
+  socialaccount_socialapp__socialapp_id_site_id_71a9a768_uniq
+
+  """unique or primary key constraint"""
+  socialaccount_socialapp_sites_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "socialaccount_socialapp_sites"
+"""
+input socialaccount_socialapp_sites_inc_input {
+  id: Int
+  site_id: Int
+  socialapp_id: Int
+}
+
+"""
+input type for inserting data into table "socialaccount_socialapp_sites"
+"""
+input socialaccount_socialapp_sites_insert_input {
+  id: Int
+  site_id: Int
+  socialapp_id: Int
+}
+
+"""aggregate max on columns"""
+type socialaccount_socialapp_sites_max_fields {
+  id: Int
+  site_id: Int
+  socialapp_id: Int
+}
+
+"""aggregate min on columns"""
+type socialaccount_socialapp_sites_min_fields {
+  id: Int
+  site_id: Int
+  socialapp_id: Int
+}
+
+"""
+response of any mutation on the table "socialaccount_socialapp_sites"
+"""
+type socialaccount_socialapp_sites_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [socialaccount_socialapp_sites!]!
+}
+
+"""
+on conflict condition type for table "socialaccount_socialapp_sites"
+"""
+input socialaccount_socialapp_sites_on_conflict {
+  constraint: socialaccount_socialapp_sites_constraint!
+  update_columns: [socialaccount_socialapp_sites_update_column!]! = []
+  where: socialaccount_socialapp_sites_bool_exp
+}
+
+"""
+Ordering options when selecting data from "socialaccount_socialapp_sites".
+"""
+input socialaccount_socialapp_sites_order_by {
+  id: order_by
+  site_id: order_by
+  socialapp_id: order_by
+}
+
+"""primary key columns input for table: socialaccount_socialapp_sites"""
+input socialaccount_socialapp_sites_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "socialaccount_socialapp_sites"
+"""
+enum socialaccount_socialapp_sites_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  site_id
+
+  """column name"""
+  socialapp_id
+}
+
+"""
+input type for updating data in table "socialaccount_socialapp_sites"
+"""
+input socialaccount_socialapp_sites_set_input {
+  id: Int
+  site_id: Int
+  socialapp_id: Int
+}
+
+"""aggregate stddev on columns"""
+type socialaccount_socialapp_sites_stddev_fields {
+  id: Float
+  site_id: Float
+  socialapp_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type socialaccount_socialapp_sites_stddev_pop_fields {
+  id: Float
+  site_id: Float
+  socialapp_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type socialaccount_socialapp_sites_stddev_samp_fields {
+  id: Float
+  site_id: Float
+  socialapp_id: Float
+}
+
+"""aggregate sum on columns"""
+type socialaccount_socialapp_sites_sum_fields {
+  id: Int
+  site_id: Int
+  socialapp_id: Int
+}
+
+"""
+update columns of table "socialaccount_socialapp_sites"
+"""
+enum socialaccount_socialapp_sites_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  site_id
+
+  """column name"""
+  socialapp_id
+}
+
+"""aggregate var_pop on columns"""
+type socialaccount_socialapp_sites_var_pop_fields {
+  id: Float
+  site_id: Float
+  socialapp_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type socialaccount_socialapp_sites_var_samp_fields {
+  id: Float
+  site_id: Float
+  socialapp_id: Float
+}
+
+"""aggregate variance on columns"""
+type socialaccount_socialapp_sites_variance_fields {
+  id: Float
+  site_id: Float
+  socialapp_id: Float
+}
+
+"""aggregate stddev on columns"""
+type socialaccount_socialapp_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type socialaccount_socialapp_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type socialaccount_socialapp_stddev_samp_fields {
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type socialaccount_socialapp_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "socialaccount_socialapp"
+"""
+enum socialaccount_socialapp_update_column {
+  """column name"""
+  client_id
+
+  """column name"""
+  id
+
+  """column name"""
+  key
+
+  """column name"""
+  name
+
+  """column name"""
+  provider
+
+  """column name"""
+  secret
+}
+
+"""aggregate var_pop on columns"""
+type socialaccount_socialapp_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type socialaccount_socialapp_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type socialaccount_socialapp_variance_fields {
+  id: Float
+}
+
+"""
+columns and relationships of "socialaccount_socialtoken"
+"""
+type socialaccount_socialtoken {
+  account_id: Int!
+  app_id: Int!
+  expires_at: timestamptz
+  id: Int!
+  token: String!
+  token_secret: String!
+}
+
+"""
+aggregated selection of "socialaccount_socialtoken"
+"""
+type socialaccount_socialtoken_aggregate {
+  aggregate: socialaccount_socialtoken_aggregate_fields
+  nodes: [socialaccount_socialtoken!]!
+}
+
+"""
+aggregate fields of "socialaccount_socialtoken"
+"""
+type socialaccount_socialtoken_aggregate_fields {
+  avg: socialaccount_socialtoken_avg_fields
+  count(columns: [socialaccount_socialtoken_select_column!], distinct: Boolean): Int!
+  max: socialaccount_socialtoken_max_fields
+  min: socialaccount_socialtoken_min_fields
+  stddev: socialaccount_socialtoken_stddev_fields
+  stddev_pop: socialaccount_socialtoken_stddev_pop_fields
+  stddev_samp: socialaccount_socialtoken_stddev_samp_fields
+  sum: socialaccount_socialtoken_sum_fields
+  var_pop: socialaccount_socialtoken_var_pop_fields
+  var_samp: socialaccount_socialtoken_var_samp_fields
+  variance: socialaccount_socialtoken_variance_fields
+}
+
+"""aggregate avg on columns"""
+type socialaccount_socialtoken_avg_fields {
+  account_id: Float
+  app_id: Float
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "socialaccount_socialtoken". All fields are combined with a logical 'AND'.
+"""
+input socialaccount_socialtoken_bool_exp {
+  _and: [socialaccount_socialtoken_bool_exp!]
+  _not: socialaccount_socialtoken_bool_exp
+  _or: [socialaccount_socialtoken_bool_exp!]
+  account_id: Int_comparison_exp
+  app_id: Int_comparison_exp
+  expires_at: timestamptz_comparison_exp
+  id: Int_comparison_exp
+  token: String_comparison_exp
+  token_secret: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "socialaccount_socialtoken"
+"""
+enum socialaccount_socialtoken_constraint {
+  """unique or primary key constraint"""
+  socialaccount_socialtoken_app_id_account_id_fca4e0ac_uniq
+
+  """unique or primary key constraint"""
+  socialaccount_socialtoken_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "socialaccount_socialtoken"
+"""
+input socialaccount_socialtoken_inc_input {
+  account_id: Int
+  app_id: Int
+  id: Int
+}
+
+"""
+input type for inserting data into table "socialaccount_socialtoken"
+"""
+input socialaccount_socialtoken_insert_input {
+  account_id: Int
+  app_id: Int
+  expires_at: timestamptz
+  id: Int
+  token: String
+  token_secret: String
+}
+
+"""aggregate max on columns"""
+type socialaccount_socialtoken_max_fields {
+  account_id: Int
+  app_id: Int
+  expires_at: timestamptz
+  id: Int
+  token: String
+  token_secret: String
+}
+
+"""aggregate min on columns"""
+type socialaccount_socialtoken_min_fields {
+  account_id: Int
+  app_id: Int
+  expires_at: timestamptz
+  id: Int
+  token: String
+  token_secret: String
+}
+
+"""
+response of any mutation on the table "socialaccount_socialtoken"
+"""
+type socialaccount_socialtoken_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [socialaccount_socialtoken!]!
+}
+
+"""
+on conflict condition type for table "socialaccount_socialtoken"
+"""
+input socialaccount_socialtoken_on_conflict {
+  constraint: socialaccount_socialtoken_constraint!
+  update_columns: [socialaccount_socialtoken_update_column!]! = []
+  where: socialaccount_socialtoken_bool_exp
+}
+
+"""Ordering options when selecting data from "socialaccount_socialtoken"."""
+input socialaccount_socialtoken_order_by {
+  account_id: order_by
+  app_id: order_by
+  expires_at: order_by
+  id: order_by
+  token: order_by
+  token_secret: order_by
+}
+
+"""primary key columns input for table: socialaccount_socialtoken"""
+input socialaccount_socialtoken_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "socialaccount_socialtoken"
+"""
+enum socialaccount_socialtoken_select_column {
+  """column name"""
+  account_id
+
+  """column name"""
+  app_id
+
+  """column name"""
+  expires_at
+
+  """column name"""
+  id
+
+  """column name"""
+  token
+
+  """column name"""
+  token_secret
+}
+
+"""
+input type for updating data in table "socialaccount_socialtoken"
+"""
+input socialaccount_socialtoken_set_input {
+  account_id: Int
+  app_id: Int
+  expires_at: timestamptz
+  id: Int
+  token: String
+  token_secret: String
+}
+
+"""aggregate stddev on columns"""
+type socialaccount_socialtoken_stddev_fields {
+  account_id: Float
+  app_id: Float
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type socialaccount_socialtoken_stddev_pop_fields {
+  account_id: Float
+  app_id: Float
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type socialaccount_socialtoken_stddev_samp_fields {
+  account_id: Float
+  app_id: Float
+  id: Float
+}
+
+"""aggregate sum on columns"""
+type socialaccount_socialtoken_sum_fields {
+  account_id: Int
+  app_id: Int
+  id: Int
+}
+
+"""
+update columns of table "socialaccount_socialtoken"
+"""
+enum socialaccount_socialtoken_update_column {
+  """column name"""
+  account_id
+
+  """column name"""
+  app_id
+
+  """column name"""
+  expires_at
+
+  """column name"""
+  id
+
+  """column name"""
+  token
+
+  """column name"""
+  token_secret
+}
+
+"""aggregate var_pop on columns"""
+type socialaccount_socialtoken_var_pop_fields {
+  account_id: Float
+  app_id: Float
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type socialaccount_socialtoken_var_samp_fields {
+  account_id: Float
+  app_id: Float
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type socialaccount_socialtoken_variance_fields {
+  account_id: Float
+  app_id: Float
+  id: Float
+}
+
+type subscription_root {
+  """
+  fetch data from the table: "account_emailaddress"
+  """
+  account_emailaddress(
+    """distinct select on columns"""
+    distinct_on: [account_emailaddress_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_emailaddress_order_by!]
+
+    """filter the rows returned"""
+    where: account_emailaddress_bool_exp
+  ): [account_emailaddress!]!
+
+  """
+  fetch aggregated fields from the table: "account_emailaddress"
+  """
+  account_emailaddress_aggregate(
+    """distinct select on columns"""
+    distinct_on: [account_emailaddress_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_emailaddress_order_by!]
+
+    """filter the rows returned"""
+    where: account_emailaddress_bool_exp
+  ): account_emailaddress_aggregate!
+
+  """
+  fetch data from the table: "account_emailaddress" using primary key columns
+  """
+  account_emailaddress_by_pk(id: Int!): account_emailaddress
+
+  """
+  fetch data from the table: "account_emailconfirmation"
+  """
+  account_emailconfirmation(
+    """distinct select on columns"""
+    distinct_on: [account_emailconfirmation_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_emailconfirmation_order_by!]
+
+    """filter the rows returned"""
+    where: account_emailconfirmation_bool_exp
+  ): [account_emailconfirmation!]!
+
+  """
+  fetch aggregated fields from the table: "account_emailconfirmation"
+  """
+  account_emailconfirmation_aggregate(
+    """distinct select on columns"""
+    distinct_on: [account_emailconfirmation_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [account_emailconfirmation_order_by!]
+
+    """filter the rows returned"""
+    where: account_emailconfirmation_bool_exp
+  ): account_emailconfirmation_aggregate!
+
+  """
+  fetch data from the table: "account_emailconfirmation" using primary key columns
+  """
+  account_emailconfirmation_by_pk(id: Int!): account_emailconfirmation
+
+  """
+  fetch data from the table: "api_hasurauser"
+  """
+  api_hasurauser(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_bool_exp
+  ): [api_hasurauser!]!
+
+  """
+  fetch aggregated fields from the table: "api_hasurauser"
+  """
+  api_hasurauser_aggregate(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_bool_exp
+  ): api_hasurauser_aggregate!
+
+  """fetch data from the table: "api_hasurauser" using primary key columns"""
+  api_hasurauser_by_pk(id: Int!): api_hasurauser
+
+  """
+  fetch data from the table: "api_hasurauser_groups"
+  """
+  api_hasurauser_groups(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_groups_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_groups_bool_exp
+  ): [api_hasurauser_groups!]!
+
+  """
+  fetch aggregated fields from the table: "api_hasurauser_groups"
+  """
+  api_hasurauser_groups_aggregate(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_groups_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_groups_bool_exp
+  ): api_hasurauser_groups_aggregate!
+
+  """
+  fetch data from the table: "api_hasurauser_groups" using primary key columns
+  """
+  api_hasurauser_groups_by_pk(id: Int!): api_hasurauser_groups
+
+  """
+  fetch data from the table: "api_hasurauser_user_permissions"
+  """
+  api_hasurauser_user_permissions(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_user_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_user_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_user_permissions_bool_exp
+  ): [api_hasurauser_user_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "api_hasurauser_user_permissions"
+  """
+  api_hasurauser_user_permissions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [api_hasurauser_user_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_hasurauser_user_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: api_hasurauser_user_permissions_bool_exp
+  ): api_hasurauser_user_permissions_aggregate!
+
+  """
+  fetch data from the table: "api_hasurauser_user_permissions" using primary key columns
+  """
+  api_hasurauser_user_permissions_by_pk(id: Int!): api_hasurauser_user_permissions
+
+  """
+  fetch data from the table: "api_organization"
+  """
+  api_organization(
+    """distinct select on columns"""
+    distinct_on: [api_organization_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_organization_order_by!]
+
+    """filter the rows returned"""
+    where: api_organization_bool_exp
+  ): [api_organization!]!
+
+  """
+  fetch aggregated fields from the table: "api_organization"
+  """
+  api_organization_aggregate(
+    """distinct select on columns"""
+    distinct_on: [api_organization_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_organization_order_by!]
+
+    """filter the rows returned"""
+    where: api_organization_bool_exp
+  ): api_organization_aggregate!
+
+  """
+  fetch data from the table: "api_organization" using primary key columns
+  """
+  api_organization_by_pk(id: Int!): api_organization
+
+  """
+  fetch data from the table: "api_organization_users"
+  """
+  api_organization_users(
+    """distinct select on columns"""
+    distinct_on: [api_organization_users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_organization_users_order_by!]
+
+    """filter the rows returned"""
+    where: api_organization_users_bool_exp
+  ): [api_organization_users!]!
+
+  """
+  fetch aggregated fields from the table: "api_organization_users"
+  """
+  api_organization_users_aggregate(
+    """distinct select on columns"""
+    distinct_on: [api_organization_users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [api_organization_users_order_by!]
+
+    """filter the rows returned"""
+    where: api_organization_users_bool_exp
+  ): api_organization_users_aggregate!
+
+  """
+  fetch data from the table: "api_organization_users" using primary key columns
+  """
+  api_organization_users_by_pk(id: Int!): api_organization_users
+
+  """
+  fetch data from the table: "auth_group"
+  """
+  auth_group(
+    """distinct select on columns"""
+    distinct_on: [auth_group_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_group_order_by!]
+
+    """filter the rows returned"""
+    where: auth_group_bool_exp
+  ): [auth_group!]!
+
+  """
+  fetch aggregated fields from the table: "auth_group"
+  """
+  auth_group_aggregate(
+    """distinct select on columns"""
+    distinct_on: [auth_group_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_group_order_by!]
+
+    """filter the rows returned"""
+    where: auth_group_bool_exp
+  ): auth_group_aggregate!
+
+  """fetch data from the table: "auth_group" using primary key columns"""
+  auth_group_by_pk(id: Int!): auth_group
+
+  """
+  fetch data from the table: "auth_group_permissions"
+  """
+  auth_group_permissions(
+    """distinct select on columns"""
+    distinct_on: [auth_group_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_group_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: auth_group_permissions_bool_exp
+  ): [auth_group_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "auth_group_permissions"
+  """
+  auth_group_permissions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [auth_group_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_group_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: auth_group_permissions_bool_exp
+  ): auth_group_permissions_aggregate!
+
+  """
+  fetch data from the table: "auth_group_permissions" using primary key columns
+  """
+  auth_group_permissions_by_pk(id: Int!): auth_group_permissions
+
+  """
+  fetch data from the table: "auth_permission"
+  """
+  auth_permission(
+    """distinct select on columns"""
+    distinct_on: [auth_permission_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_permission_order_by!]
+
+    """filter the rows returned"""
+    where: auth_permission_bool_exp
+  ): [auth_permission!]!
+
+  """
+  fetch aggregated fields from the table: "auth_permission"
+  """
+  auth_permission_aggregate(
+    """distinct select on columns"""
+    distinct_on: [auth_permission_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [auth_permission_order_by!]
+
+    """filter the rows returned"""
+    where: auth_permission_bool_exp
+  ): auth_permission_aggregate!
+
+  """fetch data from the table: "auth_permission" using primary key columns"""
+  auth_permission_by_pk(id: Int!): auth_permission
+
+  """
+  fetch data from the table: "authtoken_token"
+  """
+  authtoken_token(
+    """distinct select on columns"""
+    distinct_on: [authtoken_token_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authtoken_token_order_by!]
+
+    """filter the rows returned"""
+    where: authtoken_token_bool_exp
+  ): [authtoken_token!]!
+
+  """
+  fetch aggregated fields from the table: "authtoken_token"
+  """
+  authtoken_token_aggregate(
+    """distinct select on columns"""
+    distinct_on: [authtoken_token_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authtoken_token_order_by!]
+
+    """filter the rows returned"""
+    where: authtoken_token_bool_exp
+  ): authtoken_token_aggregate!
+
+  """fetch data from the table: "authtoken_token" using primary key columns"""
+  authtoken_token_by_pk(key: String!): authtoken_token
+
+  """
+  fetch data from the table: "django_admin_log"
+  """
+  django_admin_log(
+    """distinct select on columns"""
+    distinct_on: [django_admin_log_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_admin_log_order_by!]
+
+    """filter the rows returned"""
+    where: django_admin_log_bool_exp
+  ): [django_admin_log!]!
+
+  """
+  fetch aggregated fields from the table: "django_admin_log"
+  """
+  django_admin_log_aggregate(
+    """distinct select on columns"""
+    distinct_on: [django_admin_log_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_admin_log_order_by!]
+
+    """filter the rows returned"""
+    where: django_admin_log_bool_exp
+  ): django_admin_log_aggregate!
+
+  """
+  fetch data from the table: "django_admin_log" using primary key columns
+  """
+  django_admin_log_by_pk(id: Int!): django_admin_log
+
+  """
+  fetch data from the table: "django_content_type"
+  """
+  django_content_type(
+    """distinct select on columns"""
+    distinct_on: [django_content_type_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_content_type_order_by!]
+
+    """filter the rows returned"""
+    where: django_content_type_bool_exp
+  ): [django_content_type!]!
+
+  """
+  fetch aggregated fields from the table: "django_content_type"
+  """
+  django_content_type_aggregate(
+    """distinct select on columns"""
+    distinct_on: [django_content_type_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_content_type_order_by!]
+
+    """filter the rows returned"""
+    where: django_content_type_bool_exp
+  ): django_content_type_aggregate!
+
+  """
+  fetch data from the table: "django_content_type" using primary key columns
+  """
+  django_content_type_by_pk(id: Int!): django_content_type
+
+  """
+  fetch data from the table: "django_migrations"
+  """
+  django_migrations(
+    """distinct select on columns"""
+    distinct_on: [django_migrations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_migrations_order_by!]
+
+    """filter the rows returned"""
+    where: django_migrations_bool_exp
+  ): [django_migrations!]!
+
+  """
+  fetch aggregated fields from the table: "django_migrations"
+  """
+  django_migrations_aggregate(
+    """distinct select on columns"""
+    distinct_on: [django_migrations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_migrations_order_by!]
+
+    """filter the rows returned"""
+    where: django_migrations_bool_exp
+  ): django_migrations_aggregate!
+
+  """
+  fetch data from the table: "django_migrations" using primary key columns
+  """
+  django_migrations_by_pk(id: Int!): django_migrations
+
+  """
+  fetch data from the table: "django_session"
+  """
+  django_session(
+    """distinct select on columns"""
+    distinct_on: [django_session_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_session_order_by!]
+
+    """filter the rows returned"""
+    where: django_session_bool_exp
+  ): [django_session!]!
+
+  """
+  fetch aggregated fields from the table: "django_session"
+  """
+  django_session_aggregate(
+    """distinct select on columns"""
+    distinct_on: [django_session_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_session_order_by!]
+
+    """filter the rows returned"""
+    where: django_session_bool_exp
+  ): django_session_aggregate!
+
+  """fetch data from the table: "django_session" using primary key columns"""
+  django_session_by_pk(session_key: String!): django_session
+
+  """
+  fetch data from the table: "django_site"
+  """
+  django_site(
+    """distinct select on columns"""
+    distinct_on: [django_site_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_site_order_by!]
+
+    """filter the rows returned"""
+    where: django_site_bool_exp
+  ): [django_site!]!
+
+  """
+  fetch aggregated fields from the table: "django_site"
+  """
+  django_site_aggregate(
+    """distinct select on columns"""
+    distinct_on: [django_site_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [django_site_order_by!]
+
+    """filter the rows returned"""
+    where: django_site_bool_exp
+  ): django_site_aggregate!
+
+  """fetch data from the table: "django_site" using primary key columns"""
+  django_site_by_pk(id: Int!): django_site
+
+  """
+  fetch data from the table: "socialaccount_socialaccount"
+  """
+  socialaccount_socialaccount(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialaccount_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialaccount_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialaccount_bool_exp
+  ): [socialaccount_socialaccount!]!
+
+  """
+  fetch aggregated fields from the table: "socialaccount_socialaccount"
+  """
+  socialaccount_socialaccount_aggregate(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialaccount_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialaccount_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialaccount_bool_exp
+  ): socialaccount_socialaccount_aggregate!
+
+  """
+  fetch data from the table: "socialaccount_socialaccount" using primary key columns
+  """
+  socialaccount_socialaccount_by_pk(id: Int!): socialaccount_socialaccount
+
+  """
+  fetch data from the table: "socialaccount_socialapp"
+  """
+  socialaccount_socialapp(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialapp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialapp_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialapp_bool_exp
+  ): [socialaccount_socialapp!]!
+
+  """
+  fetch aggregated fields from the table: "socialaccount_socialapp"
+  """
+  socialaccount_socialapp_aggregate(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialapp_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialapp_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialapp_bool_exp
+  ): socialaccount_socialapp_aggregate!
+
+  """
+  fetch data from the table: "socialaccount_socialapp" using primary key columns
+  """
+  socialaccount_socialapp_by_pk(id: Int!): socialaccount_socialapp
+
+  """
+  fetch data from the table: "socialaccount_socialapp_sites"
+  """
+  socialaccount_socialapp_sites(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialapp_sites_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialapp_sites_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialapp_sites_bool_exp
+  ): [socialaccount_socialapp_sites!]!
+
+  """
+  fetch aggregated fields from the table: "socialaccount_socialapp_sites"
+  """
+  socialaccount_socialapp_sites_aggregate(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialapp_sites_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialapp_sites_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialapp_sites_bool_exp
+  ): socialaccount_socialapp_sites_aggregate!
+
+  """
+  fetch data from the table: "socialaccount_socialapp_sites" using primary key columns
+  """
+  socialaccount_socialapp_sites_by_pk(id: Int!): socialaccount_socialapp_sites
+
+  """
+  fetch data from the table: "socialaccount_socialtoken"
+  """
+  socialaccount_socialtoken(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialtoken_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialtoken_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialtoken_bool_exp
+  ): [socialaccount_socialtoken!]!
+
+  """
+  fetch aggregated fields from the table: "socialaccount_socialtoken"
+  """
+  socialaccount_socialtoken_aggregate(
+    """distinct select on columns"""
+    distinct_on: [socialaccount_socialtoken_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [socialaccount_socialtoken_order_by!]
+
+    """filter the rows returned"""
+    where: socialaccount_socialtoken_bool_exp
+  ): socialaccount_socialtoken_aggregate!
+
+  """
+  fetch data from the table: "socialaccount_socialtoken" using primary key columns
+  """
+  socialaccount_socialtoken_by_pk(id: Int!): socialaccount_socialtoken
+}
+
+scalar timestamptz
+
+"""
+Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
+"""
+input timestamptz_comparison_exp {
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _is_null: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+

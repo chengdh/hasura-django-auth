@@ -26,5 +26,5 @@ urlpatterns = [
 
     #添加 allauth urls 否则会出错
     #https://stackoverflow.com/questions/40956530/django-rest-auth-facebook-noreversematchreverse-for-socialaccount-signup-with
-    path('^accounts/', include('allauth.urls'), name='socialaccount_signup'),
+    path('accounts/', include('allauth.urls'), name='socialaccount_signup'),
 ]
