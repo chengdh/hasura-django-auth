@@ -1,0 +1,19 @@
+- model: for_test_code.Partner
+  pk: 1
+  fields:
+    name: 合伙人_1
+    mobile: 13676997527
+    email: 542340109@qq.com
+
+- model: for_test_code.Partner
+  pk: 2
+  fields:
+    name: 合伙人_2
+    mobile: 13676997528
+    email: 542340100@qq.com
+- model: for_test_code.Partner
+  pk: 3
+  fields:
+    name: 合伙人_3
+    mobile: 13676997529
+    email: 542340101@qq.com

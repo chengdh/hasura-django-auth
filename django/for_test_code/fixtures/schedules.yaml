@@ -1,0 +1,72 @@
+- model: for_test_code.Schedule
+  pk: 1
+  fields:
+    schedule_date: "2022-8-1"
+    partner_id: 1
+    note: this is a test
+
+- model: for_test_code.Schedule
+  pk: 2
+  fields:
+    schedule_date: "2022-8-2"
+    partner_id: 1
+    note: this is a test
+
+- model: for_test_code.Schedule
+  pk: 3
+  fields:
+    schedule_date: "2022-8-3"
+    partner_id: 1
+    note: this is a test
+
+- model: for_test_code.ScheduleLine
+  pk: 1
+  fields:
+    from_time: "9:00"
+    to_time: "9:15"
+    schedule_id: 1
+    developer_id: 1
+    state: draft
+
+- model: for_test_code.ScheduleLine
+  pk: 2
+  fields:
+    from_time: "9:30"
+    to_time: "9:45"
+    schedule_id: 1
+    developer_id: 2
+    state: draft
+
+- model: for_test_code.ScheduleLine
+  pk: 3
+  fields:
+    from_time: "10:00"
+    to_time: "10:15"
+    schedule_id: 1
+    developer_id: 3
+    state: partner_canceled
+
+- model: for_test_code.ScheduleLine
+  pk: 4
+  fields:
+    from_time: "10:20"
+    to_time: "10:35"
+    schedule_id: 2
+    developer_id: 3
+    state: developer_canceled
+
+- model: for_test_code.ScheduleLine
+  pk: 5
+  fields:
+    from_time: "10:40"
+    to_time: "10:55"
+    schedule_id: 2
+    state: draft
+
+- model: for_test_code.ScheduleLine
+  pk: 6
+  fields:
+    from_time: "14:40"
+    to_time: "14:55"
+    schedule_id: 2
+    state: draft

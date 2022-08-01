@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # 'import_export',
     'api.apps.APIConfig',
     'electric_power_sale.apps.ElectricPowerSaleConfig',
+    'for_test_code',
 ]
 
 SITE_ID = 1

@@ -1,0 +1,19 @@
+- model: for_test_code.Developer
+  pk: 1
+  fields:
+    name: 创业者_1
+    mobile: 15138665197
+    email: 12345@qq.com
+
+- model: for_test_code.Developer
+  pk: 2
+  fields:
+    name: 创业者_2
+    mobile: 15138665198
+    email: 12346@qq.com
+- model: for_test_code.Developer
+  pk: 3
+  fields:
+    name: 创业者_3
+    mobile: 15138665199
+    email: 12347@qq.com
