@@ -161,6 +161,7 @@
   fields:
     username: admin
     email: admin@123.com
+    # yesno242612
     password: pbkdf2_sha256$260000$sjF9xiA0NrDUKrejWCgHxs$8NZ0hEHP/2Ya8GrzQWdVA2yfxbWE9oMR1bqU6/v5hgU=
     roles: [1, 2]
     organizations: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -170,6 +171,7 @@
   fields:
     username: 销售公司
     email: xsgs@123.com
+    # 123456aaaa
     password: pbkdf2_sha256$260000$9tFLpECySSYel125tOX4Py$oWVYzz8CS+SPZETxarB21qSsgQ82Wr68pWY3Ciuandk=
     roles: [1]
     organizations: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -179,6 +181,7 @@
   fields:
     username: 平顶山分公司
     email: pdsfgs@123.com
+    # 123456aaaa
     password: pbkdf2_sha256$260000$9tFLpECySSYel125tOX4Py$oWVYzz8CS+SPZETxarB21qSsgQ82Wr68pWY3Ciuandk=
     roles: [1]
     organizations: [3]
