@@ -1,7 +1,7 @@
 django<4
 djangorestframework<4
 django-extensions
-dj-rest-auth
+dj-rest-auth==2.2.8
 django-allauth
 djangorestframework-simplejwt
 psycopg2<3
